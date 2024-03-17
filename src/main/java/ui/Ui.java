@@ -24,7 +24,7 @@ public class Ui {
      * Prints the prompt for user input.
      */
     public static void promptUserInput() {
-        System.out.print("You:");
+        System.out.print("You: ");
     }
 
     /**
@@ -41,7 +41,7 @@ public class Ui {
      * @param message the message to be printed
      */
     public static void printMessageWithSepNewLine(String message) {
-        System.out.println(SEP + "\n" +message + "\n" + SEP);
+        System.out.println(SEP + "\n" + message + "\n" + SEP);
     }
 
     public static void printList(ArrayList list) {
