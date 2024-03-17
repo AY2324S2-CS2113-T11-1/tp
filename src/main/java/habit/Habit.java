@@ -25,7 +25,7 @@ public class Habit {
             habitCount += changeInCount;
 
         } catch (NumberFormatException e) {
-            throw new HabitException("Please enter a valid count\n" +
+            throw new HabitException("Please enter a valid count" + System.lineSeparator() +
                     "Use: '+1' to increase count, '-1' to decrease count ");
         }
         return changeInCount;

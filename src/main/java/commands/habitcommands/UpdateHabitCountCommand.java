@@ -14,8 +14,8 @@ public class UpdateHabitCountCommand implements Command {
 
         String[] parts = habitCommandArgs.trim().split("/id | /by");
         if (!(parts.length == 3)) {
-            throw new HabitException("Incorrect update command formatting\n" +
-                    "Use Format: habit update /id <habit_ID> /by <increment_count>\n" +
+            throw new HabitException("Incorrect update command formatting" + System.lineSeparator() +
+                    "Use Format: habit update /id <habit_ID> /by <increment_count>" + System.lineSeparator() +
                     "Note: for <increment_count>, use '+1' to increase by 1, '-1' to decrease by 1");
         }
 
@@ -32,4 +32,3 @@ public class UpdateHabitCountCommand implements Command {
     }
 
 }
-
