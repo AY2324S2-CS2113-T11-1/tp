@@ -4,6 +4,7 @@ import exceptions.HabitException;
 import ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import static ui.Ui.printMessageWithoutSepNewLine;
 
@@ -12,6 +13,7 @@ public class HabitTracker {
 
     public HabitTracker() {
     }
+
 
     public void addHabit (Habit newHabit) {
         habitList.add(newHabit);
@@ -57,5 +59,9 @@ public class HabitTracker {
         updateHabitCountMessage += "The count for your habit has been updated:\n";
         updateHabitCountMessage += "  " + habitID + ". " + habit;
         Ui.printMessageWithSepNewLine(updateHabitCountMessage);
+    }
+
+    public static int getNumberOfHabits() {
+        return habitList.size();
     }
 }
