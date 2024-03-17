@@ -14,7 +14,7 @@ public class AddHabitCommand implements Command {
         if (habitCommandArgs.isEmpty()) {
             throw new HabitException("Habit Description cannot be left empty.");
         }
-        this.newHabit = new Habit (habitCommandArgs.trim());
+        this.newHabit = new Habit(habitCommandArgs.trim());
     }
 
     public void execute() throws HabitException {
