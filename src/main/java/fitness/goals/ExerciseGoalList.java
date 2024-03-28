@@ -1,6 +1,5 @@
 package fitness.goals;
 
-import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
@@ -13,8 +12,9 @@ import static fitness.FitnessMotivator.GOALS_FILE_PATH;
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
 public class ExerciseGoalList extends ExerciseList {
+
+    private static final int NUMBER_OF_GOALS = 5;
     private ArrayList<ExerciseGoal> goals = new ArrayList<>();
-    private final int NUMBER_OF_GOALS = 5;
 
     public ExerciseGoalList() {
         if (Storage.isFileCreated(FitnessMotivator.GOALS_FILE_PATH)) {
@@ -22,13 +22,23 @@ public class ExerciseGoalList extends ExerciseList {
         }
     }
 
+    /**
+     * Further parses data read from storage into usable ExerciseGoal objects, before adding it into
+     * the ArrayList.
+     *
+     * @param data An ArrayList of strings, comprising lines read from the data file
+     * */
     private void parseData (ArrayList<String> data) {
         assert data.size() == NUMBER_OF_GOALS : "There is something wrong with the data file!";
+
         for (String s : data) {
             String[] parts = s.split(": |, | sets & | reps");
+
+            // Checks whether the goal is done or not done
             char status = parts[0].charAt(1);
             boolean isDone = (status == 'X');
             parts[0] = parts[0].substring(4);
+
             if (parts.length == REQUIRED_NUM_OF_PARAMETERS) {
                 goals.add(new ExerciseGoal(
                         parts[1],
@@ -41,11 +51,17 @@ public class ExerciseGoalList extends ExerciseList {
         }
     }
 
+    /**
+     * A helper method that returns whether the goal list is empty
+     * */
     public boolean isEmpty() {
         return goals.isEmpty();
     }
 
-    public void clearList() {
+    /**
+     * A helper method that deletes everything in the list.
+     * */
+    public void clear() {
         goals.clear();
     }
 
@@ -62,10 +78,26 @@ public class ExerciseGoalList extends ExerciseList {
         return goals.get(index);
     }
 
+    /**
+     * Helper method that saves the goal data to a local file
+     * */
     public void saveGoals() {
         Storage.saveTasksToFile(GOALS_FILE_PATH, goals);
     }
 
+    /**
+     * Over-ridden method from parent class 'ExerciseList', this method returns an 'ExerciseGoal'
+     * object instead of an 'Exercise' object. The status of the goal is set not done by default.
+     *
+     * @param parameters An array of Strings that provide details for the creation of an Exercise
+     *                   object.
+     *                   Index 0 - Exercise Type
+     *                   Index 1 - Exercise Name
+     *                   Index 2 - Number of Sets
+     *                   Index 3 - Number of Reps
+     *
+     * @return returns a new Exercise object
+     * */
     @Override
     public ExerciseGoal newExercise(String[] parameters) {
         assert parameters.length == REQUIRED_NUM_OF_PARAMETERS
@@ -80,6 +112,13 @@ public class ExerciseGoalList extends ExerciseList {
         return new ExerciseGoal(exerciseName, exerciseType, sets, reps, false);
     }
 
+    /**
+     * Over-riden method from parent class 'ExerciseList', this method takes in 'Exercise' objects
+     * and converts them into 'ExerciseGoal' objects before adding them into the goals list. The
+     * status of the goal is set not done by default.
+     *
+     * @param exercise An Exercise object to be converted and added into the list
+     * */
     @Override
     public void add(Exercise exercise) {
         goals.add(new ExerciseGoal(

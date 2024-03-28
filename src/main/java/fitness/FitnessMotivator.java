@@ -109,11 +109,13 @@ public class FitnessMotivator {
      * goals are 5 random exercises extracted from the list of exercises in the Motivator.
      * */
     public void newGoals() {
+        dailyGoals.clear();
         Exercise[] exercises = fiveRandomExercises();
-        dailyGoals.clearList();
+
         for (Exercise e: exercises) {
             dailyGoals.add(e);
         }
+
         String message = "Lets get working on today's exercises!" + System.lineSeparator() +
                 System.lineSeparator() + dailyGoals.toString();
         Ui.printMessageWithSepNewLine(message);
@@ -124,6 +126,7 @@ public class FitnessMotivator {
      * */
     public void goalStatus() {
         String message;
+
         if (dailyGoals.isEmpty()) {
             message = "There are no goals set :(" + System.lineSeparator() +
                     System.lineSeparator() + "You can set one by doing 'goal new'!";
@@ -131,27 +134,33 @@ public class FitnessMotivator {
             message = "Here are your goals for today. Have you started? Don't be lazy ok?" +
                     System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
         }
+
         Ui.printMessageWithSepNewLine(message);
     }
 
     /**
-     * 
+     * Gets the goal that the user requested, and toggles the state of the goal. If it is done, it
+     * will be marked as undone, and vice versa. All the goal status is then printed to the Ui.
      * */
     public void toggleGoal(int index) {
         dailyGoals.findExercise(index - 1).toggle();
         dailyGoals.saveGoals();
+
         String message = "I see there are changes. I hope you are making progress..." +
                 System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
         Ui.printMessageWithSepNewLine(message);
     }
 
+    /**
+     * Prints a set of commands that the user can refer to in order to use the Fitness Motivator.
+     * */
     public void printHelp() {
         ArrayList<String> helpMenuInstructionsList =
                 new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
+
         String message =
                 "Here is a list of possible commands you can use with the Fitness Motivator!" +
                 System.lineSeparator();
         Ui.printList(helpMenuInstructionsList, message);
     }
-
 }

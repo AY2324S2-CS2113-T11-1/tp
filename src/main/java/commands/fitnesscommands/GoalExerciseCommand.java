@@ -15,6 +15,16 @@ public class GoalExerciseCommand implements Command {
         this.commandArgs = commandArgs;
     }
 
+    /**
+     * Validates the command argument given for the fitness goal command. In this command, the
+     * argument is optional.
+     *
+     * @param commandArgs An argument string
+     * @return null if there is no argument provided, otherwise returns a String for
+     *         further processing
+     *
+     * @throws FitnessException Thrown when improper command arguments are found
+     * */
     private String checkCommandArgs(String commandArgs) throws FitnessException {
         if (commandArgs.isBlank() || commandArgs.isEmpty()) {
             return null;
@@ -35,13 +45,17 @@ public class GoalExerciseCommand implements Command {
     @Override
     public void execute() throws Wellness360Exception {
         String parsedCommand = checkCommandArgs(commandArgs);
+
         if (parsedCommand == null) {
+            // 'fitness goal' command
             fitnessMotivator.goalStatus();
         } else {
             if (parsedCommand.contentEquals("new")) {
+                // 'fitness goal new' command
                 fitnessMotivator.newGoals();
             }
             if (parsedCommand.matches("^[1-5]$")) {
+                // 'fitness goal <index>' command
                 int exerciseIndex = Integer.parseInt(parsedCommand);
                 fitnessMotivator.toggleGoal(exerciseIndex);
             }
