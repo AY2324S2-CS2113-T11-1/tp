@@ -33,6 +33,25 @@ public class FitnessMotivator {
         "fitness help: Get help menu for reflect commands"
     };
 
+    private static final String NEW_GOAL_MESSAGE = "Lets get working on today's exercises!" +
+            System.lineSeparator() + System.lineSeparator();
+    private static final String EMPTY_GOAL_MESSAGE = "There are no goals set :(" +
+            System.lineSeparator() + System.lineSeparator() +
+            "You can set one by doing 'goal new'!";
+
+    private static final String GOAL_MESSAGE = "Here are your goals for today. " +
+            "Have you started? Don't be lazy ok?" + System.lineSeparator() + System.lineSeparator();
+
+    private static final String GOAL_STATUS_MESSAGE = "I see there are changes. " +
+            "I hope you are making progress..." + System.lineSeparator() + System.lineSeparator();
+
+    private static final String HELP_MESSAGE =
+            "Here is a list of possible commands you can use with the Fitness Motivator!" +
+            System.lineSeparator();
+
+    private static final String ADD_EXERCISE_MESSAGE =
+            "I have added the following exercise into our list!" + System.lineSeparator();
+
     public ExerciseList allExercises = new ExerciseList();
     public ExerciseGoalList dailyGoals = new ExerciseGoalList();
 
@@ -86,9 +105,8 @@ public class FitnessMotivator {
 
         Exercise newExercise = allExercises.newExercise(commandArgs);
         allExercises.add(newExercise);
-        String message = "I have added the following exercise into our list!" +
-                System.lineSeparator() + newExercise;
-        Ui.printMessageWithSepNewLine(message);
+
+        Ui.printMessageWithSepNewLine(ADD_EXERCISE_MESSAGE + newExercise);
     }
 
     /**
@@ -116,26 +134,18 @@ public class FitnessMotivator {
             dailyGoals.add(e);
         }
 
-        String message = "Lets get working on today's exercises!" + System.lineSeparator() +
-                System.lineSeparator() + dailyGoals.toString();
-        Ui.printMessageWithSepNewLine(message);
+        Ui.printMessageWithSepNewLine(NEW_GOAL_MESSAGE + dailyGoals.toString());
     }
 
     /**
      * Retrieves the status of current goals, then prints it to the Ui.
      * */
     public void goalStatus() {
-        String message;
-
         if (dailyGoals.isEmpty()) {
-            message = "There are no goals set :(" + System.lineSeparator() +
-                    System.lineSeparator() + "You can set one by doing 'goal new'!";
+            Ui.printMessageWithSepNewLine(EMPTY_GOAL_MESSAGE);
         } else {
-            message = "Here are your goals for today. Have you started? Don't be lazy ok?" +
-                    System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
+            Ui.printMessageWithSepNewLine(GOAL_MESSAGE + dailyGoals.toString());
         }
-
-        Ui.printMessageWithSepNewLine(message);
     }
 
     /**
@@ -146,9 +156,7 @@ public class FitnessMotivator {
         dailyGoals.findExercise(index - 1).toggle();
         dailyGoals.saveGoals();
 
-        String message = "I see there are changes. I hope you are making progress..." +
-                System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
-        Ui.printMessageWithSepNewLine(message);
+        Ui.printMessageWithSepNewLine(GOAL_STATUS_MESSAGE + dailyGoals.toString());
     }
 
     /**
@@ -158,9 +166,6 @@ public class FitnessMotivator {
         ArrayList<String> helpMenuInstructionsList =
                 new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
 
-        String message =
-                "Here is a list of possible commands you can use with the Fitness Motivator!" +
-                System.lineSeparator();
-        Ui.printList(helpMenuInstructionsList, message);
+        Ui.printList(helpMenuInstructionsList, HELP_MESSAGE);
     }
 }
