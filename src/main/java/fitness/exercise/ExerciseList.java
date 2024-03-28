@@ -1,6 +1,5 @@
 package fitness.exercise;
 
-import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 import storage.Storage;
 
