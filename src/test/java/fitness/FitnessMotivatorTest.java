@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+
+import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_PARAMS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
 import static fitness.FitnessMotivator.DATA_FILE_PATH;
 import static fitness.FitnessMotivator.GOALS_FILE_PATH;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -84,17 +88,9 @@ public class FitnessMotivatorTest {
         Wellness360Exception exceptionThree = assertThrows(FitnessException.class, () ->
                 new AddExerciseCommand(fitnessMotivator, "testing, testing, 3, 10"));
 
-        String expectedMessageOne =
-            "ERROR MSG: Forgetting something? Key in the correct parameters please!";
-        String expectedMessageTwo =
-            "ERROR MSG: Did you enter your Sets and Reps correctly? :(";
-        String expectedMessageThree = "ERROR MSG: " + "Hmm...Invalid type of exercise..." +
-            System.lineSeparator() + "Only the following exercise types are allowed: " +
-            "Arms, Chest, Abs, Back and Legs!";
-
-        assertEquals(expectedMessageOne, exceptionOne.getMessage());
-        assertEquals(expectedMessageTwo, exceptionTwo.getMessage());
-        assertEquals(expectedMessageThree, exceptionThree.getMessage());
+        assertEquals("ERROR MSG: " + INSUFFICIENT_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
+        assertEquals("ERROR MSG: " + INCORRECT_INTEGER_ERROR_MESSAGE, exceptionTwo.getMessage());
+        assertEquals("ERROR MSG: " + ILLEGAL_TYPE_ERROR_MESSAGE, exceptionThree.getMessage());
 
     }
 }
