@@ -23,7 +23,7 @@ public class ExerciseGoal extends Exercise {
 
     @Override
     public String toString() {
-        String status = isDone ? "[x] " : "[ ] ";
+        String status = isDone ? "[X] " : "[ ] ";
         return status + exerciseType + ": " + exerciseName + ", " +
                 sets + " sets & " + reps + " reps";
     }

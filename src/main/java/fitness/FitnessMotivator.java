@@ -4,9 +4,10 @@ import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
 import fitness.exercise.ExerciseType;
 import fitness.goals.ExerciseGoalList;
-import ui.fitness.FitnessUi;
+import ui.Ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -19,6 +20,18 @@ public class FitnessMotivator {
 
     // Required Number of parameters for the fitness add command
     public static final int REQUIRED_NUM_OF_PARAMETERS = 4;
+
+    private static final String[] HELP_MENU_INSTRUCTIONS = {
+        "fitness get: Get 5 random reflection questions",
+        "fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type",
+        "fitness add <exercise_type>, <exercise_name>, <sets>, <reps>: " +
+                "add an exercise to the list of exercises",
+        "fitness goal: Retrieves the status of all current goals, if it exists",
+        "fitness goal new: Overwrites current goals with new set of goals if it exists, " +
+                "otherwise creates a brand new set of goals",
+        "fitness goal <index>: Toggle the status of the goal",
+        "fitness help: Get help menu for reflect commands"
+    };
 
     public ExerciseList allExercises = new ExerciseList();
     public ExerciseGoalList dailyGoals = new ExerciseGoalList();
@@ -58,7 +71,7 @@ public class FitnessMotivator {
                 "4. " + exercises[3] + System.lineSeparator() +
                 "5. " + exercises[4] + System.lineSeparator();
 
-        FitnessUi.printMessageWithSepNewLine(message);
+        Ui.printMessageWithSepNewLine(message);
         return message;
     }
 
@@ -75,7 +88,7 @@ public class FitnessMotivator {
         allExercises.add(newExercise);
         String message = "I have added the following exercise into our list!" +
                 System.lineSeparator() + newExercise;
-        FitnessUi.printMessageWithSepNewLine(message);
+        Ui.printMessageWithSepNewLine(message);
     }
 
     /**
@@ -87,31 +100,58 @@ public class FitnessMotivator {
         ArrayList<Exercise> exercisesByType = allExercises.getType(type);
         String message = "Here are the " + type + " exercises as requested!" +
                 System.lineSeparator();
-        FitnessUi.printList(exercisesByType, message);
+        Ui.printList(exercisesByType, message);
     }
 
-    public void newGoal() {
+    /**
+     * Creates new exercise goals for the user. If goals already exists, it will override the
+     * current goals with a set of new goals, then prints these goals to the Ui. Note that the
+     * goals are 5 random exercises extracted from the list of exercises in the Motivator.
+     * */
+    public void newGoals() {
         Exercise[] exercises = fiveRandomExercises();
+        dailyGoals.clearList();
         for (Exercise e: exercises) {
             dailyGoals.add(e);
         }
         String message = "Lets get working on today's exercises!" + System.lineSeparator() +
-                dailyGoals.toString();
-        FitnessUi.printMessageWithSepNewLine(message);
+                System.lineSeparator() + dailyGoals.toString();
+        Ui.printMessageWithSepNewLine(message);
     }
 
+    /**
+     * Retrieves the status of current goals, then prints it to the Ui.
+     * */
     public void goalStatus() {
+        String message;
         if (dailyGoals.isEmpty()) {
-            String message = "There are no goals set :(" + System.lineSeparator() +
-                    "You can set one by doing 'goal new'!";
-            FitnessUi.printMessageWithSepNewLine(message);
+            message = "There are no goals set :(" + System.lineSeparator() +
+                    System.lineSeparator() + "You can set one by doing 'goal new'!";
         } else {
-            FitnessUi.printMessageWithSepNewLine(dailyGoals.toString());
+            message = "Here are your goals for today. Have you started? Don't be lazy ok?" +
+                    System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
         }
+        Ui.printMessageWithSepNewLine(message);
     }
 
-    public void toggleGoal() {
-        // toggle progress of goals
+    /**
+     * 
+     * */
+    public void toggleGoal(int index) {
+        dailyGoals.findExercise(index - 1).toggle();
+        dailyGoals.saveGoals();
+        String message = "I see there are changes. I hope you are making progress..." +
+                System.lineSeparator() + System.lineSeparator() + dailyGoals.toString();
+        Ui.printMessageWithSepNewLine(message);
+    }
+
+    public void printHelp() {
+        ArrayList<String> helpMenuInstructionsList =
+                new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
+        String message =
+                "Here is a list of possible commands you can use with the Fitness Motivator!" +
+                System.lineSeparator();
+        Ui.printList(helpMenuInstructionsList, message);
     }
 
 }

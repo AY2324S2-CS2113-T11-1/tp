@@ -1,6 +1,7 @@
 package commands.fitnesscommands;
 
 import commands.Command;
+import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
 import fitness.FitnessMotivator;
 
@@ -14,17 +15,36 @@ public class GoalExerciseCommand implements Command {
         this.commandArgs = commandArgs;
     }
 
-    @Override
-    public void execute() throws Wellness360Exception {
+    private String checkCommandArgs(String commandArgs) throws FitnessException {
         if (commandArgs.isBlank() || commandArgs.isEmpty()) {
-            fitnessMotivator.goalStatus();
+            return null;
         }
         commandArgs = commandArgs.trim();
         if (commandArgs.equalsIgnoreCase("new")) {
-            fitnessMotivator.newGoal();
+            return "new";
         }
         if (commandArgs.matches("^[1-5]$")) {
-            fitnessMotivator.toggleGoal();
+            return commandArgs;
+        }
+        String errorMessage = "Are you trying to create a new goal? You can try 'goal new'!" +
+                System.lineSeparator() +
+                "You can also do 'goal <index>' to mark and unmark exercises!";
+        throw new FitnessException(errorMessage);
+    }
+
+    @Override
+    public void execute() throws Wellness360Exception {
+        String parsedCommand = checkCommandArgs(commandArgs);
+        if (parsedCommand == null) {
+            fitnessMotivator.goalStatus();
+        } else {
+            if (parsedCommand.contentEquals("new")) {
+                fitnessMotivator.newGoals();
+            }
+            if (parsedCommand.matches("^[1-5]$")) {
+                int exerciseIndex = Integer.parseInt(parsedCommand);
+                fitnessMotivator.toggleGoal(exerciseIndex);
+            }
         }
     }
 

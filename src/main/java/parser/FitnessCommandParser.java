@@ -4,6 +4,7 @@ import commands.Command;
 import commands.fitnesscommands.AddExerciseCommand;
 import commands.fitnesscommands.GetExercisesCommand;
 import commands.fitnesscommands.GoalExerciseCommand;
+import commands.fitnesscommands.HelpExerciseCommand;
 import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 
@@ -26,8 +27,14 @@ public class FitnessCommandParser {
             return new AddExerciseCommand(fitnessMotivator, fitnessCommandArgs);
         case "goal":
             return new GoalExerciseCommand(fitnessMotivator, fitnessCommandArgs);
+        case "help":
+            return new HelpExerciseCommand(fitnessMotivator);
         default:
-            throw new FitnessException("Unknown command. Can you type proper english please !-_-!");
+            String errorMessage = "Unknown command. Did you try any of the following commands?" +
+                    System.lineSeparator() + "- 'fitness get'" + System.lineSeparator() +
+                    "- 'fitness add'" + System.lineSeparator() +
+                    "- 'fitness goal";
+            throw new FitnessException(errorMessage);
         }
     }
 }

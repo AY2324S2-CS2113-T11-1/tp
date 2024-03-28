@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static fitness.FitnessMotivator.FILE_PATH;
+import static fitness.FitnessMotivator.DATA_FILE_PATH;
+import static fitness.FitnessMotivator.GOALS_FILE_PATH;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,9 +26,13 @@ public class FitnessMotivatorTest {
 
     @BeforeEach
     public void setUp() {
-        File f = new File(FILE_PATH);
-        if (isFileCreated(FILE_PATH)) {
-            f.delete();
+        File file1 = new File(DATA_FILE_PATH);
+        File file2 = new File(GOALS_FILE_PATH);
+        if (isFileCreated(DATA_FILE_PATH)) {
+            file1.delete();
+        }
+        if (isFileCreated(GOALS_FILE_PATH)) {
+            file2.delete();
         }
         this.fitnessMotivator = new FitnessMotivator();
         this.allExercises = fitnessMotivator.allExercises;
