@@ -1,6 +1,7 @@
-package fitness;
+package fitness.exercise;
 
 import exceptions.FitnessException;
+import fitness.FitnessMotivator;
 import storage.Storage;
 
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ public class ExerciseList {
 
     private ArrayList<Exercise> allExercises = new ArrayList<>();
 
-    // Constant lists used to initialise data into local machine
     private final String[] originalListForArms = {
         "Cable Triceps Push down,Arms,3,8", "Barbell Curls,Arms,3,8", "Preacher Curls,Arms,3,8",
         "Skullcrushers,Arms,3,8", "Lateral Raises,Arms,3,8"
@@ -42,11 +42,11 @@ public class ExerciseList {
      * and initialise it with the data above.
      * */
     public ExerciseList() {
-        if (!Storage.isFileCreated(FitnessMotivator.FILE_PATH)) {
+        if (!Storage.isFileCreated(FitnessMotivator.DATA_FILE_PATH)) {
             initialiseData();
-            Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
+            Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
         } else {
-            parseData(Storage.loadDataFromFile(FitnessMotivator.FILE_PATH));
+            parseData(Storage.loadDataFromFile(FitnessMotivator.DATA_FILE_PATH));
         }
     }
 
@@ -107,8 +107,9 @@ public class ExerciseList {
 
         // The sort method then sorts the list based on the comparator specified before saving
         allExercises.sort(comparator);
-        Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
+        Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
     }
+
 
     /**
      * This method searches the ArrayList for Exercises that matches the required type, and returns
@@ -217,4 +218,6 @@ public class ExerciseList {
             throw new FitnessException("Index for exercise query is not valid!");
         }
     }
+
+
 }

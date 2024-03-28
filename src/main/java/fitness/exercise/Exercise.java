@@ -1,11 +1,11 @@
-package fitness;
+package fitness.exercise;
 
 public class Exercise {
 
-    private String exerciseName;
-    private ExerciseType exerciseType;
-    private String sets;
-    private String reps;
+    protected String exerciseName;
+    protected ExerciseType exerciseType;
+    protected String sets;
+    protected String reps;
 
     public Exercise(String exerciseName, ExerciseType exerciseType, String sets, String reps) {
         this.exerciseName = exerciseName;

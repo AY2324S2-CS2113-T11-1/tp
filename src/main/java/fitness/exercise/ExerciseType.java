@@ -1,4 +1,4 @@
-package fitness;
+package fitness.exercise;
 
 /**
  * Enumeration Class used for exercise type, to prevent incorrect types from being used

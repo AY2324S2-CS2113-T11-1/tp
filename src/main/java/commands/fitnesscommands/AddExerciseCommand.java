@@ -3,7 +3,7 @@ package commands.fitnesscommands;
 import commands.Command;
 import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
-import fitness.ExerciseType;
+import fitness.exercise.ExerciseType;
 import fitness.FitnessMotivator;
 
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;

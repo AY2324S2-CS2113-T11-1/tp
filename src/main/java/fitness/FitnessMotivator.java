@@ -1,6 +1,10 @@
 package fitness;
 
-import ui.Ui;
+import fitness.exercise.Exercise;
+import fitness.exercise.ExerciseList;
+import fitness.exercise.ExerciseType;
+import fitness.goals.ExerciseGoalList;
+import ui.fitness.FitnessUi;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,21 +14,18 @@ import java.util.Random;
  * */
 public class FitnessMotivator {
 
-    public static final String FILE_PATH = "./data/exerciselist.txt";
+    public static final String DATA_FILE_PATH = "./data/exerciselist.txt";
+    public static final String GOALS_FILE_PATH = "./data/exercisegoallist.txt";
 
     // Required Number of parameters for the fitness add command
     public static final int REQUIRED_NUM_OF_PARAMETERS = 4;
 
     public ExerciseList allExercises = new ExerciseList();
+    public ExerciseGoalList dailyGoals = new ExerciseGoalList();
 
     public FitnessMotivator() {}
 
-    /**
-     * Gets one randomised exercise per type, then prints it to the UI.
-     *
-     * @return A string that lists 5 exercises of different type
-     * */
-    public String getExercises() {
+    private Exercise[] fiveRandomExercises() {
         Random random = new Random();
         int randomInt1 = random.nextInt(allExercises.size(ExerciseType.ARMS));
         int randomInt2 = random.nextInt(allExercises.size(ExerciseType.CHEST));
@@ -38,15 +39,26 @@ public class FitnessMotivator {
         Exercise exercise4 = allExercises.get(ExerciseType.BACK, randomInt4);
         Exercise exercise5 = allExercises.get(ExerciseType.LEGS, randomInt5);
 
+        return new Exercise[]{exercise1, exercise2, exercise3, exercise4, exercise5};
+    }
+
+    /**
+     * Gets one randomised exercise per type, then prints it to the UI.
+     *
+     * @return A string that lists 5 exercises of different type
+     * */
+    public String getExercises() {
+        Exercise[] exercises = fiveRandomExercises();
+
         String message = "These are some of the exercises you can do! " +
                 "LETS GET STRONK MY G" + System.lineSeparator() + System.lineSeparator() +
-                "1. " + exercise1 + System.lineSeparator() +
-                "2. " + exercise2 + System.lineSeparator() +
-                "3. " + exercise3 + System.lineSeparator() +
-                "4. " + exercise4 + System.lineSeparator() +
-                "5. " + exercise5 + System.lineSeparator();
+                "1. " + exercises[0] + System.lineSeparator() +
+                "2. " + exercises[1] + System.lineSeparator() +
+                "3. " + exercises[2] + System.lineSeparator() +
+                "4. " + exercises[3] + System.lineSeparator() +
+                "5. " + exercises[4] + System.lineSeparator();
 
-        Ui.printMessageWithSepNewLine(message);
+        FitnessUi.printMessageWithSepNewLine(message);
         return message;
     }
 
@@ -63,7 +75,7 @@ public class FitnessMotivator {
         allExercises.add(newExercise);
         String message = "I have added the following exercise into our list!" +
                 System.lineSeparator() + newExercise;
-        Ui.printMessageWithSepNewLine(message);
+        FitnessUi.printMessageWithSepNewLine(message);
     }
 
     /**
@@ -71,12 +83,35 @@ public class FitnessMotivator {
      *
      * @param type An object of type ExerciseType used for query
      * */
-    public ArrayList<Exercise> getTypeExercises(ExerciseType type) {
+    public void getTypeExercises(ExerciseType type) {
         ArrayList<Exercise> exercisesByType = allExercises.getType(type);
         String message = "Here are the " + type + " exercises as requested!" +
                 System.lineSeparator();
-        Ui.printList(exercisesByType, message);
-        return exercisesByType;
+        FitnessUi.printList(exercisesByType, message);
+    }
+
+    public void newGoal() {
+        Exercise[] exercises = fiveRandomExercises();
+        for (Exercise e: exercises) {
+            dailyGoals.add(e);
+        }
+        String message = "Lets get working on today's exercises!" + System.lineSeparator() +
+                dailyGoals.toString();
+        FitnessUi.printMessageWithSepNewLine(message);
+    }
+
+    public void goalStatus() {
+        if (dailyGoals.isEmpty()) {
+            String message = "There are no goals set :(" + System.lineSeparator() +
+                    "You can set one by doing 'goal new'!";
+            FitnessUi.printMessageWithSepNewLine(message);
+        } else {
+            FitnessUi.printMessageWithSepNewLine(dailyGoals.toString());
+        }
+    }
+
+    public void toggleGoal() {
+        // toggle progress of goals
     }
 
 }

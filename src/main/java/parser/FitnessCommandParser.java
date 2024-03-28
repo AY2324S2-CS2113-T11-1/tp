@@ -3,6 +3,7 @@ package parser;
 import commands.Command;
 import commands.fitnesscommands.AddExerciseCommand;
 import commands.fitnesscommands.GetExercisesCommand;
+import commands.fitnesscommands.GoalExerciseCommand;
 import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 
@@ -23,6 +24,8 @@ public class FitnessCommandParser {
             return new GetExercisesCommand(fitnessMotivator, fitnessCommandArgs);
         case "add":
             return new AddExerciseCommand(fitnessMotivator, fitnessCommandArgs);
+        case "goal":
+            return new GoalExerciseCommand(fitnessMotivator, fitnessCommandArgs);
         default:
             throw new FitnessException("Unknown command. Can you type proper english please !-_-!");
         }
