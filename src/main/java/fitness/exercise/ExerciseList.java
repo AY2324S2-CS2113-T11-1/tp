@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
+import static fitness.exercise.ExerciseBank.INIT_ARMS_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_CHEST_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_ABS_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_BACK_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_LEGS_EXERCISES;
 
 /**
  * Represents the list of exercises and includes methods to manipulate the list
@@ -14,27 +19,6 @@ import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 public class ExerciseList {
 
     private ArrayList<Exercise> allExercises = new ArrayList<>();
-
-    private final String[] originalListForArms = {
-        "Cable Triceps Push down,Arms,3,8", "Barbell Curls,Arms,3,8", "Preacher Curls,Arms,3,8",
-        "Skullcrushers,Arms,3,8", "Lateral Raises,Arms,3,8"
-    };
-    private final String[] originalListForChest = {
-        "Bench Press,Chest,3,8", "Incline Bench Press,Chest,3,8", "Diamond Push-up,Chest,3,15",
-        "Cable Flies,Chest,3,8", "Wide Arm Push-up,Chest,3,15"
-    };
-    private final String[] originalListForAbs = {
-        "Sit-ups,Abs,3,20", "Russian Twists,Abs,3,20", "Crunches,Abs,5,20",
-        "Flutter Kicks,Abs,4,20", "Weighted Sit-Ups,Abs,3,20"
-    };
-    private final String[] originalListForBack = {
-        "Pull Ups,Back,3,6", "Lateral Rows,Back,3,8", "Deadlift,Back,3,5",
-        "Weighted Pull Ups,Back,3,6", "Cable Rows,Back,3,8"
-    };
-    private final String[] originalListForLegs = {
-        "Weighted Squats,Legs,3,10", "Leg Press,Legs,3,8", "Leg Curl,Legs,3,8",
-        "Leg Extensions,Legs,3,10", "Calf Raises,Legs,3,10"
-    };
 
     /**
      * Checks if a save file exists, if it does then load it for use, else create a new data file
@@ -69,11 +53,11 @@ public class ExerciseList {
      * Reads all 5 different string arrays from above and adds it into one ArrayList for use
      * */
     private void initialiseData() {
-        initialiseSingleList(originalListForArms, ExerciseType.ARMS);
-        initialiseSingleList(originalListForChest, ExerciseType.CHEST);
-        initialiseSingleList(originalListForAbs, ExerciseType.ABS);
-        initialiseSingleList(originalListForBack, ExerciseType.BACK);
-        initialiseSingleList(originalListForLegs, ExerciseType.LEGS);
+        initialiseSingleList(INIT_ARMS_EXERCISES, ExerciseType.ARMS);
+        initialiseSingleList(INIT_CHEST_EXERCISES, ExerciseType.CHEST);
+        initialiseSingleList(INIT_ABS_EXERCISES, ExerciseType.ABS);
+        initialiseSingleList(INIT_BACK_EXERCISES, ExerciseType.BACK);
+        initialiseSingleList(INIT_LEGS_EXERCISES, ExerciseType.LEGS);
     }
 
     /**

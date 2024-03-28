@@ -6,6 +6,9 @@ import exceptions.Wellness360Exception;
 import fitness.exercise.ExerciseType;
 import fitness.FitnessMotivator;
 
+import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_PARAMS_ERROR_MESSAGE;
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
 public class AddExerciseCommand implements Command {
@@ -33,8 +36,7 @@ public class AddExerciseCommand implements Command {
 
         // Handles insufficient parameters entered
         if (tempCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS) {
-            throw new FitnessException(
-                    "Forgetting something? Key in the correct parameters please!");
+            throw new FitnessException(INSUFFICIENT_PARAMS_ERROR_MESSAGE);
         }
 
         // String Cleaning
@@ -47,7 +49,7 @@ public class AddExerciseCommand implements Command {
         // be integers
         if (!tempCommandArgs[2].matches("\\d+") ||
                 !tempCommandArgs[3].matches("\\d+")) {
-            throw new FitnessException("Did you enter your Sets and Reps correctly? :(");
+            throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
         }
 
         // Checks that the entered type belongs to one of the ExerciseType Enum
@@ -55,10 +57,7 @@ public class AddExerciseCommand implements Command {
             String exerciseTypeString = tempCommandArgs[0].toUpperCase().trim();
             ExerciseType.valueOf(exerciseTypeString);
         } catch (IllegalArgumentException e) {
-            String errorMessage = "Hmm...Invalid type of exercise..." + System.lineSeparator() +
-                    "Only the following exercise types are allowed: " +
-                    "Arms, Chest, Abs, Back and Legs!";
-            throw new FitnessException(errorMessage);
+            throw new FitnessException(ILLEGAL_TYPE_ERROR_MESSAGE);
         }
         return tempCommandArgs;
     }

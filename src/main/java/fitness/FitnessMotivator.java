@@ -10,6 +10,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import static fitness.UiMessageConstants.ADD_EXERCISE_MESSAGE;
+import static fitness.UiMessageConstants.EMPTY_GOAL_MESSAGE;
+import static fitness.UiMessageConstants.GOAL_MESSAGE;
+import static fitness.UiMessageConstants.NEW_GOAL_MESSAGE;
+import static fitness.UiMessageConstants.GOAL_STATUS_MESSAGE;
+import static fitness.UiMessageConstants.HELP_MESSAGE;
+
+
 /**
  * Contains methods that execute given the respective commands
  * */
@@ -32,25 +40,6 @@ public class FitnessMotivator {
         "fitness goal <index>: Toggle the status of the goal",
         "fitness help: Get help menu for reflect commands"
     };
-
-    private static final String NEW_GOAL_MESSAGE = "Lets get working on today's exercises!" +
-            System.lineSeparator() + System.lineSeparator();
-    private static final String EMPTY_GOAL_MESSAGE = "There are no goals set :(" +
-            System.lineSeparator() + System.lineSeparator() +
-            "You can set one by doing 'goal new'!";
-
-    private static final String GOAL_MESSAGE = "Here are your goals for today. " +
-            "Have you started? Don't be lazy ok?" + System.lineSeparator() + System.lineSeparator();
-
-    private static final String GOAL_STATUS_MESSAGE = "I see there are changes. " +
-            "I hope you are making progress..." + System.lineSeparator() + System.lineSeparator();
-
-    private static final String HELP_MESSAGE =
-            "Here is a list of possible commands you can use with the Fitness Motivator!" +
-            System.lineSeparator();
-
-    private static final String ADD_EXERCISE_MESSAGE =
-            "I have added the following exercise into our list!" + System.lineSeparator();
 
     public ExerciseList allExercises = new ExerciseList();
     public ExerciseGoalList dailyGoals = new ExerciseGoalList();

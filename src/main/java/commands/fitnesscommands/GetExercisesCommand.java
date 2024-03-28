@@ -6,6 +6,8 @@ import exceptions.Wellness360Exception;
 import fitness.exercise.ExerciseType;
 import fitness.FitnessMotivator;
 
+import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
+
 public class GetExercisesCommand implements Command {
 
     private FitnessMotivator fitnessMotivator;
@@ -40,10 +42,7 @@ public class GetExercisesCommand implements Command {
         try {
             return ExerciseType.valueOf(exerciseTypeString);
         } catch (IllegalArgumentException e) {
-            String errorMessage = "Hmm...Invalid type of exercise..." + System.lineSeparator() +
-                    "Only the following exercise types are allowed: " +
-                    "Arms, Chest, Abs, Back and Legs!";
-            throw new FitnessException(errorMessage);
+            throw new FitnessException(ILLEGAL_TYPE_ERROR_MESSAGE);
         }
     }
 
