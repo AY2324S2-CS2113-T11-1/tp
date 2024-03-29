@@ -101,6 +101,12 @@ public class FitnessMotivator {
         Ui.printList(exercisesByType, message);
     }
 
+    /**
+     * Delete the exercise specified by the user, and prints the remaining exercises of the same
+     * type to the UI.
+     *
+     * @param commandArgs A list of strings that contain the index and ExerciseType to be deleted.
+     * */
     public void deleteExercise(String[] commandArgs) {
         assert commandArgs.length == REQUIRED_DELETE_PARAMS :
                 "Something went wrong with parsing fitness delete command arguments";

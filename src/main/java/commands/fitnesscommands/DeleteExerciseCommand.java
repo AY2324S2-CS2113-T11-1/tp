@@ -23,10 +23,10 @@ public class DeleteExerciseCommand implements Command {
     }
 
     /**
-     * Validates the command argument given for the fitness add command.
+     * Validates the command argument given for the fitness delete command.
      *
      * @param commandArgs A string of arguments
-     * @return A split array of strings of size 4 if there are no issues found with the string
+     * @return A split array of strings of size 2 if there are no issues found with the string
      *         input
      *
      * @throws FitnessException Thrown when improper command arguments are found
@@ -51,6 +51,8 @@ public class DeleteExerciseCommand implements Command {
         if (!tempCommandArgs[1].matches("\\d+")) {
             throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
         }
+
+        // Handles the case where the integer entered is out of bounds
         if (Integer.parseInt(tempCommandArgs[1]) > maxIndex) {
             throw new FitnessException(INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE);
         }

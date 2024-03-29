@@ -14,7 +14,7 @@ import static fitness.exercise.ExerciseBank.INIT_BACK_EXERCISES;
 import static fitness.exercise.ExerciseBank.INIT_LEGS_EXERCISES;
 
 /**
- * Represents the list of exercises and includes methods to manipulate the list
+ * Represents the list of exercises and includes methods to manipulate the list of exercises
  * */
 public class ExerciseList {
 
@@ -114,6 +114,13 @@ public class ExerciseList {
         return typeExercises.get(index);
     }
 
+    /**
+     * This method fetches all exercises that have the queried type.
+     *
+     * @param type The ExerciseType to be queried in the list of exercises.
+     *
+     * @return A list of exercises matching the type queried.
+     * */
     public ArrayList<Exercise> getType(ExerciseType type) {
         ArrayList<Exercise> exercisesByType = new ArrayList<>();
         for (Exercise e : allExercises) {
@@ -184,6 +191,11 @@ public class ExerciseList {
         return null;
     }
 
+    /**
+     * Helper method that helps remove an exercise from the list.
+     *
+     * @param exercise The exercise object to be deleted.
+     * */
     public void remove(Exercise exercise) {
         allExercises.remove(exercise);
         Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
