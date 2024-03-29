@@ -5,9 +5,11 @@ import exceptions.ReflectException;
 import java.util.Collections;
 import java.util.ArrayList;
 
-public class ReflectionQuestionBank {
-    private ArrayList<ReflectionQuestion> reflectionQuestionList;
-    private String[] questions = {
+/**
+ * Represents a bank of reflection questions.
+ */
+public class ReflectionQuestionBank extends ReflectionList{
+    private static final String[] REFLECTION_QUESTIONS = {
         "What have been the most significant lessons you've learned about yourself in the past year?",
         "How have your values evolved over time, and why?",
         "What habits or behaviors do you want to cultivate or change to become a better version of yourself?",
@@ -59,30 +61,38 @@ public class ReflectionQuestionBank {
         "How do you celebrate your unique talents and creative voice?"
     };
 
+    /**
+     * Constructs a ReflectionQuestionBank and initializes the list of reflection questions.
+     */
     public ReflectionQuestionBank() {
-        this.reflectionQuestionList = new ArrayList<>();
+        super();
         setUpReflectionBank();
     }
 
+    /**
+     * Initializes the reflection question bank with predefined questions.
+     */
     private void setUpReflectionBank() {
-        for(String question : questions) {
+        for(String question : REFLECTION_QUESTIONS) {
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(question);
             addReflectionQuestion(reflectionQuestion);
         }
+
+        assert !reflectionList.isEmpty() : "Reflection question bank should not be empty";
     }
 
-    public void addReflectionQuestion(ReflectionQuestion question) {
-        if (!question.toString().isBlank()) {
-            reflectionQuestionList.add(question);
-        }
-    }
-
+    /**
+     * Retrieves five random reflection questions from the bank.
+     *
+     * @return An ArrayList containing five random reflection questions.
+     * @throws ReflectException if the bank is empty.
+     */
     public ArrayList<ReflectionQuestion> getFiveRandomQuestions() throws ReflectException {
         try {
             ArrayList<ReflectionQuestion> randomQuestions = new ArrayList<>();
 
             // Create a copy of the original list
-            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionQuestionList);
+            ArrayList<ReflectionQuestion> copyList = new ArrayList<>(reflectionList);
 
             // Shuffle the copy list
             Collections.shuffle(copyList);
@@ -93,18 +103,11 @@ public class ReflectionQuestionBank {
                 randomQuestions.add(copyList.get(i));
             }
 
+            assert randomQuestions.size() == 5 : "random questions list size should be 5";
+
             return randomQuestions;
         } catch (IndexOutOfBoundsException e) {
             throw new ReflectException("Question bank is empty");
         }
-
-    }
-
-    public int getTaskListSize() {
-        return reflectionQuestionList.size();
-    }
-
-    public ArrayList<ReflectionQuestion> getQuestionsList() {
-        return reflectionQuestionList;
     }
 }

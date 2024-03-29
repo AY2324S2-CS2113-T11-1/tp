@@ -1,10 +1,12 @@
 import commands.Command;
 import exceptions.Wellness360Exception;
+import fitness.FitnessMotivator;
 import focus.FocusTimer;
 import habit.HabitTracker;
 import parser.Parser;
 import reflection.ReflectionManager;
 import ui.Ui;
+
 import java.util.Scanner;
 import sleep.SleepTracker;
 
@@ -19,6 +21,9 @@ public class Main {
         ReflectionManager reflectionManager = new ReflectionManager();
         HabitTracker habitTracker = new HabitTracker();
         FocusTimer focusTimer = new FocusTimer();
+        FitnessMotivator fitnessMotivator = new FitnessMotivator();
+
+        Ui.greetUser();
 
         while (!isExit) {
 
@@ -30,12 +35,14 @@ public class Main {
             //save tasks to file after each command
             try {
                 Command userCommand = Parser.determineCommand(sleepTracker, reflectionManager,
-                        habitTracker, focusTimer, userInput);
+                        habitTracker, focusTimer, fitnessMotivator, userInput);
                 userCommand.execute();
                 isExit = userCommand.isExit();
             } catch (Wellness360Exception e) {
                 Ui.printMessageWithSepNewLine(e.getMessage());
             }
         }
+
+        Ui.sayGoodbye();
     }
 }

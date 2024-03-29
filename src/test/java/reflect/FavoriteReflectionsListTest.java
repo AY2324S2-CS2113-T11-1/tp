@@ -22,16 +22,30 @@ public class FavoriteReflectionsListTest {
     public void addReflectionQuestion_addQuestion_success() {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         favoriteReflectionList.addReflectionQuestion(question);
-        assertEquals(1, favoriteReflectionList.getFavouritesList().size());
-        assertTrue(favoriteReflectionList.getFavouritesList().contains(question));
+
+        assertEquals(1, favoriteReflectionList.getReflectionList().size());
+        assertTrue(favoriteReflectionList.getReflectionList().contains(question));
     }
 
     @Test
     public void addReflectionQuestion_addBlankQuestion_skipOverBlankQuestion() {
+        //Attempt to add blank question
         ReflectionQuestion question = new ReflectionQuestion("");
         favoriteReflectionList.addReflectionQuestion(question);
-        assertEquals(0, favoriteReflectionList.getFavouritesList().size());
-        assertFalse(favoriteReflectionList.getFavouritesList().contains(question));
+
+        //Empty or blank questions should be ignored
+        assertEquals(0, favoriteReflectionList.getReflectionList().size());
+        assertFalse(favoriteReflectionList.getReflectionList().contains(question));
+    }
+
+    @Test
+    public void removeReflectionQuestion_removeQuestion_success() {
+        ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
+        favoriteReflectionList.addReflectionQuestion(question);
+        favoriteReflectionList.removeReflectionQuestion(question);
+
+        assertEquals(0, favoriteReflectionList.getReflectionList().size());
+        assertFalse(favoriteReflectionList.getReflectionList().contains(question));
     }
 
     @Test
@@ -39,6 +53,7 @@ public class FavoriteReflectionsListTest {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         favoriteReflectionList.addReflectionQuestion(question);
         ReflectionQuestion retrievedQuestion = favoriteReflectionList.get(0);
+
         assertEquals(question, retrievedQuestion);
     }
 }

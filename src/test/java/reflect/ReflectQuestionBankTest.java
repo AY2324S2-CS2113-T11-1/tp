@@ -25,14 +25,17 @@ public class ReflectQuestionBankTest {
     public void addReflectionQuestion_addQuestion_success() {
         ReflectionQuestion question = new ReflectionQuestion("What is reflection?");
         reflectionQuestionBank.addReflectionQuestion(question);
-        assertEquals(42, reflectionQuestionBank.getTaskListSize());
+        assertEquals(42, reflectionQuestionBank.getSize());
     }
 
     @Test
     public void addReflectionQuestion_addBlankQuestion_skipOverBlankQuestion() {
+        //Attempt to add blank question
         ReflectionQuestion question = new ReflectionQuestion("");
         reflectionQuestionBank.addReflectionQuestion(question);
-        assertEquals(41, reflectionQuestionBank.getTaskListSize());
+
+        //Empty or blank questions should be ignored
+        assertEquals(41, reflectionQuestionBank.getSize());
     }
 
     @Test
@@ -72,7 +75,8 @@ public class ReflectQuestionBankTest {
     }
 
     @Test
-    public void testGetTaskListSize() {
-        assertEquals(41, reflectionQuestionBank.getTaskListSize());
+    public void getSize_getSizeOfQuestionBank_success() {
+        // Question bank size has 41 questions
+        assertEquals(41, reflectionQuestionBank.getSize());
     }
 }
