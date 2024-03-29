@@ -44,13 +44,7 @@ public class ExerciseGoalList extends ExerciseList {
             parts[0] = parts[0].substring(4);
 
             if (parts.length == REQUIRED_NUM_OF_PARAMETERS) {
-                goals.add(new ExerciseGoal(
-                        parts[1],
-                        ExerciseType.valueOf(parts[0].toUpperCase()),
-                        parts[2],
-                        parts[3],
-                        isDone
-                ));
+                add(newExercise(parts), isDone);
             }
         }
     }
@@ -123,14 +117,13 @@ public class ExerciseGoalList extends ExerciseList {
      *
      * @param exercise An Exercise object to be converted and added into the list
      * */
-    @Override
-    public void add(Exercise exercise) {
+    public void add(Exercise exercise, boolean isDone) {
         goals.add(new ExerciseGoal(
                 exercise.getExerciseName(),
                 exercise.getType(),
                 exercise.getSets(),
                 exercise.getReps(),
-                false
+                isDone
         ));
 
         Storage.saveTasksToFile(FitnessMotivator.GOALS_FILE_PATH, goals);

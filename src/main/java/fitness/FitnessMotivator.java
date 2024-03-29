@@ -130,7 +130,7 @@ public class FitnessMotivator {
         Exercise[] exercises = fiveRandomExercises();
 
         for (Exercise e: exercises) {
-            dailyGoals.add(e);
+            dailyGoals.add(e, false);
         }
 
         Ui.printMessageWithSepNewLine(NEW_GOAL_MESSAGE + dailyGoals.toString());
