@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import static fitness.FitnessMotivator.GOALS_FILE_PATH;
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
+/**
+ * Represents the list of exercises and includes methods to manipulate the list of exercise goals.
+ * Inherits from the ExerciseList class.
+ * */
 public class ExerciseGoalList extends ExerciseList {
 
     private static final int NUMBER_OF_GOALS = 5;

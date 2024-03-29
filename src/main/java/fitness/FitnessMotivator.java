@@ -10,12 +10,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import static commands.fitnesscommands.DeleteExerciseCommand.REQUIRED_DELETE_PARAMS;
 import static fitness.UiMessageConstants.ADD_EXERCISE_MESSAGE;
 import static fitness.UiMessageConstants.EMPTY_GOAL_MESSAGE;
 import static fitness.UiMessageConstants.GOAL_MESSAGE;
 import static fitness.UiMessageConstants.NEW_GOAL_MESSAGE;
 import static fitness.UiMessageConstants.GOAL_STATUS_MESSAGE;
 import static fitness.UiMessageConstants.HELP_MESSAGE;
+import static fitness.UiMessageConstants.DELETE_EXERCISE_MESSAGE;
+import static fitness.UiMessageConstants.HELP_MENU_INSTRUCTIONS;
 
 
 /**
@@ -28,18 +31,6 @@ public class FitnessMotivator {
 
     // Required Number of parameters for the fitness add command
     public static final int REQUIRED_NUM_OF_PARAMETERS = 4;
-
-    private static final String[] HELP_MENU_INSTRUCTIONS = {
-        "fitness get: Get 5 random reflection questions",
-        "fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type",
-        "fitness add <exercise_type>, <exercise_name>, <sets>, <reps>: " +
-                "add an exercise to the list of exercises",
-        "fitness goal: Retrieves the status of all current goals, if it exists",
-        "fitness goal new: Overwrites current goals with new set of goals if it exists, " +
-                "otherwise creates a brand new set of goals",
-        "fitness goal <index>: Toggle the status of the goal",
-        "fitness help: Get help menu for reflect commands"
-    };
 
     public ExerciseList allExercises = new ExerciseList();
     public ExerciseGoalList dailyGoals = new ExerciseGoalList();
@@ -108,6 +99,25 @@ public class FitnessMotivator {
         String message = "Here are the " + type + " exercises as requested!" +
                 System.lineSeparator();
         Ui.printList(exercisesByType, message);
+    }
+
+    /**
+     * Delete the exercise specified by the user, and prints the remaining exercises of the same
+     * type to the UI.
+     *
+     * @param commandArgs A list of strings that contain the index and ExerciseType to be deleted.
+     * */
+    public void deleteExercise(String[] commandArgs) {
+        assert commandArgs.length == REQUIRED_DELETE_PARAMS :
+                "Something went wrong with parsing fitness delete command arguments";
+
+        ExerciseType type = ExerciseType.valueOf(commandArgs[0]);
+        int index = Integer.parseInt(commandArgs[1]);
+
+        allExercises.remove(allExercises.get(type, index-1));
+        ArrayList<Exercise> exercisesByType = allExercises.getType(type);
+
+        Ui.printList(exercisesByType, DELETE_EXERCISE_MESSAGE);
     }
 
     /**

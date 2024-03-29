@@ -2,13 +2,12 @@ package commands.fitnesscommands;
 
 import commands.Command;
 import exceptions.FitnessException;
-import exceptions.Wellness360Exception;
 import fitness.exercise.ExerciseType;
 import fitness.FitnessMotivator;
 
 import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_PARAMS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE;
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
 public class AddExerciseCommand implements Command {
@@ -36,7 +35,7 @@ public class AddExerciseCommand implements Command {
 
         // Handles insufficient parameters entered
         if (tempCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS) {
-            throw new FitnessException(INSUFFICIENT_PARAMS_ERROR_MESSAGE);
+            throw new FitnessException(INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE);
         }
 
         // String Cleaning
@@ -63,7 +62,7 @@ public class AddExerciseCommand implements Command {
     }
 
     @Override
-    public void execute() throws Wellness360Exception {
+    public void execute() throws FitnessException {
         fitnessMotivator.addExercises(commandArgs);
     }
 

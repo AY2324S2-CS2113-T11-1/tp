@@ -2,7 +2,6 @@ package commands.fitnesscommands;
 
 import commands.Command;
 import exceptions.FitnessException;
-import exceptions.Wellness360Exception;
 import fitness.FitnessMotivator;
 
 import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_GOAL_PARAMS_ERROR_MESSAGE;
@@ -42,7 +41,7 @@ public class GoalExerciseCommand implements Command {
     }
 
     @Override
-    public void execute() throws Wellness360Exception {
+    public void execute() throws FitnessException {
         String parsedCommand = checkCommandArgs(commandArgs);
 
         if (parsedCommand == null) {
