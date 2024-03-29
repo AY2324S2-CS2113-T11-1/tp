@@ -1,7 +1,11 @@
 package parser;
 
 import commands.Command;
-import commands.fitnesscommands.*;
+import commands.fitnesscommands.AddExerciseCommand;
+import commands.fitnesscommands.GetExercisesCommand;
+import commands.fitnesscommands.GoalExerciseCommand;
+import commands.fitnesscommands.HelpExerciseCommand;
+import commands.fitnesscommands.DeleteExerciseCommand;
 import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 
