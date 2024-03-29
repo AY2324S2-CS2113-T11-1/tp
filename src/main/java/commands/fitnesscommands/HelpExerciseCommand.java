@@ -2,7 +2,6 @@ package commands.fitnesscommands;
 
 import commands.Command;
 import exceptions.FitnessException;
-import exceptions.Wellness360Exception;
 import fitness.FitnessMotivator;
 
 public class HelpExerciseCommand implements Command {
