@@ -1,6 +1,7 @@
 package commands.fitnesscommands;
 
 import commands.Command;
+import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
 import fitness.FitnessMotivator;
 
@@ -13,7 +14,7 @@ public class HelpExerciseCommand implements Command {
     }
 
     @Override
-    public void execute() throws Wellness360Exception {
+    public void execute() throws FitnessException {
         fitnessMotivator.printHelp();
     }
 

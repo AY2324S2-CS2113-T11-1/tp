@@ -42,7 +42,7 @@ public class GoalExerciseCommand implements Command {
     }
 
     @Override
-    public void execute() throws Wellness360Exception {
+    public void execute() throws FitnessException {
         String parsedCommand = checkCommandArgs(commandArgs);
 
         if (parsedCommand == null) {

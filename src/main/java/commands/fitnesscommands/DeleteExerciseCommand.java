@@ -46,8 +46,7 @@ public class DeleteExerciseCommand implements Command {
 
         int maxIndex = fitnessMotivator.allExercises.size(type);
 
-        // Handles the case where non-integer values are entered in parameters that should only
-        // be
+        // Handles the case where non-integer values are entered in parameters
         if (!tempCommandArgs[1].matches("\\d+")) {
             throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
         }
@@ -61,7 +60,7 @@ public class DeleteExerciseCommand implements Command {
     }
 
     @Override
-    public void execute() throws Wellness360Exception {
+    public void execute() throws FitnessException {
         fitnessMotivator.deleteExercise(commandArgs);
     }
 
