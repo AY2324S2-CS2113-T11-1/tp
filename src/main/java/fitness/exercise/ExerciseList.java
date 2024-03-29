@@ -1,12 +1,17 @@
-package fitness;
+package fitness.exercise;
 
-import exceptions.FitnessException;
+import fitness.FitnessMotivator;
 import storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
+import static fitness.exercise.ExerciseBank.INIT_ARMS_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_CHEST_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_ABS_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_BACK_EXERCISES;
+import static fitness.exercise.ExerciseBank.INIT_LEGS_EXERCISES;
 
 /**
  * Represents the list of exercises and includes methods to manipulate the list
@@ -15,38 +20,16 @@ public class ExerciseList {
 
     private ArrayList<Exercise> allExercises = new ArrayList<>();
 
-    // Constant lists used to initialise data into local machine
-    private final String[] originalListForArms = {
-        "Cable Triceps Push down,Arms,3,8", "Barbell Curls,Arms,3,8", "Preacher Curls,Arms,3,8",
-        "Skullcrushers,Arms,3,8", "Lateral Raises,Arms,3,8"
-    };
-    private final String[] originalListForChest = {
-        "Bench Press,Chest,3,8", "Incline Bench Press,Chest,3,8", "Diamond Push-up,Chest,3,15",
-        "Cable Flies,Chest,3,8", "Wide Arm Push-up,Chest,3,15"
-    };
-    private final String[] originalListForAbs = {
-        "Sit-ups,Abs,3,20", "Russian Twists,Abs,3,20", "Crunches,Abs,5,20",
-        "Flutter Kicks,Abs,4,20", "Weighted Sit-Ups,Abs,3,20"
-    };
-    private final String[] originalListForBack = {
-        "Pull Ups,Back,3,6", "Lateral Rows,Back,3,8", "Deadlift,Back,3,5",
-        "Weighted Pull Ups,Back,3,6", "Cable Rows,Back,3,8"
-    };
-    private final String[] originalListForLegs = {
-        "Weighted Squats,Legs,3,10", "Leg Press,Legs,3,8", "Leg Curl,Legs,3,8",
-        "Leg Extensions,Legs,3,10", "Calf Raises,Legs,3,10"
-    };
-
     /**
      * Checks if a save file exists, if it does then load it for use, else create a new data file
      * and initialise it with the data above.
      * */
     public ExerciseList() {
-        if (!Storage.isFileCreated(FitnessMotivator.FILE_PATH)) {
+        if (!Storage.isFileCreated(FitnessMotivator.DATA_FILE_PATH)) {
             initialiseData();
-            Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
+            Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
         } else {
-            parseData(Storage.loadDataFromFile(FitnessMotivator.FILE_PATH));
+            parseData(Storage.loadDataFromFile(FitnessMotivator.DATA_FILE_PATH));
         }
     }
 
@@ -70,11 +53,11 @@ public class ExerciseList {
      * Reads all 5 different string arrays from above and adds it into one ArrayList for use
      * */
     private void initialiseData() {
-        initialiseSingleList(originalListForArms, ExerciseType.ARMS);
-        initialiseSingleList(originalListForChest, ExerciseType.CHEST);
-        initialiseSingleList(originalListForAbs, ExerciseType.ABS);
-        initialiseSingleList(originalListForBack, ExerciseType.BACK);
-        initialiseSingleList(originalListForLegs, ExerciseType.LEGS);
+        initialiseSingleList(INIT_ARMS_EXERCISES, ExerciseType.ARMS);
+        initialiseSingleList(INIT_CHEST_EXERCISES, ExerciseType.CHEST);
+        initialiseSingleList(INIT_ABS_EXERCISES, ExerciseType.ABS);
+        initialiseSingleList(INIT_BACK_EXERCISES, ExerciseType.BACK);
+        initialiseSingleList(INIT_LEGS_EXERCISES, ExerciseType.LEGS);
     }
 
     /**
@@ -107,8 +90,9 @@ public class ExerciseList {
 
         // The sort method then sorts the list based on the comparator specified before saving
         allExercises.sort(comparator);
-        Storage.saveTasksToFile(FitnessMotivator.FILE_PATH, allExercises);
+        Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
     }
+
 
     /**
      * This method searches the ArrayList for Exercises that matches the required type, and returns
@@ -200,21 +184,4 @@ public class ExerciseList {
         return null;
     }
 
-    /**
-     * Helper methods for finding exercises in the list. Overloaded with different parameters to
-     * allow for different searching methods.This method uses index to search.
-     *
-     * @param type The ExerciseType Enum to be queried
-     * @param index The n-th exercise of type ExerciseType, where n is the index
-     *
-     * @return An object of type Exercise
-     * */
-    public Exercise findExercise(ExerciseType type, int index) throws FitnessException {
-        ArrayList<Exercise> typeExercises = getType(type);
-        try {
-            return typeExercises.get(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new FitnessException("Index for exercise query is not valid!");
-        }
-    }
 }

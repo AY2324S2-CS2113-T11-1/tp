@@ -3,12 +3,20 @@ package fitness;
 import commands.fitnesscommands.AddExerciseCommand;
 import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
+import fitness.exercise.Exercise;
+import fitness.exercise.ExerciseList;
+import fitness.exercise.ExerciseType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static fitness.FitnessMotivator.FILE_PATH;
+
+import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_PARAMS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
+import static fitness.FitnessMotivator.DATA_FILE_PATH;
+import static fitness.FitnessMotivator.GOALS_FILE_PATH;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,9 +30,13 @@ public class FitnessMotivatorTest {
 
     @BeforeEach
     public void setUp() {
-        File f = new File(FILE_PATH);
-        if (isFileCreated(FILE_PATH)) {
-            f.delete();
+        File file1 = new File(DATA_FILE_PATH);
+        File file2 = new File(GOALS_FILE_PATH);
+        if (isFileCreated(DATA_FILE_PATH)) {
+            file1.delete();
+        }
+        if (isFileCreated(GOALS_FILE_PATH)) {
+            file2.delete();
         }
         this.fitnessMotivator = new FitnessMotivator();
         this.allExercises = fitnessMotivator.allExercises;
@@ -76,17 +88,9 @@ public class FitnessMotivatorTest {
         Wellness360Exception exceptionThree = assertThrows(FitnessException.class, () ->
                 new AddExerciseCommand(fitnessMotivator, "testing, testing, 3, 10"));
 
-        String expectedMessageOne =
-            "ERROR MSG: Forgetting something? Key in the correct parameters please!";
-        String expectedMessageTwo =
-            "ERROR MSG: Did you enter your Sets and Reps correctly? :(";
-        String expectedMessageThree = "ERROR MSG: " + "Hmm...Invalid type of exercise..." +
-            System.lineSeparator() + "Only the following exercise types are allowed: " +
-            "Arms, Chest, Abs, Back and Legs!";
-
-        assertEquals(expectedMessageOne, exceptionOne.getMessage());
-        assertEquals(expectedMessageTwo, exceptionTwo.getMessage());
-        assertEquals(expectedMessageThree, exceptionThree.getMessage());
+        assertEquals("ERROR MSG: " + INSUFFICIENT_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
+        assertEquals("ERROR MSG: " + INCORRECT_INTEGER_ERROR_MESSAGE, exceptionTwo.getMessage());
+        assertEquals("ERROR MSG: " + ILLEGAL_TYPE_ERROR_MESSAGE, exceptionThree.getMessage());
 
     }
 }

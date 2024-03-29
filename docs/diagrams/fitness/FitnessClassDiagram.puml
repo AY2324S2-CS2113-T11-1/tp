@@ -4,7 +4,7 @@ skinparam classAttributeIconSize 0
 
 package parser {
     class FitnessCommandParser {
-        {Static} Command determineFitnessCommand()
+        {Static} determineFitnessCommand(fitnessMotivator: FitnessMotivator, commandArgs: String): Command
     }
 
     class Parser {
