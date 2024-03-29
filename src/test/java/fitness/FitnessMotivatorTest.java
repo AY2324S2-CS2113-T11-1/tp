@@ -13,7 +13,7 @@ import java.io.File;
 
 
 import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_PARAMS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
 import static fitness.FitnessMotivator.DATA_FILE_PATH;
 import static fitness.FitnessMotivator.GOALS_FILE_PATH;
@@ -88,7 +88,7 @@ public class FitnessMotivatorTest {
         Wellness360Exception exceptionThree = assertThrows(FitnessException.class, () ->
                 new AddExerciseCommand(fitnessMotivator, "testing, testing, 3, 10"));
 
-        assertEquals("ERROR MSG: " + INSUFFICIENT_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
+        assertEquals("ERROR MSG: " + INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
         assertEquals("ERROR MSG: " + INCORRECT_INTEGER_ERROR_MESSAGE, exceptionTwo.getMessage());
         assertEquals("ERROR MSG: " + ILLEGAL_TYPE_ERROR_MESSAGE, exceptionThree.getMessage());
 

@@ -3,20 +3,20 @@ package commands.fitnesscommands;
 import commands.Command;
 import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
-import fitness.exercise.ExerciseType;
 import fitness.FitnessMotivator;
+import fitness.exercise.ExerciseType;
 
-import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE;
-import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
+import static commands.fitnesscommands.ErrorMessageConstants.INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE;
 
-public class AddExerciseCommand implements Command {
+public class DeleteExerciseCommand implements Command {
 
+    public static final int REQUIRED_DELETE_PARAMS = 2;
     private FitnessMotivator fitnessMotivator;
     private String[] commandArgs;
 
-    public AddExerciseCommand(FitnessMotivator fitnessMotivator, String commandArgs)
+    public DeleteExerciseCommand(FitnessMotivator fitnessMotivator, String commandArgs)
             throws FitnessException {
         this.fitnessMotivator = fitnessMotivator;
         this.commandArgs = checkCommandArgs(commandArgs);
@@ -32,39 +32,35 @@ public class AddExerciseCommand implements Command {
      * @throws FitnessException Thrown when improper command arguments are found
      * */
     private String[] checkCommandArgs(String commandArgs) throws FitnessException {
-        String[] tempCommandArgs = commandArgs.split(",", 4);
+        String[] tempCommandArgs = commandArgs.split(" ", 2);
 
         // Handles insufficient parameters entered
-        if (tempCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS) {
-            throw new FitnessException(INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE);
+        if (tempCommandArgs.length != REQUIRED_DELETE_PARAMS) {
+            throw new FitnessException(INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE);
         }
 
         // String Cleaning
-        tempCommandArgs[0] = tempCommandArgs[0].trim();
+        tempCommandArgs[0] = tempCommandArgs[0].trim().toUpperCase();
         tempCommandArgs[1] = tempCommandArgs[1].trim();
-        tempCommandArgs[2] = tempCommandArgs[2].trim();
-        tempCommandArgs[3] = tempCommandArgs[3].trim();
+        ExerciseType type = ExerciseType.valueOf(tempCommandArgs[0]);
+
+        int maxIndex = fitnessMotivator.allExercises.size(type);
 
         // Handles the case where non-integer values are entered in parameters that should only
-        // be integers
-        if (!tempCommandArgs[2].matches("\\d+") ||
-                !tempCommandArgs[3].matches("\\d+")) {
+        // be
+        if (!tempCommandArgs[1].matches("\\d+")) {
             throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
         }
-
-        // Checks that the entered type belongs to one of the ExerciseType Enum
-        try {
-            String exerciseTypeString = tempCommandArgs[0].toUpperCase().trim();
-            ExerciseType.valueOf(exerciseTypeString);
-        } catch (IllegalArgumentException e) {
-            throw new FitnessException(ILLEGAL_TYPE_ERROR_MESSAGE);
+        if (Integer.parseInt(tempCommandArgs[1]) > maxIndex) {
+            throw new FitnessException(INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
+
         return tempCommandArgs;
     }
 
     @Override
     public void execute() throws Wellness360Exception {
-        fitnessMotivator.addExercises(commandArgs);
+        fitnessMotivator.deleteExercise(commandArgs);
     }
 
     @Override

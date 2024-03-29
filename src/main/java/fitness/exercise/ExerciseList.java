@@ -184,4 +184,9 @@ public class ExerciseList {
         return null;
     }
 
+    public void remove(Exercise exercise) {
+        allExercises.remove(exercise);
+        Storage.saveTasksToFile(FitnessMotivator.DATA_FILE_PATH, allExercises);
+    }
+
 }

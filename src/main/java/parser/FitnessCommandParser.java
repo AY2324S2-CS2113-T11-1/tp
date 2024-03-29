@@ -1,10 +1,7 @@
 package parser;
 
 import commands.Command;
-import commands.fitnesscommands.AddExerciseCommand;
-import commands.fitnesscommands.GetExercisesCommand;
-import commands.fitnesscommands.GoalExerciseCommand;
-import commands.fitnesscommands.HelpExerciseCommand;
+import commands.fitnesscommands.*;
 import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 
@@ -29,6 +26,8 @@ public class FitnessCommandParser {
             return new GoalExerciseCommand(fitnessMotivator, fitnessCommandArgs);
         case "help":
             return new HelpExerciseCommand(fitnessMotivator);
+        case "delete":
+            return new DeleteExerciseCommand(fitnessMotivator, fitnessCommandArgs);
         default:
             String errorMessage = "Unknown command. Did you try any of the following commands?" +
                     System.lineSeparator() + "- 'fitness get'" + System.lineSeparator() +
