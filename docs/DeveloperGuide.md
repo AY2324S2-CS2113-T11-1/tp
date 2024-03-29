@@ -83,7 +83,22 @@ You are recommended to use Intellij IDEA:
 
 ### Architecture
 
-### Ui component
+### UI component
+#### Description
+`Ui` component is in charge of reading in user input and printing output. </br> </br>
+The `Ui` class is created to standardise the output formatting of messages to be printed across all features. These formatting include the printing of messages and lists, reducing code repetition.
+
+#### Design Considerations
+- #### User Design Considerations
+  - Users are able to understand what is going on with relative ease, when they use the Wellness360 chat bot.
+  - Standardised output creates a cohesive look and an overall more immersive experience for the user.
+- #### Developer Design Considerations
+  - Static Attributes: All methods are static, allowing their usage anywhere within the codebase.
+  - SRP: Classes adhere to the Single Responsibility Principle. For example, the `Ui` class is solely responsible for managing printing-related operations.
+  - Readability and Maintainability: Descriptive naming, comments, and documentation for clarity. Since printing is a highly used task, it prevents highly-repetitive code as well.
+#### Implementation
+#### Class Diagram
+<!-- Insert Class Diagram here -->
 
 ### Command parser component
 
