@@ -914,8 +914,10 @@ fitness goal [INDEX]
 * The `fitness` and `goal` are case-sensitive.
 * Running the command with no parameters will generate different exercises goals with each repeated command.
 * Use the `fitness goal` command to find out the indexes of the respective exercises goals.
+* Use the `fitness goal new` command to get a new randomised list of five exercise goals.
+* Running `fitness goal new` will always override any previously set goals.
+* Use the `fitness goal [INDEX]` command to mark/unmark a specific goal. 
 * Only `new` and `[INDEX]` are accepted as parameters, where `[INDEX]` is an integer value. The parameters are optional as well.
-* `fitness goal new` will always override any previously set goals.
 
 Example of usage :
 ```
