@@ -45,6 +45,9 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
       - Fitness Motivator
           - [`fitness get` - Get a pre-loaded list of different exercises](#get-a-list-of-exercises-fitness-get)
           - [`fitness add` - Add new exercises into the list](#add-exercises-to-the-list-fitness-add)
+          - [`fitness delete` - Delete exercises from the list](#delete-exercises-from-the-list-fitness-delete)
+          - [`fitness goal` - Set exercise goals for the day](#set-exercise-goals-for-the-day-fitness-goal)
+          - [`fitness help` - View Fitness Motivator help menu](#view-fitness-motivator-help-menu-fitness-help)
 
 ## Quick Start
 
@@ -802,7 +805,7 @@ fitness get [EXERCISE_TYPE]
 * The `[EXERCISE_TYPE]` parameter is optional, and only supports the following types:
   * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
 
-Example of usage:
+Example of usage (getting exercises of a certain type):
 ~~~
 fitness get
 ~~~
@@ -841,19 +844,19 @@ ________________________________________________________________________________
 
 
 ### Add exercises to the list: `fitness add`
-Allows the user to add their own exercises to the list.
+Allows the user to add their own exercises to the list of exercises.
 
 Format:
 ```
 fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
 ```
 
-* The `fitness` and `add` is case-sensitive.
-* Use of commands between each parameter is required.
+* The `fitness` and `add` are case-sensitive.
+* Use of comma between each parameter is required.
 * The `[EXERCISE_TYPE]` parameter only supports the following types:
   * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
 
-Example of usage (increasing count):
+Example of usage:
 ```
 fitness add Arms, Tricep Dips, 8, 10
 ```
@@ -863,6 +866,152 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 I have added the following exercise into our list!
 Arms: Tricep Dips, 8 sets & 10 reps
+________________________________________________________________________________________________________________
+```
+
+### Delete exercises from the list: `fitness delete`
+Allows the user to delete exercises from the list of exercises.
+
+Format:
+```
+fitness delete [EXERCISE_TYPE] [INDEX]
+```
+
+* The `fitness` and `delete` are case-sensitive.
+* The `[EXERCISE_TYPE]` parameter only supports the following types:
+    * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
+* Use the `fitness get [EXERCISE_TYPE]` command to find out the indexes of the respective exercises
+* The printed list of exercises reflects the list of exercises left that are of the same type as the exercise deleted.
+
+Example of usage:
+```
+fitness delete arms 6
+```
+Expected Outcome:
+```
+________________________________________________________________________________________________________________
+ I have deleted the exercise. Here are the exercises left in the list!
+
+1. Arms: Cable Triceps Push down, 3 sets & 8 reps
+2. Arms: Barbell Curls, 3 sets & 8 reps
+3. Arms: Preacher Curls, 3 sets & 8 reps
+4. Arms: Skullcrushers, 3 sets & 8 reps
+5. Arms: Lateral Raises, 3 sets & 8 reps
+________________________________________________________________________________________________________________
+
+```
+
+### Set exercise goals for the day: `fitness goal`
+Allows the user to create, track and mark a list of exercise goals.
+
+Formats:
+```
+fitness goal
+fitness goal new
+fitness goal [INDEX]
+```
+
+* The `fitness` and `goal` are case-sensitive.
+* Running the command with no parameters will generate different exercises goals with each repeated command.
+* Use the `fitness goal` command to find out the indexes of the respective exercises goals.
+* Use the `fitness goal new` command to get a new randomised list of five exercise goals.
+* Running `fitness goal new` will always override any previously set goals.
+* Use the `fitness goal [INDEX]` command to mark/unmark a specific goal. 
+* Only `new` and `[INDEX]` are accepted as parameters, where `[INDEX]` is an integer value. The parameters are optional as well.
+
+Example of usage :
+```
+fitness goal
+```
+
+Expected outcome (If there are no current goals):
+```
+________________________________________________________________________________________________________________
+There are no goals set :(
+
+You can set one by doing 'goal new'!
+________________________________________________________________________________________________________________
+```
+
+Expected outcome (If there are goals already set):
+```
+________________________________________________________________________________________________________________
+Lets get working on today's exercises!
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+Example of usage :
+```
+fitness goal new
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Lets get working on today's exercises!
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+Example of usage:
+```
+fitness goal 3
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+I see there are changes. I hope you are making progress...
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [X] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+### View Fitness Motivator help menu: `fitness help`
+Allows the user to see a list of available commands that can be executed under the FitnessMotivator.
+
+Format:
+```
+fitness help
+```
+
+* The `fitness` and `help` are case-sensitive.
+
+Example of usage:
+```
+fitness help
+```
+Expected Outcome:
+```
+________________________________________________________________________________________________________________
+Here is a list of possible commands you can use with the Fitness Motivator!
+
+1. fitness get: Get 5 random reflection questions
+2. fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type
+3. fitness add <exercise_type>, <exercise_name>, <sets>, <reps>: add an exercise to the list of exercises
+4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.The index is based on the index when you run 'fitness get <exercise_type>
+5. fitness goal: Retrieves the status of all current goals, if it exists
+6. fitness goal new: Overwrites current goals with new set of goals if it exists, otherwise creates a brand new set of goals
+7. fitness goal <index>: Toggle the status of the goal
+8. fitness help: Get help menu for reflect commands
 ________________________________________________________________________________________________________________
 ```
 
