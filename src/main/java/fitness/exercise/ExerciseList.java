@@ -1,5 +1,6 @@
 package fitness.exercise;
 
+import fitness.ExerciseType;
 import fitness.FitnessMotivator;
 import storage.Storage;
 

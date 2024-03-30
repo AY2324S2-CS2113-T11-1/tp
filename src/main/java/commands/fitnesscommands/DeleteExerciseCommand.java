@@ -3,7 +3,7 @@ package commands.fitnesscommands;
 import commands.Command;
 import exceptions.FitnessException;
 import fitness.FitnessMotivator;
-import fitness.exercise.ExerciseType;
+import fitness.ExerciseType;
 
 import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;

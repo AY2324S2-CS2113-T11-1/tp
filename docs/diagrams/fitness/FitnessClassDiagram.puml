@@ -59,19 +59,13 @@ package fitness {
         class ExerciseBank {
         }
 
-        enum ExerciseType {
-            ARMS
-            CHEST
-            ABS
-            BACK
-            LEGS
-        }
     }
 
     package goals {
         class ExerciseGoal {
             - isDone: boolean
             + toggle(): void
+            + toString(): String
         }
 
         class ExerciseGoalList {
@@ -103,6 +97,14 @@ package fitness {
     }
 }
 
+enum ExerciseType {
+            ARMS
+            CHEST
+            ABS
+            BACK
+            LEGS
+        }
+
 class Storage {
 }
 
@@ -110,6 +112,11 @@ class Ui {
 }
 
 Parser ..> FitnessCommandParser : uses >
+FitnessCommandParser ..> GetExerciseCommand : creates >
+FitnessCommandParser ..> DeleteExerciseCommand : creates >
+FitnessCommandParser ..> GoalExerciseCommand : creates >
+FitnessCommandParser ..> HelpExerciseCommand : creates >
+FitnessCommandParser ..> AddExerciseCommand : creates >
 
 AddExerciseCommand --> FitnessMotivator : uses >
 AddExerciseCommand ..> ExerciseType : uses >
@@ -121,18 +128,22 @@ HelpExerciseCommand --> FitnessMotivator : uses >
 FitnessMotivator *--> "1" ExerciseList : contains >
 FitnessMotivator *--> "1" ExerciseGoalList : contains >
 
-Exercise ..> ExerciseType : uses >
 ExerciseGoal --|> Exercise : extends >
 ExerciseGoalList --|> ExerciseList : extends >
-ExerciseList ..> ExerciseType : uses >
-FitnessMotivator ..> ExerciseType : uses >
 FitnessMotivator ..> UiMessageConstants : uses >
 ExerciseList ..> ExerciseBank : uses >
 
 ExerciseList *--> "25..*" Exercise : contains >
 ExerciseGoalList *--> "0..5" ExerciseGoal : contains >
 
+ExerciseList ..> ExerciseType : uses >
+ExerciseGoalList ..> ExerciseType : uses >
+ExerciseGoal ..> ExerciseType : uses >
+FitnessMotivator ..> ExerciseType : uses >
+Exercise ..> ExerciseType : uses >
+
 ExerciseList ..> Storage : uses >
+ExerciseGoalList ..> Storage : uses >
 
 FitnessMotivator ..> Ui : uses >
 

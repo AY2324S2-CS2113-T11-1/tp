@@ -1,7 +1,7 @@
 package fitness.goals;
 
 import fitness.exercise.Exercise;
-import fitness.exercise.ExerciseType;
+import fitness.ExerciseType;
 
 public class ExerciseGoal extends Exercise {
 

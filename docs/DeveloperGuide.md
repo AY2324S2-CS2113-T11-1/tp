@@ -566,44 +566,52 @@ methods, dependencies and UML Notes -->
   - Overview
     - The `FitnessMotivator` class manages fitness related operations.
   - Attributes:
-    - `FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
+    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
+    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
     - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. (Omitted from Class Diagram)
     - `allExercise`: An instance of `ExerciseList`.
+    - `dailyGoals`: An instance of `ExerciseGoalList`.
   - Methods:
-    - `getExercises()`: Prints 5 random exercises, where each exercise belongs to a different `ExerciseType`.
+    - `fiveRandomExercises()`: Generates five random integers within the index of each `ExerciseType`, then returns an array of exercises, where each exercise belongs to a different `ExerciseType`.
+    - `getExercises()`: Uses `fiveRandomExercises()`, then prints the exercises generated.
     - `getTypeExercises(ExerciseType type)`: Prints all the exercises belonging to the queried `ExerciseType`.
     - `addExercises(String[] commandArgs)`: Add the user-specified exercise into `allExercises`.
+    - `deleteExercises(String[] commandArgs)`: Delete the user-specified exercise by using its `ExerciseType` and index to remove it from the list.
+    - `newGoals()`: Uses `fiveRandomExercises()`, then converts them to `ExerciseGoal` objects and adds them to the dailyGoals list.
+    - `goalStatus()`: If the list of goals is not empty, it prints out all the currently set `ExerciseGoal` and its status, otherwise it shows a message that says there are no goals.
+    - `toggleGoal(int index)`: Toggles the status of the user-specified `ExerciseGoal` based on its index.
+    - `printHelp()`: Prints out a list of commands and briefly describes what each command does.
   - Dependencies:
     - Ui: Utilised for user interface interactions.
     - Enum ExerciseType: Utilised to allow only specified types of exercises.
+    - UiMessageConstants: A class with static string constants, where each string stores a different message for printing.
   - UML Notes:
-    - `FitnessMotivator` class only contains one `ExerciseList`.
+    - `FitnessMotivator` class only contains one `ExerciseList`, and one `ExerciseGoalList`.
 - `ExerciseList` Class
   - Overview:
     - The `ExerciseList` class directly manipulates the list of `Exercises`, and provides methods to do so.
   - Attributes:
     - `allExercises`: A private instance of an `ArrayList` of `Exercises`.
-    - `originalListForArms`: A private constant array of Strings used to initialise the program with arm `Exercise`. (Omitted from Class Diagram)
-    - `originalListForChest`: A private constant array of Strings used to initialise the program with chest `Exercise`. (Omitted from Class Diagram)
-    - `originalListForAbs`: A private constant array of Strings used to initialise the program with abs `Exercise`. (Omitted from Class Diagram)
-    - `originalListForBack`: A private constant array of Strings used to initialise the program with back `Exercise`. (Omitted from Class Diagram)
-    - `originalListForLegs`: A private constant array of Strings used to initialise the program with legs `Exercise`. (Omitted from Class Diagram)
   - Methods:
     - `ExerciseList()`: A public constructor method, it checks if a local save file exists. If it does not, it creates a new file and initialises it with data, otherwise it will simply load the file.
     - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. (Omitted from Class Diagram)
     - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. (Omitted from Class Diagram)
     - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. (Omitted from Class Diagram)
     - `add(Exercise exercise)`: A public helper method used to add an `Exercise` object into `allExercises`.
+    - `get(ExerciseType type, int index)`: A public helper method used to query for an `Exercise` Object that matches the n-th `Exercise` with the matching `ExerciseType`, where n = index.
     - `getType(ExerciseType type)`: A public helper method used to query for all of the `Exercise` objects that match the `ExerciseType`.
     - `size(ExerciseType type)`: A public helper method that returns the total number of `Exercise` objects that match the `ExerciseType`.
     - `newExercise(String[] parameters)`: A public helper method that creates an `Exercise` Object from an array of strings.
     - `findExercise(ExerciseType type, String nameQuery)`: A public helper method that searches for an `Exercise` object within `allExercises` using `ExerciseType` and a string which represents the name being searched.
+    - `remove(Exercise exercise)`: A public helper method that removes a specified `Exercise` Object from `ExerciseList`.
   - Dependencies:
       - Storage: Utilised for persistent memory storage.
       - Enum ExerciseType: Utilised to allow only specified types of exercises.
+      - ExerciseBank: Utilised for storage of initialisation data.
   - UML Notes:
     - `ExerciseList` contains at least 25 instances of `Exercise`.
     - When `FitnessMotivator` is destroyed, the `ExerciseList` instance is destroyed, reflecting a "whole-part" relationship.
+    - `ExerciseList` is a parent class to `ExerciseGoalList`.
 - `Exercise` Class
   - Overview:
     - The `Exercise` class stores the basic data of each exercise, such as its name, its type and the number of sets and reps to do.
@@ -623,6 +631,84 @@ methods, dependencies and UML Notes -->
   - UML Notes:
     - `ExerciseList` contains at least 25 instances of `Exercise`.
     - When `ExerciseList` or `FitnessMotivator` is destroyed, the `Exercise` instances are destroyed as well, reflecting a "whole-part" relationship.
+    - `Exercise` is the parent class of `ExerciseGoal`.
+- `ExerciseBank` Class
+    - Overview: 
+      - The `ExerciseBank` class stores a collection of static string constants for initialisation.
+    - Attributes:
+      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+    - UML Notes:
+      - Used exclusively by `ExerciseList`.
+- `ExerciseGoalList` Class
+  - Overview: 
+    - The `ExerciseGoalList` class inherits from the class `ExerciseList`, but storing `ExerciseGoal` objects instead of `Exercise` objects. It also implements additional methods.
+  - Attributes:
+    - `NUMBER_OF_GOALS`: A private static constant integer value representing the maximum number of goals in the `ExerciseGoalList`.
+    - `goals`: A private `ArrayList` of `ExerciseGoal` objects.
+  - Methods:
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. (Omitted from Class Diagram)
+    - `isEmpty()`: A public helper method used to check if the `ExerciseGoalList` is empty.
+    - `clear()`: A public helper method used to reset the `ExerciseGoalList` by deleting all `ExerciseGoal` objects within.
+    - `findExercise(int index)`: A public helper method used to find an `ExerciseGoal` based on its index.
+    - `saveGoals()`: A public helper method used to save the current list to a local storage.
+    - `newExercise(String[] parameters)`: An overriden public method from the parent class, it is used to create a new `ExerciseGoal` object, with its `isDone` attribute initialised to `false`.
+    - `add(Exercise exercise, boolean isDone)`: A public method overloaded from the parent class, it adds a pre-existing `Exercise`, converts it with a declared `isDone` parameter, before adding it into the list and saving locally.
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. (Omitted from Class Diagram)
+  - Dependencies:
+    - Storage: Utilised for persistent memory storage.
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+  - `ExerciseGoalList` is the child class of `ExerciseList`.
+  - When `ExercisegoalList` or `FitnessMotivator` is destroyed, the `ExerciseGoal` instances are destroyed as well, reflecting a "whole-part" relationship.
+  - `ExerciseGoalList` contains either 5 or 0 instances of `Exercise`.
+- `ExerciseGoal` Class
+  - Overview: 
+    - The `ExerciseGoal` class inherits from the class `Exercise`, but adds an attribute to store the completion status of the exercise goal. 
+  - Attributes:
+    - All attributes of the `Exercise` class.
+    - `isDone`: A private boolean storing the completion state of the `ExerciseGoal` object.
+  - Methods:
+    - `toggle()`: A public helper method used to toggle the state of the `ExerciseGoal` object.
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoal` object.
+  - Dependencies:
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `ExerciseGoal` is the child class of `Exercise`.
+    - `ExerciseGoalList` contains either 5 or 0 instances of `Exercise`.
+    - When `ExercisegoalList` or `FitnessMotivator` is destroyed, the `ExerciseGoal` instances are destroyed as well, reflecting a "whole-part" relationship.
+- `UiMessageConstants` Class
+  - Overview:
+    - The `UiMessageConstants` class stores all constant `String` variables used in the various printing methods in `FitnessMotivator`.
+  - Attributes:
+    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. (Omitted from Class Diagram)
+    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. (Omitted from Class Diagram)
+    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. (Omitted from Class Diagram)
+    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. (Omitted from Class Diagram)
+    - `HELP_MESSAGE`: A public static `String` constant storing the help message. (Omitted from Class Diagram)
+    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. (Omitted from Class Diagram)
+    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. (Omitted from Class Diagram)
+    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. (Omitted from Class Diagram)
+  - UML Notes:
+    - Used exclusively by `FitnessMotivator`.
+- `ExerciseType` Enumeration
+  - Overview:
+    - The `ExerciseType` enumeration restricts the number of different types of exercises to five parts of the body, for easier sorting and management of all exercises.
+  - Attributes:
+    - `ARMS`: Exercises that work the Arms
+    - `CHEST`: Exercises that work the Chest
+    - `ABS`: Exercises that work the Abs
+    - `BACK`: Exercises that work the Back
+    - `LEGS`: Exercises that work the Legs
+  - Methods:
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. (Omitted from Class Diagram)
+  - Dependencies:
+    - Does not require any dependencies.
+  - UML Notes:
+    - It is used everywhere, as every feature in the FitnessMotivator uses/parses `Exercise` objects, which will always use `ExerciseGoal` objects.
 - Fitness command classes
   - `GetExercisesCommand`:
     - Without parameters, the command retrieves 5 random exercises from each `ExerciseType` and prints it.
@@ -631,6 +717,18 @@ methods, dependencies and UML Notes -->
       - Command format: `fitness get arms`
   - `AddExerciseCommand`: Add a user specified exercise into the list.
     - CommandFormat: `fitness add <ExerciseType>, <ExerciseName>, <Number_Of_Sets>, <Number_Of_Reps>`
+  - `DeleteExerciseCommand`: Deletes a user specified `Exercise` from the list. 
+    - CommandFormat: `fitness delete <ExerciseType> <Index>`
+  - `GoalExerciseCommand`:
+    - Without parameters, the command tries to retrieve the status of the list of `ExerciseGoal`.
+      - Command format: `fitness goal`
+    - With parameters, there are only 2 possible parameters.
+      - This command creates or overwrites the existing goals with new goals.
+        - Command format: `fitness goal new`
+      - This command marks/unmarks the `ExerciseGoal` as completed or uncompleted.
+        - Command format: `fitness goal <index>`
+  - `HelpExerciseCommand`: Prints a list of executable commands for Fitness Motivator
+    - Command format: `fitness help`
 
 #### Sequence Diagram
 <!-- Insert image and description of the image -->
