@@ -17,46 +17,89 @@ package commands {
         + isExit(): boolean
     }
 
-    class AddExerciseCommand implements Command {
+    class GetExerciseCommand implements Command {
     }
 
-    class GetExerciseCommand implements Command {
+    class DeleteExerciseCommand implements Command {
+    }
+
+    class GoalExerciseCommand implements Command {
+    }
+
+    class HelpExerciseCommand implements Command {
+    }
+
+    class AddExerciseCommand implements Command {
     }
 }
 
 package fitness {
+    package exercise {
+
+        class ExerciseList {
+            - allExercises: ArrayList<Exercise>
+            + ExerciseList()
+            + add(exercise: Exercise): void
+            + get(type: ExerciseType, index: int): Exercise
+            + getType(type: ExerciseType): ArrayList<Exercise>
+            + size(type: ExerciseType): int
+            + newExercise(parameters: String[]): Exercise
+            + findExercise(type: ExerciseType, nameQuery: String): Exercise
+            + remove(exercise: Exercise): void
+        }
+
+        class Exercise {
+            - ExerciseName: String
+            - exerciseType: ExerciseType
+            - sets: String
+            - reps: String
+            + toString(): String
+        }
+
+        class ExerciseBank {
+        }
+
+        enum ExerciseType {
+            ARMS
+            CHEST
+            ABS
+            BACK
+            LEGS
+        }
+    }
+
+    package goals {
+        class ExerciseGoal {
+            - isDone: boolean
+            + toggle(): void
+        }
+
+        class ExerciseGoalList {
+            - goals: ArrayList<ExerciseGoal>
+            + isEmpty(): void
+            + clear(): void
+            + findExercise(index: int): ExerciseGoal
+            + saveGoals(): void
+            + newExercise(parameters: String[]): ExerciseGoal
+            + add(exercise: Exercise, isDone: boolean): void
+        }
+    }
+
     class FitnessMotivator {
         + allExercises: ExerciseList
-        + getExercises(): void
+        + dailyGoals : ExerciseGoalList
+        - fiveRandomExercise(): Exercise[]
+        + getExercises(): String
         + addExercises(commandArgs: String[]): void
-        + getTypeExercises(exerciseType: ExerciseType): void
+        + getTypeExercises(type: ExerciseType): void
+        + deleteExercise(commandArgs: String[]): void
+        + newGoal(): void
+        + goalStatus(): void
+        + toggleStatus(index: int): void
+        + printHelp(): void
     }
 
-    class ExerciseList {
-        - allExercises: ArrayList<Exercise>
-        + ExerciseList()
-        + add(exercise: Exercise): void
-        + get(type: ExerciseType, index: int): Exercise
-        + getType(type: ExerciseType): ArrayList<Exercise>
-        + size(type: ExerciseType): int
-        + newExercise(parameters: String[]): Exercise
-        + findExercise(type: ExerciseType, nameQuery: String): Exercise
-    }
-
-    class Exercise {
-        - ExerciseName: String
-        - exerciseType: ExerciseType
-        - sets: String
-        - reps: String
-        + toString(): String
-    }
-
-    enum ExerciseType {
-        ARMS
-        CHEST
-        ABS
-        BACK
-        LEGS
+    class UiMessageConstants {
     }
 }
 
@@ -71,14 +114,23 @@ Parser ..> FitnessCommandParser : uses >
 AddExerciseCommand --> FitnessMotivator : uses >
 AddExerciseCommand ..> ExerciseType : uses >
 GetExerciseCommand --> FitnessMotivator : uses >
+DeleteExerciseCommand --> FitnessMotivator : uses >
+GoalExerciseCommand --> FitnessMotivator : uses >
+HelpExerciseCommand --> FitnessMotivator : uses >
 
 FitnessMotivator *--> "1" ExerciseList : contains >
+FitnessMotivator *--> "1" ExerciseGoalList : contains >
 
 Exercise ..> ExerciseType : uses >
+ExerciseGoal --|> Exercise : extends >
+ExerciseGoalList --|> ExerciseList : extends >
 ExerciseList ..> ExerciseType : uses >
 FitnessMotivator ..> ExerciseType : uses >
+FitnessMotivator ..> UiMessageConstants : uses >
+ExerciseList ..> ExerciseBank : uses >
 
 ExerciseList *--> "25..*" Exercise : contains >
+ExerciseGoalList *--> "0..5" ExerciseGoal : contains >
 
 ExerciseList ..> Storage : uses >
 
