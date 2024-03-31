@@ -2,7 +2,6 @@ package fitness;
 
 import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
-import fitness.exercise.ExerciseType;
 import fitness.goals.ExerciseGoalList;
 import ui.Ui;
 

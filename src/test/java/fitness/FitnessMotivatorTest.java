@@ -5,7 +5,6 @@ import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
 import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
-import fitness.exercise.ExerciseType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
