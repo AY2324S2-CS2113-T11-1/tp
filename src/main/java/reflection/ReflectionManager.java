@@ -3,7 +3,6 @@ package reflection;
 import exceptions.ReflectException;
 import storage.Storage;
 import ui.Ui;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -67,7 +66,6 @@ public class ReflectionManager {
 
         } catch (IndexOutOfBoundsException e) {
             throw new ReflectException("Key in valid favourite reflection ID, between 1 and 5");
-
         } catch (NullPointerException e) {
             throw new ReflectException("No questions generated yet. Generate questions using 'reflect get' " +
                     "command first.");

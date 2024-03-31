@@ -50,6 +50,13 @@
     - [Implementation](#implementation-4)
         - [Class Diagram](#class-diagram-3)
         - [Sequence Diagram](#sequence-diagram-3)
+- [Appendix: Requirements]()
+  - [Product Scope]()
+  - [User Stories]()
+  - [Non Functional Requirements]()
+  - [Glossary]()
+- [Appendix: Instructions for manual testing]()
+  - [Reflection component]()
 
 ## Acknowledgements
 
@@ -133,13 +140,14 @@ This component aims to contribute to the goal of improving user's wellness.
 ##### Class Diagram
 ![ReflectionClassDiagram.png](diagrams/reflection/ReflectionClassDiagram.png)
 
+Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
   * `ReflectionManager` class
     * Overview
       * The `ReflectionManager` class oversees reflection-related operations, managing reflection questions and favorites. 
     * Attributes:
-      * `HELP_MENU_INSTRUCTIONS`: Array containing instructions for the help menu. (Omitted from Class Diagram)
-      * `FAVOURITE_QUESTIONS_FILE_PATH`: Path to the file storing favorite reflection questions. (Omitted from Class Diagram)
-      * `fiveRandomQuestions`: ArrayList holding five random reflection questions. (Omitted from Class Diagram)
+      * `HELP_MENU_INSTRUCTIONS`: Array containing instructions for the help menu. 
+      * `FAVOURITE_QUESTIONS_FILE_PATH`: Path to the file storing favorite reflection questions. 
+      * `fiveRandomQuestions`: ArrayList holding five random reflection questions. 
       * `questionBank`: Instance of `ReflectionQuestionBank` managing reflection questions.
       * `favoriteReflectionsList`: Instance of `FavoriteReflectionsList` managing favorite reflection questions.
     * Methods:
@@ -171,7 +179,7 @@ This component aims to contribute to the goal of improving user's wellness.
     * Overview:
       * The `ReflectionList` class serves as an abstract representation of a list of reflection questions within the Reflection Management System. It provides basic operations for managing reflection questions, such as adding, removing, and retrieving questions from the list.
     * Attributes:
-      * `reflectionList`: Protected attribute representing the list of reflection questions. It is an ArrayList of ReflectionQuestion objects.
+      * `reflectionList`: Protected attribute representing the list of reflection questions. It is an ArrayList of `ReflectionQuestion` objects.
     * Methods:
       * `addReflectionQuestion(ReflectionQuestion reflectionQuestion)`: Adds a reflection question to the list. 
       * `removeReflectionQuestion(ReflectionQuestion reflectionQuestion)`: Removes a reflection question from the list.
@@ -740,27 +748,163 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* Wellness360 is a wellness app. 
+* It is meant for stressed Engineering Students who prefer CLI over GUI and want to keep track of their overall wellbeing.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+* Our app offers comprehensive tracking and management tools, providing personalized support to alleviate stress and enhance overall well-being.
+* It can help you take control of your mental and physical health effortlessly, so you can focus on your studies with peace of mind.
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| Version | As a ... | I want to ...                                                                         | So that I can ...                                                   |
+|---------|----------|---------------------------------------------------------------------------------------|---------------------------------------------------------------------|
+| v1.0    | user     | load and save data to a text file                                                     | have persistent memory storage.                                     |
+| v1.0    | user     | enter the command as one long string                                                  | so that I can execute different commands tied to different features |
+| v1.0    | user     | get new random reflection questions                                                   | have a variety of questions to think about.                         |
+| v1.0    | user     | save my favorite questions                                                            | refer to them and focus my attention on these questions             |
+| v1.0    | user     | print my favorite reflections questions                                               | access and read my favorites list.                                  |
+| v1.0    | user     | view all sleep cycles that I have added before                                        | see how many hours I have slept thus far.                           |
+| v1.0    | user     | add habits                                                                            | stay focused and organized in my studies.                           |
+| v1.0    | user     | list out all my habits                                                                | keep track of them.                                                 |
+| v1.0    | user     | update the count for a habit                                                          | keep track of how many times I have completed a habit               |
+| v1.0    | user     | start the focus timer                                                                 | start the clock to time my focus session.                           |
+| v1.0    | user     | stop the focus timer                                                                  | see the total duration of the entire focus session.                 |
+| v1.0    | user     | see exercise tips                                                                     | know what exercises I can do to stay fit.                           |
+| v2.0    | user     | have daily exercise goals                                                             | track my progress                                                   |
+| v2.0    | user     | add custom exercises                                                                  | view them later on                                                  |
+| v2.0    | user     | resume the timer                                                                      | continue my existing timer after using the command pause.           |
+| v2.0    | user     | have access to a menu option                                                          | know how to use the reflection feature if I am lost.                |
+| v2.0    | user     | remove reflection questions that are no longer relevant to me from my favourites list | focus on the questions that matter.                                 |
+| v2.0    | user     | sort the habit tracker list based on the habits' priority                             | easily view the habits with higher priority.                        |
+| v2.0    | user     | set different priority levels for my habits                                           | prioritize my time on certain habits.                               |
+| v2.0    | user     | pause the timer after starting it                                                     | pause during breaks or an emergency and resume it afterwards.       |
+| v2.0    | user     | set the desired duration for countdown timer                                          | focus for that specific timing.                                     |
+| v2.0    | user     | use a help command to view the format of the various habit tracker commands           | utilize the habit tracker with ease.                                |
+| v2.0    | user     | load and save my habits to a local text file                                          | access it again without losing the data.                            |
+| v2.0    | user     | delete habits from the habit tracker                                                  | remove habits that I no longer want to track.                       |
+| v2.0    | user     | check the total time elapsed                                                          | keep track of how long the session have been running.               |
+| v2.0    | user     | start a countdown timer                                                               | set a specific timing to focus on my tasks.                         |
+| v2.0    | user     | delete sleep cycles                                                                   | remove sleep cycles that I do not want to track                     |
+
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Should work on any mainstream OS as long as it has Java 11 or above installed.
+* A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
 
-* *glossary item* - Definition
+* Mainstream OS: Windows, Linux, Unix, MacOS
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Reflection component
+#### Get reflection questions
+1. Testcase: `reflect get`
+
+    Expected outcome: Get 5 random questions
+   ```
+   ________________________________________________________________________________________________________________
+    Generated Questions:
+   1. How do you prioritize self-care and well-being in your daily life?
+   2. Reflect on your communication style. In what ways do you excel, and where do you see room for improvement?
+   3. What role does creativity play in your life, and how do you nurture it?
+   4. What steps are you taking to advance your skills and knowledge in your field?
+   5. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
+   ________________________________________________________________________________________________________________
+   ```
+2. Testcase: `get`
+   
+    Expected outcome: Unknown reflection command
+
+    ```
+   ________________________________________________________________________________________________________________
+   ERROR MSG: Unknown Wellness360 command
+   ________________________________________________________________________________________________________________
+   ```
+
+3. Testcase: `get reflect`
+
+   Expected outcome: Unknown reflection command
+
+    ```
+   ________________________________________________________________________________________________________________
+   ERROR MSG: Unknown Wellness360 command
+   ________________________________________________________________________________________________________________
+   ```
+#### View list of saved favourite questions
+1. Testcase: Calling `reflect list` on an empty favourites list
+    
+    Expected outcome: Empty list message if no questions saved
+    ```
+   ________________________________________________________________________________________________________________
+    No reflection questions saved to favourites
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: Calling `reflect list` on a non-empty favourites list
+
+    Expected outcome: List of saved questions if list is not empty
+    ```
+   ________________________________________________________________________________________________________________
+    Favourites list:
+   1. Describe a memorable shared experience with someone you care about. What made it special?
+   2. Reflect on a time when you faced a significant challenge at work. How did you overcome it?
+   3. In what ways do you seek to grow and develop within your current role or industry?
+   4. Describe a recent moment when you felt inspired by something or someone in your environment.
+   ________________________________________________________________________________________________________________
+   ```
+#### Save favourite question
+1. Testcase: Calling `reflect save 1` without generating questions first (`reflect get`)
+
+    Expected outcome: Error message prompting you to generate questions first.
+    ```
+   ________________________________________________________________________________________________________________
+    ERROR MSG: No questions generated yet. Generate questions using 'reflect get' command first.
+    ________________________________________________________________________________________________________________
+   ```
+2. Testcase: Calling `reflect save 1 ` AFTER generating questions first (`reflect get`)
+
+    Expected outcome: save question successful
+
+    ```
+    ________________________________________________________________________________________________________________
+   You:reflect get
+   ________________________________________________________________________________________________________________
+   Generated Questions:
+   1. Reflect on a time when you took a creative risk. What did you learn from the experience?
+   2. Reflect on your career goals. Are they still aligned with your passions and values, or have they evolved?
+   3. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
+   4. Describe a recent moment when you felt inspired by something or someone in your environment.
+   5. How do you express gratitude toward the people who enrich your life?
+   ________________________________________________________________________________________________________________
+   You:reflect save 1
+   ________________________________________________________________________________________________________________
+   Got it. Added reflection question to favourites:
+   Reflect on a time when you took a creative risk. What did you learn from the experience?
+   ________________________________________________________________________________________________________________
+   ```
+
+#### Unsave favourite question
+1. Testcase: Calling `reflect unsave 1` on an empty list
+    
+    Expected outcome: Error message prompting you to check list of saved questions
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Key in valid favourite reflection ID, key in 'reflect list' command to view range of questions in your favourites list.
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: Calling `reflect unsave 1` on a non-empty list
+    
+    Expected outcome: unsave successful
+    ```
+   ________________________________________________________________________________________________________________
+   Got it. Unsaved reflection question from favourites:
+   Reflect on a time when you took a creative risk. What did you learn from the experience?
+   ________________________________________________________________________________________________________________
+   ```
+### Habit Tracker component
+### Sleep Tracker component
+### Focus Timer component
+### Fitness Tracker component
