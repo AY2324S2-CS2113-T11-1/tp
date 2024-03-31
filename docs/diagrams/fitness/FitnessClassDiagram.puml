@@ -1,0 +1,150 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+package parser {
+    class FitnessCommandParser {
+        {Static} determineFitnessCommand(fitnessMotivator: FitnessMotivator, commandArgs: String): Command
+    }
+
+    class Parser {
+    }
+}
+
+package commands {
+    interface "<<interface>>\nCommand" as Command {
+        + execute(): void
+        + isExit(): boolean
+    }
+
+    class GetExerciseCommand implements Command {
+    }
+
+    class DeleteExerciseCommand implements Command {
+    }
+
+    class GoalExerciseCommand implements Command {
+    }
+
+    class HelpExerciseCommand implements Command {
+    }
+
+    class AddExerciseCommand implements Command {
+    }
+}
+
+package fitness {
+    package exercise {
+
+        class ExerciseList {
+            - allExercises: ArrayList<Exercise>
+            + ExerciseList()
+            + add(exercise: Exercise): void
+            + get(type: ExerciseType, index: int): Exercise
+            + getType(type: ExerciseType): ArrayList<Exercise>
+            + size(type: ExerciseType): int
+            + newExercise(parameters: String[]): Exercise
+            + findExercise(type: ExerciseType, nameQuery: String): Exercise
+            + remove(exercise: Exercise): void
+        }
+
+        class Exercise {
+            - ExerciseName: String
+            - exerciseType: ExerciseType
+            - sets: String
+            - reps: String
+            + toString(): String
+        }
+
+        class ExerciseBank {
+        }
+
+    }
+
+    package goals {
+        class ExerciseGoal {
+            - isDone: boolean
+            + toggle(): void
+            + toString(): String
+        }
+
+        class ExerciseGoalList {
+            - goals: ArrayList<ExerciseGoal>
+            + isEmpty(): void
+            + clear(): void
+            + findExercise(index: int): ExerciseGoal
+            + saveGoals(): void
+            + newExercise(parameters: String[]): ExerciseGoal
+            + add(exercise: Exercise, isDone: boolean): void
+        }
+    }
+
+    class FitnessMotivator {
+        + allExercises: ExerciseList
+        + dailyGoals : ExerciseGoalList
+        - fiveRandomExercise(): Exercise[]
+        + getExercises(): String
+        + addExercises(commandArgs: String[]): void
+        + getTypeExercises(type: ExerciseType): void
+        + deleteExercise(commandArgs: String[]): void
+        + newGoal(): void
+        + goalStatus(): void
+        + toggleStatus(index: int): void
+        + printHelp(): void
+    }
+
+    class UiMessageConstants {
+    }
+}
+
+enum ExerciseType {
+            ARMS
+            CHEST
+            ABS
+            BACK
+            LEGS
+        }
+
+class Storage {
+}
+
+class Ui {
+}
+
+Parser ..> FitnessCommandParser : uses >
+FitnessCommandParser ..> GetExerciseCommand : creates >
+FitnessCommandParser ..> DeleteExerciseCommand : creates >
+FitnessCommandParser ..> GoalExerciseCommand : creates >
+FitnessCommandParser ..> HelpExerciseCommand : creates >
+FitnessCommandParser ..> AddExerciseCommand : creates >
+
+AddExerciseCommand --> FitnessMotivator : uses >
+AddExerciseCommand ..> ExerciseType : uses >
+GetExerciseCommand --> FitnessMotivator : uses >
+DeleteExerciseCommand --> FitnessMotivator : uses >
+GoalExerciseCommand --> FitnessMotivator : uses >
+HelpExerciseCommand --> FitnessMotivator : uses >
+
+FitnessMotivator *--> "1" ExerciseList : contains >
+FitnessMotivator *--> "1" ExerciseGoalList : contains >
+
+ExerciseGoal --|> Exercise : extends >
+ExerciseGoalList --|> ExerciseList : extends >
+FitnessMotivator ..> UiMessageConstants : uses >
+ExerciseList ..> ExerciseBank : uses >
+
+ExerciseList *--> "25..*" Exercise : contains >
+ExerciseGoalList *--> "0..5" ExerciseGoal : contains >
+
+ExerciseList ..> ExerciseType : uses >
+ExerciseGoalList ..> ExerciseType : uses >
+ExerciseGoal ..> ExerciseType : uses >
+FitnessMotivator ..> ExerciseType : uses >
+Exercise ..> ExerciseType : uses >
+
+ExerciseList ..> Storage : uses >
+ExerciseGoalList ..> Storage : uses >
+
+FitnessMotivator ..> Ui : uses >
+
+@enduml

@@ -21,9 +21,35 @@
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
   - [Habit tracker component]()
-  - [Sleep tracker component]()
-  - [Focus timer component]()
-  - [Fitness tracker component]()
+    - [Description](#description-1)
+    - [Design Considerations](#design-considerations-1)
+        - [User Design Considerations](#design-considerations-1)
+        - [Developer Design Considerations](#design-considerations-1)
+    - [Implementation](#implementation-1)
+        - [Class Diagram](#class-diagram-1)
+        - [Sequence Diagram](#sequence-diagram-1)
+  - [Sleep tracker component](#sleep-tracker-component)
+    - [Description](#description-2)
+    - [Design Considerations](#design-considerations-2)
+      - [User Design Considerations](#user-design-considerations-2)
+      - [Developer Design Considerations](#developer-design-considerations-1)
+    - [Implementation](#implementation-2)
+      - [Class Diagram](#class-diagram-2)
+      - [Sequence Diagram](#sequence-diagram-2)
+  - [Focus timer component](#focus-timer-component)
+    - [Design Considerations](#design-considerations-3)
+    - [Implementation](#implementation-3)
+      - [Focus Class Diagram](#focus-class-diagram)
+      - [Focus State Transition Diagram](#focus-state-transition-diagram)
+      - [Focus Sequence Diagram](#focus-sequence-diagram)
+  - [Fitness tracker component](#fitness-motivator-component)
+    - [Description](#description-3)
+    - [Design Considerations](#design-considerations-4)
+        - [User Design Considerations](#user-design-considerations-4)
+        - [Developer Design Considerations](#developer-design-considerations-4)
+    - [Implementation](#implementation-4)
+        - [Class Diagram](#class-diagram-3)
+        - [Sequence Diagram](#sequence-diagram-3)
 
 ## Acknowledgements
 
@@ -57,7 +83,22 @@ You are recommended to use Intellij IDEA:
 
 ### Architecture
 
-### Ui component
+### UI component
+#### Description
+`Ui` component is in charge of reading in user input and printing output. </br> </br>
+The `Ui` class is created to standardise the output formatting of messages to be printed across all features. These formatting include the printing of messages and lists, reducing code repetition.
+
+#### Design Considerations
+- #### User Design Considerations
+  - Users are able to understand what is going on with relative ease, when they use the Wellness360 chat bot.
+  - Standardised output creates a cohesive look and an overall more immersive experience for the user.
+- #### Developer Design Considerations
+  - Static Attributes: All methods are static, allowing their usage anywhere within the codebase.
+  - SRP: Classes adhere to the Single Responsibility Principle. For example, the `Ui` class is solely responsible for managing printing-related operations.
+  - Readability and Maintainability: Descriptive naming, comments, and documentation for clarity. Since printing is a highly used task, it prevents highly-repetitive code as well.
+#### Implementation
+#### Class Diagram
+<!-- Insert Class Diagram here -->
 
 ### Command parser component
 
@@ -192,19 +233,509 @@ This component aims to contribute to the goal of improving user's wellness.
 ![ReflectionSequenceDiagram.png](diagrams/reflection/ReflectionSequenceDiagram.png)
 * Note that `PlaceholderReflectionCommand` can refer to any of the reflection commands as mentioned above, as all of them follow the same call pattern.
 
-When main starts, `scanner` and `ReflectionManager` objects are created. Upon receiving user input, the input will first be
+When `Main` starts, `scanner` and `ReflectionManager` objects are created. Upon receiving user input, the input will first be
 determined if it is a command related to the reflection feature. If it is, it will be further parsed by `ReflectionCommandParser` to determine
 the command. The corresponding reflection command object is then created and is returned to `Main`, where `execute` will then be called
 and the corresponding method in `ReflectionManager` is invoked.
 
 ### Habit tracker component
 
+#### Description
+The habit tracker component aims to provide user with a tool to track and cultivate good habits.
+
+#### Design Considerations
+* ##### User Design Considerations
+    * User can add new habits in the habit tracker that they wish to cultivate.
+    * User can increase the count of a habit after they completed the habit for the day, allowing them to keep track of the total number of times they completed the habit.
+    * User can also delete the habit if they no longer want to cultivate that habit.
+    * User are able to set the priority of the habits (HIGH, MED, LOW), to prioritise their time on more important habits.
+    * User can also sort the habits according to their priority for better visualization.
+    * A help menu is also provided for users to guide them on how to use the habit tracker.
+    * Error messages with guidance messages will be printed to console if command input by user is invalid.
+
+* #### Developer Design Considerations
+    * Modularity: Encapsulate related functionalities within classes to promote re-usability and maintainability.
+    * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages
+    * Data Encapsulation: Control the access to a class's internal attributes, accessible only through getters and setters
+    * Interface Segregation: Segregation of command interface to represent different command types for specific use cases.
+    * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+#### Implementation
+
+##### Class Diagram
+![HabitClassDiagram.png](diagrams/habit/HabitClassDiagram.png)
+
+* `HabitTracker` class
+    * Overview
+        * The `HabitTracker` class manages the habit tracker list which contains the habits.
+    * Attributes:
+        * `habitList`: Private attribute representing the list of habits. It is an ArrayList of Habit objects.
+    * Methods:
+        * `HabitTracker()`: Constructs a HabitTracker object. 
+        * `getNumberOfHabits()`: Returns the number of habits in the habitList.
+        * `addHabit(Habit newHabit)`: Adds a new Habit object into the habitList.
+        * `listHabits()`: Prints a list of all habits in habitList .
+        * `isValidHabitID(int habitID)`: Check if a habit ID is valid by comparing with the size of habitList.
+        * `updateHabitCount(int habitID, String updatedCount)`: Update the habit count of a habit.
+        * `deleteHabit(int habitID)`: Delete a habit from habitList.
+        * `setPriorityLevel(int habitID, String priority)`: Set the priority of a habit.
+        * `sortHabits()`: Sort the habits in habitList according to the habits' priorities.
+        * `clearHabitList()`: Delete all habits from habitList.
+    * Dependencies:
+        * HabitTrackerStorage: Utilized for data storage operations.
+        * Ui: Utilized for user interface interactions.
+    * UML notes:
+        * `HabitTracker` can contain any number of `Habit` class objects.
+        * It relies on `HabitTrackerStorage` class for file operations and `Ui` class for user interactions.
+
+* `Habit` class
+    * Overview:
+        * This class represents a Habit.
+    * Attributes:
+        * `description`: Private attribute holding the habit description.
+        * `habitCount`: Private attribute holding the total count the user have completed the habit.
+        * `priority`: Private attribute representing the priority level of a habit.
+    * Methods:
+        * `Habit(String description)`: Constructs a habit object.
+        * `Habit(String description, int habitCount, Priority priority)`: Constructs a habit object.
+        * `getDescription()`: Get the description of the habit.
+        * `getHabitCount()`: Get the habit count of the habit.
+        * `getPriority()`: Get the priority of the habit.
+        * `toString()`: Method that formats the attributes of the habit for printing.
+    * UML notes:
+        * `HabitTracker` can contain any number of `Habit` instances.
+        * When a `HabitTracker` object is destroyed, its associated `Habit` instances are also destroyed, showcasing a composition relationship.
+
+* `HabitCommandParser`
+    * Overview: Parses habit-tracker commands and create different habit command objects based on user input.
+    * Method: `determineHabitCommand(HabitTracker habitTracker, String commandArgs)`
+
+* Habit command classes
+    * `AddHabitCommand`: Add a new habit to the habit-tracker.
+        * Command format: `habit add <habit_description>`
+    * `DeleteHabitCommand`: Delete a habit from the habit-tracker.
+        * Command format: `habit delete /id <habit_ID>`
+    * `ListHabitsCommand`: Prints a list of all existing habits.
+        * Command format: `habit list`
+    * `UpdateHabitCountCommand`: Increase habit count after completing a habit.
+        * Command format: `habit update /id <habit_ID> /by <increment_count>`
+    * `SetPriorityCommand`: Set priority level of habit
+        * Command format: `habit set /id <habit_ID> /priority <priority_level>`
+    * `SortHabitsCommand`: Sort habit list according to priority level.
+        * Command format: `habit sort`
+    * `HabitHelpCommand`: Display a help menu of the habit-tracker commands
+        * Command format: `habit help`
+
+
+#### Sequence Diagram
+![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
+* Note that `PlaceholderHabitCommand` can refer to any of the habit commands. 
+
+When `Main` starts, `scanner` and `HabitTracker` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the habit tracker feature. If it is, it will be further parsed by `HabitCommandParser` to determine
+the command. The corresponding habit command object is then created and is returned to `Main`, where `execute` will then be called
+and the corresponding method in `HabitTracker` is invoked.
+
 ### Sleep tracker component
 
+#### Description
+
+The Sleep tracker component allow users to keep track of the number of hours they have slept, so that users will know
+when their lacking sleep or getting more sleep hours as the day progresses. With information on the user's sleep cycle,
+one will be able to understand what is their optimal sleep cycle. With this users can have better sleep, improving
+user's wellness.
+
+#### Design Considerations
+
+* ##### User Design Considerations
+    * Users can add hours slept on a specific date
+    * Users can update hours slept on a specific date in case of mistakes in adding of sleep hours
+    * Users can list out all sleep hours tracked or get number of hours slept on a specific date
+    * Users can delete sleep cycles with deletion methods of:
+        * Deleting a sleep cycle that is of a certain date
+        * Deleting sleep cycles before a certain date
+        * Deleting sleep cycles between certain dates
+    * Error messages with guidance messages will be printed to console if command input by user is invalid.
+
+
+* ##### Developer Design Considerations
+    * SRP: Ease of scalability is achieved as classes adhere to the Single Responsibility Principle. For example, 
+    the SleepTracker class is responsible for managing sleep tracker related commands, SleepCommandParser class handles
+    parsing and determining which sleep command is being called and SleepCycleList is responsible for storing sleep 
+    cycles and methods that can be called to edit it's content.
+    * Readability and Maintainability: Descriptive naming, use of Enumerations and JavaDoc for clarity. 
+    For example, use of enumerations for deleteMode.
+    * Encapsulation: Private access modifiers and encapsulated methods ensure data integrity. Methods like addSleepCycle
+    and deleteSleepCycle in SleepCycleList encapsulate the manipulation of the reflection list, ensuring data integrity
+    and promoting a clear interface for interacting with the list.
+    * Exception Handling: Extensive coverage of exceptions in sleepCommand classes to ensure all errors are handled 
+    properly
+
+#### Implementation
+
+##### Class Diagram
+![SleepDiagram.png](diagrams/sleep/SleepDiagram.png)
+
+* `SleepTracker` class
+  * Overview
+    * The `SleepTracker` class oversees sleep-related operations, managing sleep cycles.
+  * Attributes:
+    * `sleepCycleList`: Instance of `SleepCycleList` managing sleep cycles.
+  * Methods:
+    * `listSleepCycles()`: List out all sleep cycles.
+    * `addSleepCycle(SleepCycle sleepCycleToAdd)`: Add sleep cycle.
+    * `updateSleepCycle(LocalDate date, double newHours)`: Change hours slept for specific date.
+    * `getSleepCycle(LocalDate date)`: Get number of hours slept for specific date.
+    * `deleteSleepCycle(LocalDate date)`: Delete sleep cycle for specific date.
+    * `deleteSleepCyclesBefore(LocalDate date)`: Delete sleep cycle before specific date.
+    * `deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate)`: Delete sleep cycles between 2 dates.
+    * `saveSleepCycles()`: Save sleep cycle list into a text file.
+  * Dependencies:
+    * `SleepTrackerStorage`: Utilized for sleep cycle data storage operations
+  * UML Notes:
+    * `SleepTracker` contains only 1 `SleepCycleList`
+    * It relies on `SleepTrackerStorage` class for file operations
+
+* `SleepCycle` class
+  * Overview:
+    * This class represents a sleep cycle
+  * Attributes:
+    * `hoursSlept`: Number of hours slept
+    * `dateOfSleep`: Date that user slept on
+  * Methods:
+    * getHoursSlept(): Get Hours slept for this sleep cycle.
+    * getDateOfSleep(): Get date slept for this sleep cycle.
+    * setHoursOfSleep(double newHours): Set Hours slept for this sleep cycle to a new duration.
+    * compareTo(SleepCycle: SleepCycle): Comparison between sleep cycles.
+    * toString(): String format for what needs to be printed out for a sleep cycle.
+  * `SleepCycleList` may contain 0 or more instances of `SleepCycle`.
+  * UML Notes:
+    * When a `SleepCycleList` object is destroyed, its associated `SleepCycle` instances are also destroyed,
+    reflecting a "whole part" relationship.
+
+* `SleepCycleList` class
+  * Overview
+    * The `SleepCycleList` class contains all sleep cycles added by the user.
+  * Attributes:
+    * `totalHrsSlept`: Accumulated number of hours slept from all sleep cycles. 
+    * `numberOfCycles`: Number of sleep cycles in sleepCycleList.
+  * Methods:
+    * `listSleepCycles()`: List out all sleep cycles.
+    * `addSleepCycle(SleepCycle sleepCycleToAdd)`: Add sleep cycle.
+    * `updateSleepCycle(LocalDate date, double newHours)`: Change hours slept for specific date.
+    * `getSleepCycle(LocalDate date)`: Get number of hours slept for specific date.
+    * `deleteSleepCycle(LocalDate date)`: Delete sleep cycle for specific date.
+    * `deleteSleepCyclesBefore(LocalDate date)`: Delete sleep cycle before specific date.
+    * `deleteSleepCyclesBetween(LocalDate startDate, LocalDate endDate)`: Delete sleep cycles between 2 dates.
+    * `getNumberOfCycles()`: Get number of sleep cycles in sleepCycleList.
+    * `getTotalHrsSlept()`: Get total number of hours slept.
+    * `getSleepCycleList`: Get list of sleep cycles.
+  * Dependencies:
+    * Ui: Utilized for user interface interactions
+  * UML Notes:
+    * `SleepTracker` contains a single instance of `SleepCycleList`.
+    * `SleepCycleList` may contain 0 or more instances of `SleepCycle`. 
+    * It relies on `Ui` class for user interaction.
+
+* `SleepCommandParser` class
+  * Overview: 
+    * Parses sleep-related commands and create different sleep command objects based on user input.
+  * Method:
+    * determineSleepCommand(SleepTracker sleepTracker, String commandArgs)
+
+* Sleep command classes
+    * `AddSleep Command`: Add a sleep cycle.
+        * Command format: `sleep add`
+    * `DeleteSleepCommand`: Delete sleep cycles.
+        * Delete sleep cycle matching date command format: `sleep delete /date <date>`
+        * Delete sleep cycle before date command format: `sleep delete /before <date>`
+        * Delete sleep cycles between 2 dates command format: `sleep delete /from <start_date /to <end_date>`
+    * `GetSleepCommand`: Get number of hours slept on a specific date.
+        * Command format: `sleep get <date>`
+    * `ListSleepcommand`: Get information on all the sleep.
+        * Command format: `sleep list`
+    * `SaveSleepCommand`: Save current sleep cycles added/deleted/updated into a text file.
+        * Command format:`sleep save`
+    * `UpdateSleepCommand`: Change number of hours slept on a specific date.
+        * Command format: `sleep update <date> /new <new_hours>`
+    
+##### Sequence Diagram
+
+![SleepSequenceDiagram.png](diagrams/sleep/SleepSequenceDiagram.png)
+
+* Note that PlaceholderReflectionCommand can refer to any of the reflection commands as mentioned above, 
+as all of them follow the same call pattern.
+
+When main starts, scanner and SleepTracker objects are created. Upon receiving user input, the input will first 
+be determined if it is a command related to the sleep tracker feature. If it is, it will be further parsed by 
+SleepTrackerParser to determine the command. The corresponding sleep command object is then created and is 
+returned to Main, where execute will then be called and the corresponding method in SleepTracker is invoked.
+
 ### Focus timer component
+The focus timer component provides users with a countdown timer and a count up timer, which enables the user to set a 
+goal to focus entirely on their work. This component aims to allow users to keep track of their time, improving their
+productivity and well-being.
 
-### Fitness tracker component
+### Design Considerations
+* #### User Design Considerations
+  * Users will be able to choose between a count up timer and a countdown timer.
+  * Users can start, pause, resume, stop the timer at any point in time.
+  * Users will also be able to navigate to other functions while running the timer concurrently.
+  * Error messages will inform users the current status of the timer and reason the error appeared.
 
+* #### Developer Design Considerations
+  * The `Focus Timer` component is a wrapper class for both `CountupTimer` and `CountdownTimer`, which contains 
+utility logic to identify state and manage the different timers.
+
+#### Implementation
+
+#### Focus Class Diagram
+![FocusClassDiagram.png](diagrams/focus/FocusClassDiagram.png)
+* `FocusTimer` object
+  * Overview:
+    * The `FocusTimer` class is a facade class that sits between the component internals and users of the component 
+    such that all access to the component like countdown timer and count up timer happens through the Facade class.
+  * Attributes:
+    * `countupTimer`: Count up timer object.
+    * `countdownTimer`: Count down timer object.
+    * `timerMode`: Indicates the timer mode to be operating.
+  * Methods:
+    * `getStartTiming()`: Gets the current running state of the timer.
+    * `switchTimer()`: Changes the timer mode between count up and count down timer.
+    * `getPausedStatus()`: Gets the current pause status of the timer.
+    * `setStartTiming()`: Start the timer.
+    * `setStopTiming()`: Stop the timer.
+    * `setPauseTiming()`: Pause the timer.
+    * `setResumeTiming()`: Resume the timer.
+    * `checkTime`: Get the total time elapsed or time remaining in the timer.
+    * `setDuration`: Change countdown timer duration.
+    
+* `CountupTimer` and `CountdownTimer` object
+  * Dependencies:
+    * `Ui` object: Utilized for user interface interactions.
+
+#### Focus State transition Diagram
+There are many commands for the focus timer feature. However, some commands logically cannot be executed in cetain 
+states. For example, the command `focus pause` cannot be used if the timer hasn't started. Another example would be 
+the `focus switch` command to switch between the timer could not be used if the current timer mode is running. To aid 
+the understanding of the logic, we will use state transition diagram.
+
+![FocusStateDiagram.png](diagrams/focus/FocusStateDiagram.png)
+* The black circle in the diagram represents the starting point of focus timer. 
+* The labels of the arrows represents the commands.
+
+#### Focus Sequence Diagram
+![FocusSequenceDiagram.png](diagrams/focus/FocusSequenceDiagram.png)
+* Note that `PlaceholderFocusCommand` can refer to any of the focus commands as mentioned above, since all of them 
+follows the same call pattern.
+
+When `Main` starts, `scanner` and `FocusTimer` objects are created. Upon receiving user input, the input will first be
+determined if it is a command related to the focus timer feature. 
+If it is, it will be further parsed by `FocusCommandParser` to determine the command. 
+The corresponding focus command object is then created and is returned to `Main`, where `execute` will then be called 
+and the corresponding method in `FocusTimer` is invoked.
+
+
+### Fitness Motivator component
+#### Description
+The Fitness Motivator provides users with a list of exercises, and give these users the ability to add and track their
+fitness goals. This component aims to contribute to the goal of improving the user's wellness, mainly their physical
+well-being.
+
+#### Design Considerations
+- #### User Design Considerations
+    - Users are able to generate a list of 5 different exercises that target 5 different parts of the body: The arms, chest, abs, back and legs. The list is randomly generated each time, to allow for the mixing of exercises.
+    - Users can also choose to generate exercises that generate a single part of the body, should they choose to target that part of the body for exercise.
+    - Users are given the freedom of adding, editing and deleting exercises to the list, to increase the number of different exercises that can be done.
+    - What good are exercises if there is no way of keeping track of progress? The goal tracker does this by generating 5 exercises for the user to do that day. It then allows the user to mark the exercise as done or not done, along with a progress bar for the user to track their progress.
+    - Error messages helps guide the user with usage of the fitness tracker, to ensure ease of usage.
+- #### Developer Design Considerations
+    - _Modularity_: All related classes are grouped together into packages. Command parsers are placed in the parser package, with individual command execution further placed into the fitnesscommands package. The execution of fitness logic are all grouped into the fitness package.
+    - _Abstraction_: The command interface is used to specify methods to be implemented in every single exercise command, creating a pre-written template and behaviour for all command classes.
+    - _Encapsulation_: The usage of private attributes and the use of helper methods help ensure data integrity. Get methods in the Exercise class and ExerciseList class ensure that the data is manipulated in the way that was intended by the developer and thus protecting the data.
+    - _Exception Handling_: Exception Handling prevents the code from reaching an unknown or unpredictable state, which could break the program.
+    - _Design Pattern_: To Be Continued
+    - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
+<!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
+#### Implementation
+#### Class Diagram
+<!-- Insert image and description of each class, with its overview, attributes,
+methods, dependencies and UML Notes -->
+![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
+- `FitnessMotivator` Class
+  - Overview
+    - The `FitnessMotivator` class manages fitness related operations.
+  - Attributes:
+    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
+    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
+    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. (Omitted from Class Diagram)
+    - `allExercise`: An instance of `ExerciseList`.
+    - `dailyGoals`: An instance of `ExerciseGoalList`.
+  - Methods:
+    - `fiveRandomExercises()`: Generates five random integers within the index of each `ExerciseType`, then returns an array of exercises, where each exercise belongs to a different `ExerciseType`.
+    - `getExercises()`: Uses `fiveRandomExercises()`, then prints the exercises generated.
+    - `getTypeExercises(ExerciseType type)`: Prints all the exercises belonging to the queried `ExerciseType`.
+    - `addExercises(String[] commandArgs)`: Add the user-specified exercise into `allExercises`.
+    - `deleteExercises(String[] commandArgs)`: Delete the user-specified exercise by using its `ExerciseType` and index to remove it from the list.
+    - `newGoals()`: Uses `fiveRandomExercises()`, then converts them to `ExerciseGoal` objects and adds them to the dailyGoals list.
+    - `goalStatus()`: If the list of goals is not empty, it prints out all the currently set `ExerciseGoal` and its status, otherwise it shows a message that says there are no goals.
+    - `toggleGoal(int index)`: Toggles the status of the user-specified `ExerciseGoal` based on its index.
+    - `printHelp()`: Prints out a list of commands and briefly describes what each command does.
+  - Dependencies:
+    - Ui: Utilised for user interface interactions.
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+    - UiMessageConstants: A class with static string constants, where each string stores a different message for printing.
+  - UML Notes:
+    - `FitnessMotivator` class only contains one `ExerciseList`, and one `ExerciseGoalList`.
+- `ExerciseList` Class
+  - Overview:
+    - The `ExerciseList` class directly manipulates the list of `Exercises`, and provides methods to do so.
+  - Attributes:
+    - `allExercises`: A private instance of an `ArrayList` of `Exercises`.
+  - Methods:
+    - `ExerciseList()`: A public constructor method, it checks if a local save file exists. If it does not, it creates a new file and initialises it with data, otherwise it will simply load the file.
+    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. (Omitted from Class Diagram)
+    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. (Omitted from Class Diagram)
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. (Omitted from Class Diagram)
+    - `add(Exercise exercise)`: A public helper method used to add an `Exercise` object into `allExercises`.
+    - `get(ExerciseType type, int index)`: A public helper method used to query for an `Exercise` Object that matches the n-th `Exercise` with the matching `ExerciseType`, where n = index.
+    - `getType(ExerciseType type)`: A public helper method used to query for all of the `Exercise` objects that match the `ExerciseType`.
+    - `size(ExerciseType type)`: A public helper method that returns the total number of `Exercise` objects that match the `ExerciseType`.
+    - `newExercise(String[] parameters)`: A public helper method that creates an `Exercise` Object from an array of strings.
+    - `findExercise(ExerciseType type, String nameQuery)`: A public helper method that searches for an `Exercise` object within `allExercises` using `ExerciseType` and a string which represents the name being searched.
+    - `remove(Exercise exercise)`: A public helper method that removes a specified `Exercise` Object from `ExerciseList`.
+  - Dependencies:
+      - Storage: Utilised for persistent memory storage.
+      - Enum ExerciseType: Utilised to allow only specified types of exercises.
+      - ExerciseBank: Utilised for storage of initialisation data.
+  - UML Notes:
+    - `ExerciseList` contains at least 25 instances of `Exercise`.
+    - When `FitnessMotivator` is destroyed, the `ExerciseList` instance is destroyed, reflecting a "whole-part" relationship.
+    - `ExerciseList` is a parent class to `ExerciseGoalList`.
+- `Exercise` Class
+  - Overview:
+    - The `Exercise` class stores the basic data of each exercise, such as its name, its type and the number of sets and reps to do.
+  - Attributes:
+    - `exerciseName`: A private string storing the name of the exercise.
+    - `exerciseType`: A private `ExerciseType` object storing one of five types of exercises.
+    - `sets`: A private string storing the number of sets to be done.
+    - `reps`: A private string storing the number of reps to be done.
+  - Methods:
+    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. (Omitted from Class Diagram)
+    - `getExerciseName()`: A public helper method to obtain the name of the exercise. (Omitted from Class Diagram)
+    - `getSets()`: A public helper method to get the number of sets to be done per exercise. (Omitted from Class Diagram)
+    - `getReps()`: A public helper method to get the number of reps to be done per exercise. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `Exercise` object.
+  - Dependencies:
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `ExerciseList` contains at least 25 instances of `Exercise`.
+    - When `ExerciseList` or `FitnessMotivator` is destroyed, the `Exercise` instances are destroyed as well, reflecting a "whole-part" relationship.
+    - `Exercise` is the parent class of `ExerciseGoal`.
+- `ExerciseBank` Class
+    - Overview: 
+      - The `ExerciseBank` class stores a collection of static string constants for initialisation.
+    - Attributes:
+      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+    - UML Notes:
+      - Used exclusively by `ExerciseList`.
+- `ExerciseGoalList` Class
+  - Overview: 
+    - The `ExerciseGoalList` class inherits from the class `ExerciseList`, but storing `ExerciseGoal` objects instead of `Exercise` objects. It also implements additional methods.
+  - Attributes:
+    - `NUMBER_OF_GOALS`: A private static constant integer value representing the maximum number of goals in the `ExerciseGoalList`.
+    - `goals`: A private `ArrayList` of `ExerciseGoal` objects.
+  - Methods:
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. (Omitted from Class Diagram)
+    - `isEmpty()`: A public helper method used to check if the `ExerciseGoalList` is empty.
+    - `clear()`: A public helper method used to reset the `ExerciseGoalList` by deleting all `ExerciseGoal` objects within.
+    - `findExercise(int index)`: A public helper method used to find an `ExerciseGoal` based on its index.
+    - `saveGoals()`: A public helper method used to save the current list to a local storage.
+    - `newExercise(String[] parameters)`: An overriden public method from the parent class, it is used to create a new `ExerciseGoal` object, with its `isDone` attribute initialised to `false`.
+    - `add(Exercise exercise, boolean isDone)`: A public method overloaded from the parent class, it adds a pre-existing `Exercise`, converts it with a declared `isDone` parameter, before adding it into the list and saving locally.
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. (Omitted from Class Diagram)
+  - Dependencies:
+    - Storage: Utilised for persistent memory storage.
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+  - `ExerciseGoalList` is the child class of `ExerciseList`.
+  - When `ExercisegoalList` or `FitnessMotivator` is destroyed, the `ExerciseGoal` instances are destroyed as well, reflecting a "whole-part" relationship.
+  - `ExerciseGoalList` contains either 5 or 0 instances of `Exercise`.
+- `ExerciseGoal` Class
+  - Overview: 
+    - The `ExerciseGoal` class inherits from the class `Exercise`, but adds an attribute to store the completion status of the exercise goal. 
+  - Attributes:
+    - All attributes of the `Exercise` class.
+    - `isDone`: A private boolean storing the completion state of the `ExerciseGoal` object.
+  - Methods:
+    - `toggle()`: A public helper method used to toggle the state of the `ExerciseGoal` object.
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoal` object.
+  - Dependencies:
+    - Enum ExerciseType: Utilised to allow only specified types of exercises.
+  - UML Notes:
+    - `ExerciseGoal` is the child class of `Exercise`.
+    - `ExerciseGoalList` contains either 5 or 0 instances of `Exercise`.
+    - When `ExercisegoalList` or `FitnessMotivator` is destroyed, the `ExerciseGoal` instances are destroyed as well, reflecting a "whole-part" relationship.
+- `UiMessageConstants` Class
+  - Overview:
+    - The `UiMessageConstants` class stores all constant `String` variables used in the various printing methods in `FitnessMotivator`.
+  - Attributes:
+    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. (Omitted from Class Diagram)
+    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. (Omitted from Class Diagram)
+    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. (Omitted from Class Diagram)
+    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. (Omitted from Class Diagram)
+    - `HELP_MESSAGE`: A public static `String` constant storing the help message. (Omitted from Class Diagram)
+    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. (Omitted from Class Diagram)
+    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. (Omitted from Class Diagram)
+    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. (Omitted from Class Diagram)
+  - UML Notes:
+    - Used exclusively by `FitnessMotivator`.
+- `ExerciseType` Enumeration
+  - Overview:
+    - The `ExerciseType` enumeration restricts the number of different types of exercises to five parts of the body, for easier sorting and management of all exercises.
+  - Attributes:
+    - `ARMS`: Exercises that work the Arms
+    - `CHEST`: Exercises that work the Chest
+    - `ABS`: Exercises that work the Abs
+    - `BACK`: Exercises that work the Back
+    - `LEGS`: Exercises that work the Legs
+  - Methods:
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. (Omitted from Class Diagram)
+  - Dependencies:
+    - Does not require any dependencies.
+  - UML Notes:
+    - It is used everywhere, as every feature in the FitnessMotivator uses/parses `Exercise` objects, which will always use `ExerciseGoal` objects.
+- Fitness command classes
+  - `GetExercisesCommand`:
+    - Without parameters, the command retrieves 5 random exercises from each `ExerciseType` and prints it.
+      - Command format: `fitness get`
+    - With parameters, the command retrieves all the exercises from the specified `ExerciseType` and prints it.
+      - Command format: `fitness get arms`
+  - `AddExerciseCommand`: Add a user specified exercise into the list.
+    - CommandFormat: `fitness add <ExerciseType>, <ExerciseName>, <Number_Of_Sets>, <Number_Of_Reps>`
+  - `DeleteExerciseCommand`: Deletes a user specified `Exercise` from the list. 
+    - CommandFormat: `fitness delete <ExerciseType> <Index>`
+  - `GoalExerciseCommand`:
+    - Without parameters, the command tries to retrieve the status of the list of `ExerciseGoal`.
+      - Command format: `fitness goal`
+    - With parameters, there are only 2 possible parameters.
+      - This command creates or overwrites the existing goals with new goals.
+        - Command format: `fitness goal new`
+      - This command marks/unmarks the `ExerciseGoal` as completed or uncompleted.
+        - Command format: `fitness goal <index>`
+  - `HelpExerciseCommand`: Prints a list of executable commands for Fitness Motivator
+    - Command format: `fitness help`
+
+#### Sequence Diagram
+<!-- Insert image and description of the image -->
+![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
+- Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
+
+When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
 
 ## Product scope
 ### Target user profile
