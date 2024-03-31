@@ -16,7 +16,7 @@ public class CountdownTimerTest {
     @Test
     public void setStartTimer_startTimer_success() {
         countdownTimer.setStart();
-        assertEquals(true,countdownTimer.getRunningStatus());
+        assertEquals(true, countdownTimer.getRunningStatus());
     }
 
     @Test

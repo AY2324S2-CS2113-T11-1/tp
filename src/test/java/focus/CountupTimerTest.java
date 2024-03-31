@@ -16,7 +16,7 @@ public class CountupTimerTest {
     @Test
     public void setStartTimer_startTimer_success() {
         countupTimer.setStartTiming();
-        assertEquals(true,countupTimer.getStartedStatus());
+        assertEquals(true, countupTimer.getStartedStatus());
     }
 
     @Test
