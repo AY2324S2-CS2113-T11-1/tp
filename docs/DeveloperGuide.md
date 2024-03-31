@@ -86,9 +86,11 @@ You are recommended to use Intellij IDEA:
 ### UI component
 #### Description
 `Ui` component is in charge of reading in user input and printing output. </br> </br>
+
 The `Ui` class is created to standardise the output formatting of messages to be printed across all features. These formatting include the printing of messages and lists, reducing code repetition.
 
 #### Design Considerations
+
 - #### User Design Considerations
   - Users are able to understand what is going on with relative ease, when they use the Wellness360 chat bot.
   - Standardised output creates a cohesive look and an overall more immersive experience for the user.
@@ -96,10 +98,24 @@ The `Ui` class is created to standardise the output formatting of messages to be
   - Static Attributes: All methods are static, allowing their usage anywhere within the codebase.
   - SRP: Classes adhere to the Single Responsibility Principle. For example, the `Ui` class is solely responsible for managing printing-related operations.
   - Readability and Maintainability: Descriptive naming, comments, and documentation for clarity. Since printing is a highly used task, it prevents highly-repetitive code as well.
+
 #### Implementation
+
 #### Class Diagram
 <!-- Insert Class Diagram here -->
-
+![UiClassDiagram.png](diagrams/Ui/UiClassDiagram.png)
+- `Ui` class
+  - Overview
+    - This class is a collection of methods that standardise the printing of messages to the CLI.
+  - Attributes:
+    - `SEP`: A private static string constant that stores a separation line.
+  - Methods:
+    - `greetUser()`: A public static method that prints a welcome message when Wellness360 is started.
+    - `promptUserInput()`: A public static method that prints a "You: " message before the input cursor, to signal the input of
+    - `sayGoodbye()`: A public static method that prints a farewell message when Wellness360 is terminated by the user.
+    - `printMessagewithSepNewLine(String message)`: A public static method used to print a message with a separation line.
+    - `printMessageWithoutNewLine(String message)`: A public static method used to print a message without a separation line.
+    - `printList(ArrayList list, String message)`: A public static method to print a list of type `ArrayList`, along with a message and a separation line.
 ### Command parser component
 
 ### Storage component
