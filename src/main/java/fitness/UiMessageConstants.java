@@ -9,7 +9,7 @@ public class UiMessageConstants {
             System.lineSeparator() + System.lineSeparator();
     public static final String EMPTY_GOAL_MESSAGE = "There are no goals set :(" +
             System.lineSeparator() + System.lineSeparator() +
-            "You can set one by doing 'goal new'!";
+            "You can set one by doing 'fitness goal new'!";
 
     public static final String GOAL_MESSAGE = "Here are your goals for today. " +
             "Have you started? Don't be lazy ok?" + System.lineSeparator() + System.lineSeparator();
@@ -19,13 +19,17 @@ public class UiMessageConstants {
 
     public static final String HELP_MESSAGE =
             "Here is a list of possible commands you can use with the Fitness Motivator!" +
-                    System.lineSeparator();
+            System.lineSeparator();
 
     public static final String ADD_EXERCISE_MESSAGE =
             "I have added the following exercise into our list!" + System.lineSeparator();
 
     public static final String DELETE_EXERCISE_MESSAGE =
             " I have deleted the exercise. Here are the exercises left in the list!" +
+            System.lineSeparator();
+
+    public static final String MIN_EXERCISES_MESSAGE =
+            " I cannot delete anymore, there needs to be at least one exercise per type :(" +
             System.lineSeparator();
 
     public static final String[] HELP_MENU_INSTRUCTIONS = {
