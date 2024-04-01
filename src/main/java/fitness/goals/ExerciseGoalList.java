@@ -3,7 +3,7 @@ package fitness.goals;
 import fitness.FitnessMotivator;
 import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
-import fitness.exercise.ExerciseType;
+import fitness.ExerciseType;
 import storage.Storage;
 
 import java.util.ArrayList;

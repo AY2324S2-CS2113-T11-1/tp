@@ -2,7 +2,7 @@ package commands.fitnesscommands;
 
 import commands.Command;
 import exceptions.FitnessException;
-import fitness.exercise.ExerciseType;
+import fitness.ExerciseType;
 import fitness.FitnessMotivator;
 
 import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;

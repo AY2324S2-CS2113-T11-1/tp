@@ -1,5 +1,7 @@
 package fitness.exercise;
 
+import fitness.ExerciseType;
+
 public class Exercise {
 
     protected String exerciseName;

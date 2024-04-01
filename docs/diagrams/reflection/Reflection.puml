@@ -1,6 +1,7 @@
 @startuml
 
 skinparam classAttributeIconSize 0
+hide circle
 
 package parser {
     class ReflectionCommandParser {
@@ -16,20 +17,10 @@ package command {
             + isExit(): boolean
     }
 
-    class GetReflectionQuestionsCommand implements Command {
-    }
 
-    class ListFavouriteReflectionsCommand implements Command {
+    class ReflectionCommand implements Command {
     }
-
-    class ReflectionHelpCommand implements Command {
-    }
-
-    class SaveToFavouritesCommand implements Command {
-    }
-
-    class UnsaveFromFavouritesCommand implements Command {
-    }
+    note top of ReflectionCommand: Could represent: \n1.GetReflectionQuestionsCommand \n2.ListFavouriteReflectionsCommand \n3.ReflectionHelpCommand \n4.SaveToFavouritesCommand \n5.UnsaveFromFavouritesCommand
 }
 package reflection {
     abstract class "{abstract}\nReflectionList" as ReflectionList {
@@ -82,26 +73,14 @@ ReflectionQuestionBank --|> ReflectionList
 ReflectionQuestionBank *-- "41" ReflectionQuestion : contains >
 FavoriteReflectionsList *-- "*" ReflectionQuestion : contains >
 
-ReflectionManager --> Storage : uses >
-ReflectionManager --> Ui : uses >
-ReflectionManager *--> "1" FavoriteReflectionsList : contains >
-ReflectionManager *--> "1" ReflectionQuestionBank : contains >
+ReflectionManager ..> Storage : uses >
+ReflectionManager ..> Ui : uses >
+ReflectionManager *-- "1" FavoriteReflectionsList : contains >
+ReflectionManager *-- "1" ReflectionQuestionBank : contains >
 
 Parser ..> ReflectionCommandParser : creates >
-ReflectionCommandParser .DOWN.> GetReflectionQuestionsCommand : creates >
-ReflectionCommandParser .DOWN.> ListFavouriteReflectionsCommand : creates >
-ReflectionCommandParser .DOWN.> ReflectionHelpCommand : creates >
-ReflectionCommandParser .DOWN.> SaveToFavouritesCommand : creates >
-ReflectionCommandParser .DOWN.> UnsaveFromFavouritesCommand : creates >
+ReflectionCommandParser .DOWN.> ReflectionCommand : creates >
 
-GetReflectionQuestionsCommand --> ReflectionManager : uses >
-
-ListFavouriteReflectionsCommand --> ReflectionManager : uses >
-
-ReflectionHelpCommand --> ReflectionManager : uses >
-
-SaveToFavouritesCommand --> ReflectionManager : uses >
-
-UnsaveFromFavouritesCommand --> ReflectionManager : uses >
+ReflectionCommand --> ReflectionManager: uses
 
 @enduml

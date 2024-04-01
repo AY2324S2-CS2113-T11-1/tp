@@ -3,12 +3,12 @@
 
 autonumber
 
-participant Main
-participant Scanner
-participant ReflectionManager
-participant Parser
-participant ReflectionCommandParser
-participant PlaceholderReflectionCommand
+participant ":Main" as Main
+participant ":Scanner" as Scanner
+participant ":ReflectionManager" as ReflectionManager
+participant "<<Class>>\nParser" as Parser
+participant "<<Class>>\nReflectionCommandParser" as ReflectionCommandParser
+participant ":PlaceholderReflectionCommand" as PlaceholderReflectionCommand
 
 activate Main
 
@@ -29,7 +29,7 @@ loop until isExit
         Parser -> ReflectionCommandParser: determineReflectionCommand()
         alt command is PlaceholderReflectionCommand
             create PlaceholderReflectionCommand
-            ReflectionCommandParser -> PlaceholderReflectionCommand: command, params
+            ReflectionCommandParser -> PlaceholderReflectionCommand
             activate PlaceholderReflectionCommand
             PlaceholderReflectionCommand --> ReflectionCommandParser: command object
             ReflectionCommandParser --> Parser: command object
