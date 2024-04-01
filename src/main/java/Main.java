@@ -32,7 +32,6 @@ public class Main {
             String userInput = scanner.nextLine();
 
             //execute user command if it is valid else throw exception
-            //save tasks to file after each command
             try {
                 Command userCommand = Parser.determineCommand(sleepTracker, reflectionManager,
                         habitTracker, focusTimer, fitnessMotivator, userInput);
