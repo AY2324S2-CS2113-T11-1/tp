@@ -12,9 +12,9 @@ public class ErrorMessageConstants {
     public static final String INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE =
             "Forgetting something? Key in the correct parameters please!" +
             System.lineSeparator() + System.lineSeparator() +
-            "Example: fitness delete <type>, <index>";
+            "Example: fitness delete <type> <index>";
 
-    public static final String INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE =
+    public static final String DELETE_INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE =
             "Please enter an index within bounds!" + System.lineSeparator() +
             "You can do 'fitness get <type> to see the indexes of the exercises!";
 
@@ -26,7 +26,9 @@ public class ErrorMessageConstants {
             "Did you enter your Sets and Reps correctly? :(";
 
     public static final String ILLEGAL_GOAL_PARAMS_ERROR_MESSAGE =
-            "Are you trying to create a new goal? You can try 'goal new'!" +
+            "Are you trying to create a new goal? You can try 'fitness goal new'!" +
             System.lineSeparator() +
-            "You can also do 'goal <index>' to mark and unmark exercises!";
+            "You can also do 'fitness goal <index>' to mark and unmark exercise goals!" +
+            System.lineSeparator() +
+            "Do 'fitness goal' to check the index of each exercise goal.";
 }
