@@ -567,6 +567,7 @@ fitness goals. This component aims to contribute to the goal of improving the us
 well-being.
 
 #### Design Considerations
+
 - #### User Design Considerations
     - Users are able to generate a list of 5 different exercises that target 5 different parts of the body: The arms, chest, abs, back and legs. The list is randomly generated each time, to allow for the mixing of exercises.
     - Users can also choose to generate exercises that generate a single part of the body, should they choose to target that part of the body for exercise.
@@ -581,18 +582,20 @@ well-being.
     - _Design Pattern_: To Be Continued
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
 <!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
+
 #### Implementation
 #### Class Diagram
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
 ![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
+Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
 - `FitnessMotivator` Class
   - Overview
     - The `FitnessMotivator` class manages fitness related operations.
   - Attributes:
-    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
-    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
-    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. (Omitted from Class Diagram)
+    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator 
+    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator 
+    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. 
     - `allExercise`: An instance of `ExerciseList`.
     - `dailyGoals`: An instance of `ExerciseGoalList`.
   - Methods:
@@ -618,9 +621,9 @@ methods, dependencies and UML Notes -->
     - `allExercises`: A private instance of an `ArrayList` of `Exercises`.
   - Methods:
     - `ExerciseList()`: A public constructor method, it checks if a local save file exists. If it does not, it creates a new file and initialises it with data, otherwise it will simply load the file.
-    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. (Omitted from Class Diagram)
-    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. (Omitted from Class Diagram)
-    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. (Omitted from Class Diagram)
+    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. 
+    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. 
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. 
     - `add(Exercise exercise)`: A public helper method used to add an `Exercise` object into `allExercises`.
     - `get(ExerciseType type, int index)`: A public helper method used to query for an `Exercise` Object that matches the n-th `Exercise` with the matching `ExerciseType`, where n = index.
     - `getType(ExerciseType type)`: A public helper method used to query for all of the `Exercise` objects that match the `ExerciseType`.
@@ -645,10 +648,10 @@ methods, dependencies and UML Notes -->
     - `sets`: A private string storing the number of sets to be done.
     - `reps`: A private string storing the number of reps to be done.
   - Methods:
-    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. (Omitted from Class Diagram)
-    - `getExerciseName()`: A public helper method to obtain the name of the exercise. (Omitted from Class Diagram)
-    - `getSets()`: A public helper method to get the number of sets to be done per exercise. (Omitted from Class Diagram)
-    - `getReps()`: A public helper method to get the number of reps to be done per exercise. (Omitted from Class Diagram)
+    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. 
+    - `getExerciseName()`: A public helper method to obtain the name of the exercise. 
+    - `getSets()`: A public helper method to get the number of sets to be done per exercise. 
+    - `getReps()`: A public helper method to get the number of reps to be done per exercise. 
     - `toString()`: An overriden public method used to specify the string format of the `Exercise` object.
   - Dependencies:
     - Enum ExerciseType: Utilised to allow only specified types of exercises.
@@ -660,11 +663,11 @@ methods, dependencies and UML Notes -->
     - Overview: 
       - The `ExerciseBank` class stores a collection of static string constants for initialisation.
     - Attributes:
-      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. 
     - UML Notes:
       - Used exclusively by `ExerciseList`.
 - `ExerciseGoalList` Class
@@ -674,14 +677,14 @@ methods, dependencies and UML Notes -->
     - `NUMBER_OF_GOALS`: A private static constant integer value representing the maximum number of goals in the `ExerciseGoalList`.
     - `goals`: A private `ArrayList` of `ExerciseGoal` objects.
   - Methods:
-    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. (Omitted from Class Diagram)
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. 
     - `isEmpty()`: A public helper method used to check if the `ExerciseGoalList` is empty.
     - `clear()`: A public helper method used to reset the `ExerciseGoalList` by deleting all `ExerciseGoal` objects within.
     - `findExercise(int index)`: A public helper method used to find an `ExerciseGoal` based on its index.
     - `saveGoals()`: A public helper method used to save the current list to a local storage.
     - `newExercise(String[] parameters)`: An overriden public method from the parent class, it is used to create a new `ExerciseGoal` object, with its `isDone` attribute initialised to `false`.
     - `add(Exercise exercise, boolean isDone)`: A public method overloaded from the parent class, it adds a pre-existing `Exercise`, converts it with a declared `isDone` parameter, before adding it into the list and saving locally.
-    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. 
   - Dependencies:
     - Storage: Utilised for persistent memory storage.
     - Enum ExerciseType: Utilised to allow only specified types of exercises.
@@ -708,14 +711,14 @@ methods, dependencies and UML Notes -->
   - Overview:
     - The `UiMessageConstants` class stores all constant `String` variables used in the various printing methods in `FitnessMotivator`.
   - Attributes:
-    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. (Omitted from Class Diagram)
-    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. (Omitted from Class Diagram)
-    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. (Omitted from Class Diagram)
-    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. (Omitted from Class Diagram)
-    - `HELP_MESSAGE`: A public static `String` constant storing the help message. (Omitted from Class Diagram)
-    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. (Omitted from Class Diagram)
-    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. (Omitted from Class Diagram)
-    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. (Omitted from Class Diagram)
+    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. 
+    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. 
+    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. 
+    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. 
+    - `HELP_MESSAGE`: A public static `String` constant storing the help message. 
+    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. 
+    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. 
+    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. 
   - UML Notes:
     - Used exclusively by `FitnessMotivator`.
 - `ExerciseType` Enumeration
@@ -728,7 +731,7 @@ methods, dependencies and UML Notes -->
     - `BACK`: Exercises that work the Back
     - `LEGS`: Exercises that work the Legs
   - Methods:
-    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. 
   - Dependencies:
     - Does not require any dependencies.
   - UML Notes:
@@ -802,7 +805,11 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 | v2.0    | user     | delete habits from the habit tracker                                                  | remove habits that I no longer want to track.                       |
 | v2.0    | user     | check the total time elapsed                                                          | keep track of how long the session have been running.               |
 | v2.0    | user     | start a countdown timer                                                               | set a specific timing to focus on my tasks.                         |
-| v2.0    | user     | delete sleep cycles                                                                   | remove sleep cycles that I do not want to track                     |
+| v2.0    | user     | delete sleep cycles                                                                   | remove sleep cycles that I do not want to track.                    |
+| v2.0    | user     | add custom exercises                                                                  | view them later on.                                                 |
+| v2.0    | user     | delete exercises from the fitness motivator                                           | keep the list of exercises updated.                                 |
+| v2.0    | user     | create exercise goals                                                                 | work towards a daily goal.                                          |
+| v2.0    | user     | mark exercise goals                                                                   | keep track of what goals are done and what goals are not.           |
 
 
 ## Non-Functional Requirements
