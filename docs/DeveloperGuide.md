@@ -927,7 +927,72 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    Reflect on a time when you took a creative risk. What did you learn from the experience?
    ________________________________________________________________________________________________________________
    ```
+   
 ### Habit Tracker component
 ### Sleep Tracker component
 ### Focus Timer component
+
 ### Fitness Tracker component
+#### Get 5 different exercises
+1. Testcase: Calling `fitness get` when the jar is first executed.
+    </br>
+    Expected outcome: A list of 5 random different exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    These are some of the exercises you can do! LETS GET STRONK MY G
+
+    1. Arms: Preacher Curls, 3 sets & 8 reps
+    2. Chest: Cable Flies, 3 sets & 8 reps
+    3. Abs: Flutter Kicks, 4 sets & 20 reps
+    4. Back: Weighted Pull Ups, 3 sets & 6 reps
+    5. Legs: Leg Extensions, 3 sets & 10 reps
+
+    ________________________________________________________________________________________________________________
+    ```
+#### Get a list of specific type of exercises
+1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
+    </br>
+    Expected outcome: Error message prompts you to use the accepted types of exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Hmm...Invalid type of exercise...
+    Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
+    ________________________________________________________________________________________________________________
+    ```
+#### Add an exercise
+1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
+    </br>
+    Expected outcome: Error message prompts you to use the accepted types of exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Hmm...Invalid type of exercise...
+    Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
+    ________________________________________________________________________________________________________________
+    ```
+#### Create a new Goal
+1. Testcase: Calling `fitness goal new` when the jar is first executed
+    </br>
+    Expected outcome: 5 randomly generated exercise goals with a status icon in front of the respective exercises
+    ```
+    ________________________________________________________________________________________________________________
+    Lets get working on today's exercises!
+
+    1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+    2. [ ] Chest: Diamond Push-up, 3 sets & 15 reps
+    3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+    4. [ ] Back: Lateral Rows, 3 sets & 8 reps
+    5. [ ] Legs: Leg Press, 3 sets & 8 reps
+
+    ________________________________________________________________________________________________________________
+    ```
+#### Mark a goal as done
+1. Testcase: Calling `fitness goal first` when the goals have been created.
+    </br>
+    Expected outcome:
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Are you trying to create a new goal? You can try 'goal new'!
+    You can also do 'goal <index>' to mark and unmark exercises!
+    ________________________________________________________________________________________________________________
+
+    ```
