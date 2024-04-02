@@ -26,8 +26,9 @@ public class Parser {
                                            String userInput)
             throws Wellness360Exception {
 
+        userInput = userInput.toLowerCase();
         String[] userWords = userInput.trim().split("\\s+", 2);
-        String userCommandSection = userWords[0].toLowerCase();
+        String userCommandSection = userWords[0];
 
         String commandArgs = userWords.length == COMMAND_LENGTH ? userWords[1] : "";
 

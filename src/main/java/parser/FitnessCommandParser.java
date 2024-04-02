@@ -16,7 +16,7 @@ public class FitnessCommandParser {
             throws FitnessException {
 
         String[] userCommand = commandArgs.trim().split("\\s+", 2);
-        String userFitnessCommand = userCommand[0].trim().toLowerCase();
+        String userFitnessCommand = userCommand[0].trim();
 
         String fitnessCommandArgs =
             userCommand.length == COMMAND_LENGTH ? userCommand[1].trim() : "";
