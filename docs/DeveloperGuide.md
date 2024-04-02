@@ -806,18 +806,18 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
     Expected outcome: Get 5 random questions
    ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     Generated Questions:
-   1. How do you prioritize self-care and well-being in your daily life?
-   2. Reflect on your communication style. In what ways do you excel, and where do you see room for improvement?
-   3. What role does creativity play in your life, and how do you nurture it?
-   4. What steps are you taking to advance your skills and knowledge in your field?
-   5. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
-   ________________________________________________________________________________________________________________
+    1. How do you prioritize self-care and well-being in your daily life?
+    2. Reflect on your communication style. In what ways do you excel, and where do you see room for improvement?
+    3. What role does creativity play in your life, and how do you nurture it?
+    4. What steps are you taking to advance your skills and knowledge in your field?
+    5. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
+    ________________________________________________________________________________________________________________
    ```
 2. Testcase: `get`
    
-    Expected outcome: Unknown reflection command
+    Expected outcome: Unknown command
 
     ```
    ________________________________________________________________________________________________________________
@@ -827,19 +827,29 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 3. Testcase: `get reflect`
 
-   Expected outcome: Unknown reflection command
+   Expected outcome: Unknown command
 
     ```
    ________________________________________________________________________________________________________________
    ERROR MSG: Unknown Wellness360 command
    ________________________________________________________________________________________________________________
    ```
+
+4. Testcase: `reflect get 10`
+   Expected outcome: No additional parameters allowed warning
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Additional parameters for 'reflect get' command are not allowed.
+    ________________________________________________________________________________________________________________
+    ```
+
+
 #### View list of saved favourite questions
 1. Testcase: Calling `reflect list` on an empty favourites list
     
     Expected outcome: Empty list message if no questions saved
     ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
@@ -848,19 +858,27 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Expected outcome: List of saved questions if list is not empty
     ```
    ________________________________________________________________________________________________________________
-    Favourites list:
+   Favourites list:
    1. Describe a memorable shared experience with someone you care about. What made it special?
    2. Reflect on a time when you faced a significant challenge at work. How did you overcome it?
    3. In what ways do you seek to grow and develop within your current role or industry?
    4. Describe a recent moment when you felt inspired by something or someone in your environment.
    ________________________________________________________________________________________________________________
    ```
+   
+3. Testcase: `reflect list 10`
+   Expected outcome: No additional parameters allowed warning
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Additional parameters for 'reflect list' command are not allowed.
+    ________________________________________________________________________________________________________________
+    ```
 #### Save favourite question
 1. Testcase: Calling `reflect save 1` without generating questions first (`reflect get`)
 
     Expected outcome: Error message prompting you to generate questions first.
     ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     ERROR MSG: No questions generated yet. Generate questions using 'reflect get' command first.
     ________________________________________________________________________________________________________________
    ```
@@ -869,7 +887,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Expected outcome: save question successful
 
     ```
-    ________________________________________________________________________________________________________________
+   ________________________________________________________________________________________________________________
    You:reflect get
    ________________________________________________________________________________________________________________
    Generated Questions:
