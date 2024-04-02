@@ -21,6 +21,10 @@ public class ExerciseGoal extends Exercise {
         isDone = !isDone;
     }
 
+    public boolean getStatus() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         String status = isDone ? "[X] " : "[ ] ";

@@ -27,7 +27,7 @@ public class DeleteHabitCommand implements Command{
 
         if (parts.length != REQUIRED_PARAMETERS) {
             throw new HabitException("Please provide a habit ID.\n" +
-                    "Use Format: habit delete <habit_ID>");
+                    "Use Format: habit delete /id <habit_ID>");
         }
 
         try {

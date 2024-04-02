@@ -16,7 +16,7 @@ public class StartTimerCommand implements Command {
      * @param timer FocusTimer object to be started.
      */
     public StartTimerCommand(FocusTimer timer) {
-        this.focusTimer = timer;
+        focusTimer = timer;
     }
 
     /**
