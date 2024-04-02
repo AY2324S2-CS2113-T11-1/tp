@@ -668,6 +668,7 @@ well-being.
     - _Modularity_: All related classes are grouped together into packages. Command parsers are placed in the parser package, with individual command execution further placed into the fitnesscommands package. The execution of fitness logic are all grouped into the fitness package.
     - _Abstraction_: The command interface is used to specify methods to be implemented in every single exercise command, creating a pre-written template and behaviour for all command classes.
     - _Encapsulation_: The usage of private attributes and the use of helper methods help ensure data integrity. Get methods in the Exercise class and ExerciseList class ensure that the data is manipulated in the way that was intended by the developer and thus protecting the data.
+    - _Inheritance_: Commands with similar classes utilise inheritance to reduce code repetition of similar methods.
     - _Exception Handling_: Exception Handling prevents the code from reaching an unknown or unpredictable state, which could break the program.
     - _Design Pattern_: To Be Continued
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
