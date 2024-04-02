@@ -5,9 +5,10 @@ import exceptions.FitnessException;
 import fitness.FitnessMotivator;
 import fitness.ExerciseType;
 
-import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.DELETE_INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_DELETE_PARAMS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE;
 
 public class DeleteExerciseCommand implements Command {
 
@@ -31,7 +32,7 @@ public class DeleteExerciseCommand implements Command {
      * @throws FitnessException Thrown when improper command arguments are found
      * */
     private String[] checkCommandArgs(String commandArgs) throws FitnessException {
-        String[] tempCommandArgs = commandArgs.split(" ", 2);
+        String[] tempCommandArgs = commandArgs.split(" ");
 
         // Handles insufficient parameters entered
         if (tempCommandArgs.length != REQUIRED_DELETE_PARAMS) {
@@ -41,13 +42,21 @@ public class DeleteExerciseCommand implements Command {
         // String Cleaning
         tempCommandArgs[0] = tempCommandArgs[0].trim().toUpperCase();
         tempCommandArgs[1] = tempCommandArgs[1].trim();
+
+        // Checks that the entered type belongs to one of the ExerciseType Enum
+        try {
+            ExerciseType.valueOf(tempCommandArgs[0]);
+        } catch (IllegalArgumentException e) {
+            throw new FitnessException(ILLEGAL_TYPE_ERROR_MESSAGE);
+        }
+
         ExerciseType type = ExerciseType.valueOf(tempCommandArgs[0]);
 
         int maxIndex = fitnessMotivator.allExercises.size(type);
 
         // Handles the case where non-integer values are entered in parameters
         if (!tempCommandArgs[1].matches("\\d+")) {
-            throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
+            throw new FitnessException(INCORRECT_DELETE_PARAMS_ERROR_MESSAGE);
         }
 
         // Handles the case where the integer entered is out of bounds

@@ -6,7 +6,7 @@ import fitness.ExerciseType;
 import fitness.FitnessMotivator;
 
 import static commands.fitnesscommands.ErrorMessageConstants.ILLEGAL_TYPE_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_SETS_REPS_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE;
 import static fitness.FitnessMotivator.REQUIRED_NUM_OF_PARAMETERS;
 
@@ -48,7 +48,7 @@ public class AddExerciseCommand implements Command {
         // be integers
         if (!tempCommandArgs[2].matches("\\d+") ||
                 !tempCommandArgs[3].matches("\\d+")) {
-            throw new FitnessException(INCORRECT_INTEGER_ERROR_MESSAGE);
+            throw new FitnessException(INCORRECT_SETS_REPS_ERROR_MESSAGE);
         }
 
         // Checks that the entered type belongs to one of the ExerciseType Enum
