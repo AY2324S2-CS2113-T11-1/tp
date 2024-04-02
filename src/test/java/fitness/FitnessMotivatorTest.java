@@ -5,6 +5,8 @@ import exceptions.FitnessException;
 import exceptions.Wellness360Exception;
 import fitness.exercise.Exercise;
 import fitness.exercise.ExerciseList;
+import fitness.goals.ExerciseGoal;
+import fitness.goals.ExerciseGoalList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,12 +22,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static storage.Storage.isFileCreated;
 
 public class FitnessMotivatorTest {
 
     private FitnessMotivator fitnessMotivator;
     private ExerciseList allExercises;
+    private ExerciseGoalList dailyGoals;
 
     @BeforeEach
     public void setUp() {
@@ -39,6 +43,7 @@ public class FitnessMotivatorTest {
         }
         this.fitnessMotivator = new FitnessMotivator();
         this.allExercises = fitnessMotivator.allExercises;
+        this.dailyGoals = fitnessMotivator.dailyGoals;
     }
 
     @Test
@@ -90,6 +95,43 @@ public class FitnessMotivatorTest {
         assertEquals("ERROR MSG: " + INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
         assertEquals("ERROR MSG: " + INCORRECT_INTEGER_ERROR_MESSAGE, exceptionTwo.getMessage());
         assertEquals("ERROR MSG: " + ILLEGAL_TYPE_ERROR_MESSAGE, exceptionThree.getMessage());
+    }
 
+    @Test
+    public void deleteExercise_deleteFromList_success() {
+
+        // Add pre-defined exercise
+        Exercise exercise = new Exercise(
+            "testing", ExerciseType.CHEST, "3", "10");
+        allExercises.add(exercise);
+        Exercise testExerciseAdded = allExercises.findExercise(ExerciseType.CHEST, "testing");
+
+        // Check that the exercise created matches the exercise
+        assertEquals(exercise.getExerciseName(), testExerciseAdded.getExerciseName());
+        assertEquals(exercise.getType(), testExerciseAdded.getType());
+        assertEquals(exercise.getSets(), testExerciseAdded.getSets());
+        assertEquals(exercise.getReps(), testExerciseAdded.getReps());
+
+        // Delete pre-defined exercise
+        allExercises.remove(exercise);
+
+        // Check does not exist
+        Exercise testExerciseDeleted = allExercises.findExercise(ExerciseType.CHEST, "testing");
+        assertNull(testExerciseDeleted);
+    }
+
+    @Test
+    public void toggleGoal_markGoalDone_success() {
+        int INDEX = 3;
+
+        // Create goal, get status of goal 3
+        fitnessMotivator.newGoals();
+        ExerciseGoal testExerciseBeforeToggle = dailyGoals.findExercise(INDEX - 1);
+        assertFalse(testExerciseBeforeToggle.getStatus());
+
+        // Mark goal 3 using toggle, then get status of goal 3
+        fitnessMotivator.toggleGoal(INDEX);
+        ExerciseGoal testExerciseAfterToggle = dailyGoals.findExercise(INDEX - 1);
+        assertTrue(testExerciseAfterToggle.getStatus());
     }
 }
