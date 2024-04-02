@@ -1,19 +1,23 @@
 package commands;
 
 import exceptions.Wellness360Exception;
+import focus.FocusTimer;
 
 public class ExitCommand implements Command {
+    FocusTimer focustimer;
 
-
-    public ExitCommand(String commandArgs) throws Wellness360Exception {
+    public ExitCommand( FocusTimer timer, String commandArgs) throws Wellness360Exception {
         if (!commandArgs.isEmpty()) {
             throw new Wellness360Exception("Unknown command");
         }
+        this.focustimer = timer;
     }
 
     @Override
     public void execute() {
-        return;
+        if(focustimer.timerMode) {
+            focustimer.setStopTiming();
+        }
     }
 
 

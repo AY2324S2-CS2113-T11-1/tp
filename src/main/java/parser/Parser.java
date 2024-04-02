@@ -43,7 +43,7 @@ public class Parser {
         case "focus":
             return determineFocusCommand(focusTimer, commandArgs);
         case "exit":
-            return new ExitCommand(commandArgs);
+            return new ExitCommand(focusTimer, commandArgs);
         default:
             throw new Wellness360Exception("Unknown Wellness360 command");
         }
