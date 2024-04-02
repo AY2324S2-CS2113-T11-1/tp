@@ -20,13 +20,13 @@
     - [Implementation](#implementation)
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
-  - [Habit tracker component]()
-    - [Description](#description-1)
-    - [Design Considerations](#design-considerations-1)
-        - [User Design Considerations](#design-considerations-1)
-        - [Developer Design Considerations](#design-considerations-1)
-    - [Implementation](#implementation-1)
-        - [Class Diagram](#class-diagram-1)
+  - [Habit tracker component](#habit-tracker-component)
+    - [Description](#description-2)
+    - [Design Considerations](#design-considerations-2)
+        - [User Design Considerations](#design-considerations-2)
+        - [Developer Design Considerations](#design-considerations-2)
+    - [Implementation](#implementation-2)
+        - [Class Diagram](#class-diagram-2)
         - [Sequence Diagram](#sequence-diagram-1)
   - [Sleep tracker component](#sleep-tracker-component)
     - [Description](#description-2)
@@ -921,6 +921,181 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    ________________________________________________________________________________________________________________
    ```
 ### Habit Tracker component
+#### Add Habit
+1. Testcase: `habit add` 
+
+   Expected outcome: Error message prompting you that the habit description cannot be empty
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Habit Description cannot be left empty.
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit add vacuum the floor`
+
+   Expected outcome: add habit successful
+    ```
+   ________________________________________________________________________________________________________________
+   Great! You have added a new habit:
+      'vacuum the floor' was successfully added!
+   ________________________________________________________________________________________________________________
+   ```
+   
+#### Delete Habit
+1. Testcase: `habit delete /id`
+
+   Expected outcome: Error message prompting you to provide a habit ID
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a habit ID.
+    Use Format: habit delete <habit_ID>
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit delete /id w`
+
+   Expected outcome: Error message prompting you to provide a valid habit ID
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit delete /id 2` with one habit in the list
+
+   Expected outcome: Error message prompting you to provide a valid habit ID
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+4. Testcase: `habit delete /id 1` with one habit in the list
+
+   Expected outcome: Habit deleted successfully
+    ```
+    ________________________________________________________________________________________________________________
+    Got it! I've removed this habit:
+       [LOW] vacuum the floor [count: 0]
+    Now you have 0 habits left in the list.
+    ________________________________________________________________________________________________________________
+    ```
+#### List habits
+1. Testcase: `habit list` with empty list
+
+   Expected outcome: Show empty list message
+    ```
+    ________________________________________________________________________________________________________________
+    Here is the list of all your habits!
+       <you currently have no habits, add one now!>
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit list` with 2 habits in the list
+
+   Expected outcome: Prints a list of current habits
+    ```
+    ________________________________________________________________________________________________________________
+    Here is the list of all your habits!
+       1. [LOW] vacuum the floor [count: 0]
+       2. [LOW] complete leetcode daily question [count: 0]
+    ________________________________________________________________________________________________________________
+    ```   
+#### Update habit count
+1. Testcase: `habit update` or `habit update /id` or `habit update /id /by`
+
+   Expected outcome: Error message displaying incorrect formatting
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Incorrect update command formatting
+    Use Format: habit update /id <habit_ID> /by <increment_count>
+    Note: for <increment_count>, use '+1' to increase by 1, '-1' to decrease by 1
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit update /id 3 /by +2` with 2 habits in the list.
+
+   Expected outcome: Error message prompting user to provide valid habit ID
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit update /id 1 /by -1` with at least 1 habit in the list, and a zero habit count for the first habit.
+
+   Expected outcome: Error message informing user to not decrement habit count to below zero.
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: You cannot decrement a habit count to below zero
+    ________________________________________________________________________________________________________________
+    ```   
+4. Testcase: `habit update /id 1 /by +1` with at least 1 habit in the list, and a zero habit count for the first habit.
+
+   Expected outcome: Increase habit count successfully.
+
+    ```
+    ________________________________________________________________________________________________________________
+    Good Job! You have completed your habit!
+    The count for your habit has been updated:
+       1.  [LOW] vacuum the floor [count: 1]
+    ________________________________________________________________________________________________________________
+    ```      
+      
+#### Set habit priority level
+1. Testcase: `habit set` or `habit set /id` or `habit set /id /priority`
+
+   Expected outcome: Error message displaying incorrect formatting
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Incorrect set priority command formatting
+    Use Format: habit set /id <habit_ID> /priority <priority_level>
+    Note: for <priority_level>, there are 3 levels --> low, med, high
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit set /id 3 /priority low` with 2 habits in the list.
+
+   Expected outcome: Error message prompting user to provide valid habit ID
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit set /id 1 /priority very high` with at least 1 habit in the list.
+
+   Expected outcome: Error message displaying invalid priority level
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Invalid priority level!
+    ________________________________________________________________________________________________________________
+    ```   
+4. Testcase: `habit set /id 1 /priority high` with at least 1 habit in the list
+
+   Expected outcome: Priority level set to high successfully.
+
+    ```
+    ________________________________________________________________________________________________________________
+    The priority for your habit has been updated:
+       1.  [HIGH] vacuum the floor [count: 0]
+    ________________________________________________________________________________________________________________
+    ```   
+#### Sort habit list according to priority
+1. Testcase: `habit sort` without any habits in the list
+
+   Expected outcome: Message informing user that he have no habits to sort
+    ```
+    ________________________________________________________________________________________________________________
+    You have no habits to sort.
+    ________________________________________________________________________________________________________________
+    ```
+   
+2. Testcase: `habit sort` with habits in the list
+
+   Expected outcome: habit sorted successfully.
+    ```
+    ________________________________________________________________________________________________________________
+    Habits have been sorted according to priority.
+    Use `habit list` to view the updated list.
+    ________________________________________________________________________________________________________________
+    ```
+   
 ### Sleep Tracker component
 ### Focus Timer component
 ### Fitness Tracker component
