@@ -241,10 +241,14 @@ Format:
 habit list
 ```
 
+* Extraneous parameters will be ignored. For eg, `habit list 123` will be taken as `habit list`
+
+
 Example of usage:
 ```
 habit list
 ```
+
 Expected outcome:
 ```
 ________________________________________________________________________________________________________________
@@ -265,6 +269,7 @@ habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 ```
 
 * `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
+* `INCREMENT_COUNT` can be set to 0, but the habit count will remain the same.
 
 Example of usage (increasing count):
 ```
@@ -349,6 +354,8 @@ Format:
 ```
 habit sort
 ```
+
+* Extraneous parameters will be ignored. For eg, `habit sort 123` will be taken as `habit sort`
 
 Example of usage:
 ```
