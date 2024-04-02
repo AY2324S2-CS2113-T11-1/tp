@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant SleepTracker
+participant SleepTrackerStorage
+participant Storage
+participant ArrayList
+
+activate SleepTracker
+SleepTracker -> SleepTrackerStorage: calls saveSleepListToFile(ArrayList<SleepCycle> sleepList)
+activate SleepTrackerStorage
+create ArrayList
+SleepTrackerStorage -> ArrayList: null
+activate ArrayList
+ArrayList --> SleepTrackerStorage: ArrayList object
+loop until end of
+SleepTrackerStorage -> ArrayList: calls add(String)
+end
+SleepTrackerStorage -> Storage: Call saveTasksToFile(SLEEP_FILE_PATH, ArrayList)
+activate Storage
+
+@enduml
