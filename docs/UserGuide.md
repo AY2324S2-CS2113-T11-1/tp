@@ -416,7 +416,6 @@ sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 ```
 
 * The `sleep`, `/date` and `add` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -437,9 +436,6 @@ Format:
 ```
 sleep list
 ```
-
-* The `sleep` and `list` are case-sensitive.
-* Use lower casing for this command.
 
 Example of usage:
 ```
@@ -462,8 +458,6 @@ Format:
 sleep get [DATE_OF_SLEEP]
 ```
 
-* The `sleep` and `get` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -485,8 +479,6 @@ Format:
 sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]
 ```
 
-* The `sleep`, `update` and `/new` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -509,8 +501,6 @@ Format:
 sleep delete /date [DATE_OF_SLEEP]
 ```
 
-* The `sleep`, `delete` and `/date` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -532,8 +522,6 @@ Format:
 sleep delete /before [DATE_OF_SLEEP]
 ```
 
-* The `sleep`, `delete` and `/before` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -554,8 +542,6 @@ Format:
 sleep delete /from [START_DATE] /to [END_DATE]
 ```
 
-* The `sleep`, `delete`, `/from` and `/to` are case-sensitive.
-* Use lower casing for this command.
 * `START_DATE` and `END_DATE` must be of format dd/MM/yyyy
 
 Example of usage:
