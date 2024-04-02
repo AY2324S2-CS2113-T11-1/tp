@@ -20,13 +20,36 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`habit add` - Add a new habit](#add-a-new-habit-habit-add)
           - [`habit list` - List out all habits](#list-out-all-habits-habit-list)
           - [`habit update` - Update habit count after completing a habit](#update-habit-count-after-completing-a-habit-habit-update)
+          - [`habit delete` - Delete a habit](#delete-a-habit-habit-delete)
+          - [`habit set` - Set priority of habit](#set-priority-of-habit-habit-set)
+          - [`habit sort` - Sort habit tracker list](#sort-habit-tracker-list-habit-sort)
+          - [`habit help` - View habit tracker help menu](#view-habit-tracker-help-menu-habit-help)
         - Sleep Tracker
           - [`sleep add` - Add a new sleep cycle](#add-a-new-sleep-cycle-sleep-add)
           - [`sleep list` - List out all sleep cycles](#list-out-all-sleep-cycles-sleep-list)
+          - [`sleep get` - Get hours slept on specific date](#get-hours-slept-on-specific-date-sleep-get)
+          - [`sleep update` - Update hours slept on specific date](#update-hours-slept-on-specific-date)
+          - [`sleep delete` - Delete sleep cycles](#delete-sleep-cycles-sleep-delete)
+            - [Delete Sleep Cycle of a specific date](#delete-sleep-cycle-of-a-specific-date)
+            - [Delete Sleep Cycles before a specific date](#delete-sleep-cycles-before-a-specific-date)
+            - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
+          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
         - Focus Timer
+          - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
           - [`focus stop` - Stop the current focus timer](#stop-the-current-focus-timer-focus-stop)
-
+          - [`focus pause` - Pause the current focus timer](#pause-the-current-focus-timer-focus-pause)
+          - [`focus resume` - Resume the current focus timer](#resume-the-current-focus-timer-focus-resume)
+          - [`focus check` - Check time for focus timer](#check-time-for-focus-timer-focus-check)
+          - [`focus set` - Set focus time duration](#set-focus-timer-duration-focus-set)
+      - Fitness Motivator
+          - [`fitness get` - Get a pre-loaded list of different exercises](#get-a-list-of-exercises-fitness-get)
+          - [`fitness add` - Add new exercises into the list](#add-exercises-to-the-list-fitness-add)
+          - [`fitness delete` - Delete exercises from the list](#delete-exercises-from-the-list-fitness-delete)
+          - [`fitness goal` - Set exercise goals for the day](#set-exercise-goals-for-the-day-fitness-goal)
+          - [`fitness help` - View Fitness Motivator help menu](#view-fitness-motivator-help-menu-fitness-help)
+    - Command Summary
+    - FAQ
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -235,8 +258,8 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 Here is the list of all your habits!
-  1. vacuum and mop the floor [count: 2]
-  2. complete leetcode daily question [count: 3]
+  1. [LOW] vacuum and mop the floor [count: 2]
+  2. [LOW] complete leetcode daily question [count: 3]
 ________________________________________________________________________________________________________________
 ```
 
@@ -252,6 +275,7 @@ habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 
 * The `habit`, `list`, `id` and `by` are case-sensitive.
 * Use lower casing for this command.
+* `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
 
 Example of usage (increasing count):
 ```
@@ -264,7 +288,7 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 Good Job! You have completed your habit!
 The count for your habit has been updated:
-  2. complete leetcode daily question [count: 4]
+  2. [LOW] complete leetcode daily question [count: 4]
 ________________________________________________________________________________________________________________
 ```
 
@@ -278,7 +302,108 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 The count for your habit has been updated:
-  2. complete leetcode daily question [count: 2]
+  2. [LOW] complete leetcode daily question [count: 2]
+________________________________________________________________________________________________________________
+```
+
+### Delete a habit: `habit delete`
+Delete a habit from the habit tracker.
+
+Format:
+```
+habit delete /id <HABIT_ID>
+```
+
+* The `habit` and `delete` are case-sensitive.
+* Use lower casing for this command.
+* `HABIT_ID` have to be numerical.
+
+Example of usage:
+```
+habit delete /id 1
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Got it! I've removed this habit:
+   [LOW] vacuum and mop the floor [count: 2]
+Now you have 1 habit left in the list.
+________________________________________________________________________________________________________________
+```
+
+### Set priority of habit: `habit set`
+Set the priority of a habit (`HIGH`, `MED`, `LOW`). Priority of habits are initialised at LOW by default.
+
+Format:
+```
+habit set /id <HABIT_ID> /priority <PRIORITY_LEVEL>
+```
+
+* The `habit` and `set` are case-sensitive.
+* Use lower casing for this command.
+* `HABIT_ID` have to be numerical.
+* For `PRIORITY_LEVEL`, user can set as `HIGH`, `MED` OR `LOW` (not case-sensitive).
+
+Example of usage:
+```
+habit set /id 1 /priority HIGH
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+The priority for your habit has been updated:
+  1. [HIGH] complete leetcode daily question [count: 4]
+________________________________________________________________________________________________________________
+```
+
+### Sort habit tracker list: `habit sort`
+Sort the habits in the habit tracker list according to the habits' priority. 
+Habits with higher priority will be placed higher than those with lower priority.
+
+Format:
+```
+habit sort
+```
+
+* The `habit` and `sort` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit sort
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Habits have been sorted according to priority.
+________________________________________________________________________________________________________________
+```
+
+### View habit tracker help menu: `habit help`
+Allows new users to check what commands are available for habit tracker feature and their formats.
+
+Format:
+```
+habit help
+```
+
+* The `habit` and `help` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+habit help
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Commands for habit tracker feature:
+1. habit add <habit_description>: Add a new habit
+2. habit list: List out all existing habits
+3. habit update /id <habit_ID> /by <increment_count>: Increase habit count after completing a habit
+4. habit delete /id <habit_ID>: Delete a habit
+5. habit set /id <habit_ID> /priority <priority_level>: Set priority level for habits (HIGH, MED, LOW)
+6. habit sort: Sort habit list according to priority level
 ________________________________________________________________________________________________________________
 ```
 
@@ -292,15 +417,16 @@ sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 
 * The `sleep`, `/date` and `add` are case-sensitive.
 * Use lower casing for this command.
+* `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
 ```
-sleep add 7 /date 18/03/24
+sleep add 7 /date 18/03/2024
 ```
 Expected outcome:
 ```
 ________________________________________________________________________________________________________________
---- SleepCycle for 18/03/24 has been added ---
+--- SleepCycle for 18/03/2024 has been added ---
 ________________________________________________________________________________________________________________
 ```
 
@@ -323,13 +449,171 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 Total hrs slept: 15.0
-1. 27/01/12: 7.0
-2. 30/01/12: 8.0
+1. 27/01/2012: 7.0
+2. 30/01/2012: 8.0
 ________________________________________________________________________________________________________________
 ```
+
+### Get hours slept on specific date: `sleep get`
+Prints number of hours slept on specific date.
+
+Format:
+```
+sleep get [DATE_OF_SLEEP]
+```
+
+* The `sleep` and `get` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep get 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Hours slept on 27/01/2012: 7.0
+________________________________________________________________________________________________________________
+```
+
+### Update hours slept on specific date: `sleep update`
+Updates number of hours slept on specfic date.
+
+Format:
+```
+sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]
+```
+
+* The `sleep`, `update` and `/new` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep update 27/01/2012 /new 9
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Hours of sleep for 27/01/2012 has been updated from 7.0 to 9.0
+________________________________________________________________________________________________________________
+```
+
+### Delete sleep cycles: `sleep delete`
+
+#### Delete Sleep Cycle of a specific date:
+
+Format:
+```
+sleep delete /date [DATE_OF_SLEEP]
+```
+
+* The `sleep`, `delete` and `/date` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /date 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Sleep cycle for 27/01/2012 has been removed from list
+________________________________________________________________________________________________________________
+```
+Format:
+
+#### Delete Sleep Cycles before a specific date:
+
+Format:
+```
+sleep delete /before [DATE_OF_SLEEP]
+```
+
+* The `sleep`, `delete` and `/before` are case-sensitive.
+* Use lower casing for this command.
+* `DATE_OF_SLEEP` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /date 27/01/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+A total of 2 sleep cycles have been deleted
+________________________________________________________________________________________________________________
+```
+
+#### Delete Sleep Cycles within a range of dates:
+
+Format:
+```
+sleep delete /from [START_DATE] /to [END_DATE]
+```
+
+* The `sleep`, `delete`, `/from` and `/to` are case-sensitive.
+* Use lower casing for this command.
+* `START_DATE` and `END_DATE` must be of format dd/MM/yyyy
+
+Example of usage:
+```
+sleep delete /from 27/01/2012 /to 27/02/2012
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+A total of 5 sleep cycles have been deleted
+________________________________________________________________________________________________________________
+```
+
+### Save sleep cycles: `sleep save`
+Allow user to save sleep cycles in a text file located in `FILE_PATH: data/sleep.txt`
+
+Format:
+```
+sleep save
+```
+
+* The `sleep` and `save` are case-sensitive.
+* Use lower casing for this command.
+
+Example of usage:
+```
+sleep save
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Saved list to storage file
+________________________________________________________________________________________________________________
+```
+=======
+### Switch focus timer mode: `focus switch`
+Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose
+between count up timer and count down timer.
+
+Format:
+~~~
+focus switch
+~~~
+* The `focus` and `switch` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Switched to Count down timer
+________________________________________________________________________________________________________________
+~~~
+* Outcome depends on the current timer mode.
+* `focus switch` will be disable if a timer is currently running.
+
 ### Start a new focus timer: `focus start`
 Allow the user to start a new focus timer session. The user will be able
-to start the timer whenever they want and the application will keep track of the time. 
+to start the timer whenever they want and the application will keep track of the time.
 In addition, only 1 timer will run at a time, thus multiple uses of `focus start` is not allowed.
 
 Format:
@@ -340,13 +624,25 @@ focus start
 * Use lower casing for this command.
 
 Expected outcome:
+* Count up timer.
 ~~~
 ________________________________________________________________________________________________________________
 Your session has started. Time to grind!
 ________________________________________________________________________________________________________________
 ~~~
 
+* Count down timer.
+~~~
+________________________________________________________________________________________________________________
+Countdown timer started! 
+Duration set: 1 minute(s) 0 second(s)
+________________________________________________________________________________________________________________
+~~~
+
 ### Stop the current focus timer: `focus stop`
+> [!NOTE]
+> Countdown timer will automatically stop when the duration expires.
+>
 Allow users to stop a timer that is currently running. The users will be able to see the total
 time elapsed upon a successful stop.
 
@@ -358,7 +654,7 @@ focus stop
 * Use lower casing for this command.
 
 Expected outcome:
-* Depending on the total time spent, the output may differ.
+* Count up timer
 ~~~
 ________________________________________________________________________________________________________________
 Your focus session has ended.
@@ -367,14 +663,401 @@ To start a new session, use ‘focustimer start’
 ________________________________________________________________________________________________________________
 ~~~
 
-## FAQ
+* Count down timer
+* Timer will automatically stop if the duration expires. However, users will still be able to stop it manually
+~~~
+________________________________________________________________________________________________________________
+5 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+4 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+3 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+2 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+1 seconds left
+________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
+Count down timer completed!
+________________________________________________________________________________________________________________
+~~~
 
-**Q**: How do I transfer my data to another computer? 
+### Pause the current focus timer: `focus pause`
+Allow users to pause the timer momentarily while the timer is running.
 
-**A**: {your answer here}
+Format:
+~~~
+focus pause
+~~~
+* The `focus` and `pause` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Count up timer paused.
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Timer paused. 
+Remaining time: 0 minutes 56 seconds
+________________________________________________________________________________________________________________
+~~~
+### Resume the current focus timer: `focus resume`
+Allow users to resume the paused timer.
+
+Format:
+~~~
+focus resume
+~~~
+* The `focus` and `resume` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Count up timer resumed
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Countdown timer resumed.
+________________________________________________________________________________________________________________
+~~~
+
+### Check time for focus timer: `focus check`
+Allow users to check the total time elapsed or total time remaining, depending on the mode of the timer.
+
+Format:
+~~~
+focus check
+~~~
+* The `focus` and `check` are case-sensitive.
+* Use lower casing for this command.
+
+Expected outcome:
+* Count up timer
+~~~
+________________________________________________________________________________________________________________
+Total time elapsed: 
+0 hours, 0 minutes, 8 seconds
+________________________________________________________________________________________________________________
+~~~
+
+* Count down timer
+~~~
+________________________________________________________________________________________________________________
+Remaining time: 
+0 minutes 54 seconds left.
+________________________________________________________________________________________________________________
+~~~
+
+### Set focus timer duration: `focus set`
+> Using `focus set` command only affects count down timer.
+>
+
+Allow users to set the desired countdown timer duration for the session.
+
+Format:
+~~~
+focus set [minutes]
+~~~
+* The `focus` and `set` are case-sensitive.
+* Use lower casing for this command.
+* Input `minutes` must be in numerical form and can be more than 60.
+* Example: *120 minutes implies 2 hours*
+
+Example of usage:
+~~~
+focus set 10
+~~~
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Countdown duration has been set to 10 minute(s)
+________________________________________________________________________________________________________________
+
+~~~
+
+### Get a list of exercises: `fitness get`
+Prints a list of exercises. If no parameters are specified, 5 different exercises from 5 different types of exercises 
+targeting different body parts. If the exercise type is specified, only exercises matching that type will be shown.
+
+Format:
+```
+fitness get [EXERCISE_TYPE]
+```
+
+* The `fitness` and `get` are case-sensitive. Use lower casing.
+* Running the command with no parameters will generate different exercises with each repeated command, but there should be one exercise from
+  each type
+* The `[EXERCISE_TYPE]` parameter is optional, and only supports the following types:
+  * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
+
+Example of usage (getting exercises of a certain type):
+~~~
+fitness get
+~~~
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+These are some of the exercises you can do! LETS GET STRONK MY G
+
+1. Arms: Skullcrushers, 3 sets & 8 reps
+2. Chest: Cable Flies, 3 sets & 8 reps
+3. Abs: Crunches, 5 sets & 20 reps
+4. Back: Lateral Rows, 3 sets & 8 reps
+5. Legs: Leg Press, 3 sets & 8 reps
+
+________________________________________________________________________________________________________________
+```
+Example of usage:
+~~~
+fitness get arms
+~~~
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Here are the Arms exercises as requested!
+
+1. Arms: Cable Triceps Push down, 3 sets & 8 reps
+2. Arms: Barbell Curls, 3 sets & 8 reps
+3. Arms: Preacher Curls, 3 sets & 8 reps
+4. Arms: Skullcrushers, 3 sets & 8 reps
+5. Arms: Lateral Raises, 3 sets & 8 reps
+________________________________________________________________________________________________________________
+
+```
+
+
+### Add exercises to the list: `fitness add`
+Allows the user to add their own exercises to the list of exercises.
+
+Format:
+```
+fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
+```
+
+* The `fitness` and `add` are case-sensitive.
+* Use of comma between each parameter is required.
+* The `[EXERCISE_TYPE]` parameter only supports the following types:
+  * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
+
+Example of usage:
+```
+fitness add Arms, Tricep Dips, 8, 10
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+I have added the following exercise into our list!
+Arms: Tricep Dips, 8 sets & 10 reps
+________________________________________________________________________________________________________________
+```
+
+### Delete exercises from the list: `fitness delete`
+Allows the user to delete exercises from the list of exercises.
+
+Format:
+```
+fitness delete [EXERCISE_TYPE] [INDEX]
+```
+
+* The `fitness` and `delete` are case-sensitive.
+* The `[EXERCISE_TYPE]` parameter only supports the following types:
+    * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
+* Use the `fitness get [EXERCISE_TYPE]` command to find out the indexes of the respective exercises
+* The printed list of exercises reflects the list of exercises left that are of the same type as the exercise deleted.
+
+Example of usage:
+```
+fitness delete arms 6
+```
+Expected Outcome:
+```
+________________________________________________________________________________________________________________
+ I have deleted the exercise. Here are the exercises left in the list!
+
+1. Arms: Cable Triceps Push down, 3 sets & 8 reps
+2. Arms: Barbell Curls, 3 sets & 8 reps
+3. Arms: Preacher Curls, 3 sets & 8 reps
+4. Arms: Skullcrushers, 3 sets & 8 reps
+5. Arms: Lateral Raises, 3 sets & 8 reps
+________________________________________________________________________________________________________________
+
+```
+
+### Set exercise goals for the day: `fitness goal`
+Allows the user to create, track and mark a list of exercise goals.
+
+Formats:
+```
+fitness goal
+fitness goal new
+fitness goal [INDEX]
+```
+
+* The `fitness` and `goal` are case-sensitive.
+* Running the command with no parameters will generate different exercises goals with each repeated command.
+* Use the `fitness goal` command to find out the indexes of the respective exercises goals.
+* Use the `fitness goal new` command to get a new randomised list of five exercise goals.
+* Running `fitness goal new` will always override any previously set goals.
+* Use the `fitness goal [INDEX]` command to mark/unmark a specific goal. 
+* Only `new` and `[INDEX]` are accepted as parameters, where `[INDEX]` is an integer value. The parameters are optional as well.
+
+Example of usage :
+```
+fitness goal
+```
+
+Expected outcome (If there are no current goals):
+```
+________________________________________________________________________________________________________________
+There are no goals set :(
+
+You can set one by doing 'goal new'!
+________________________________________________________________________________________________________________
+```
+
+Expected outcome (If there are goals already set):
+```
+________________________________________________________________________________________________________________
+Lets get working on today's exercises!
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+Example of usage :
+```
+fitness goal new
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Lets get working on today's exercises!
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+Example of usage:
+```
+fitness goal 3
+```
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+I see there are changes. I hope you are making progress...
+
+1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+2. [ ] Chest: Wide Arm Push-up, 3 sets & 15 reps
+3. [X] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+4. [ ] Back: Weighted Pull Ups, 3 sets & 6 reps
+5. [ ] Legs: Calf Raises, 3 sets & 10 reps
+
+________________________________________________________________________________________________________________
+```
+
+### View Fitness Motivator help menu: `fitness help`
+Allows the user to see a list of available commands that can be executed under the FitnessMotivator.
+
+Format:
+```
+fitness help
+```
+
+* The `fitness` and `help` are case-sensitive.
+
+Example of usage:
+```
+fitness help
+```
+Expected Outcome:
+```
+________________________________________________________________________________________________________________
+Here is a list of possible commands you can use with the Fitness Motivator!
+
+1. fitness get: Get 5 random reflection questions
+2. fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type
+3. fitness add <exercise_type>, <exercise_name>, <sets>, <reps>: add an exercise to the list of exercises
+4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.The index is based on the index when you run 'fitness get <exercise_type>
+5. fitness goal: Retrieves the status of all current goals, if it exists
+6. fitness goal new: Overwrites current goals with new set of goals if it exists, otherwise creates a brand new set of goals
+7. fitness goal <index>: Toggle the status of the goal
+8. fitness help: Get help menu for reflect commands
+________________________________________________________________________________________________________________
+```
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+This section serves as a cheatsheet for commands.
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+| **Command**                                                                        | **Description**                               |
+|------------------------------------------------------------------------------------|-----------------------------------------------|
+| `reflect get`                                                                      | get 5 random reflection questions             |
+| `reflect save [QUESTION_ID]`                                                       | Save favourite reflection question            |
+| `reflect unsave [QUESTION_ID]`                                                     | Unsave favourite reflection question          |
+| `reflect list`                                                                     | View favourite reflection questions           |
+| `reflect help`                                                                     | View reflection help menu                     |
+| `habit add [HABIT_DESCRIPTION]`                                                    | Add a new habit                               |
+| `habit list`                                                                       | List out all habits                           |
+| `habit update /id [HABIT_ID] /by [INCREMENT_COUNT]`                                | Update habit count after completing a habit   |
+| `habit delete /id [HABIT_ID]`                                                      | Delete a habit                                |
+| `habit set /id [HABIT_ID] /priority [PRIORITY_LEVEL]`                              | Set priority of habit                         |
+| `habit sort`                                                                       | Sort habit tracker list                       |
+| `habit help`                                                                       | View habit tracker help menu                  |
+| `sleep add [HOURS_SLEPT] /date [DATE_SLEPT]`                                       | Add a new sleep cycle                         |
+| `sleep list `                                                                      | List out all sleep cycles                     |
+| `sleep get [DATE_OF_SLEEP]`                                                        | Get hours slept on specific date              |
+| `leep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]`                                | Update hours slept on specific date           |
+| `sleep delete /date [DATE_OF_SLEEP]`                                               | Delete Sleep Cycle of a specific date         |
+| `sleep delete /before [DATE_OF_SLEEP]`                                             | Delete Sleep Cycles before a specific date    | 
+| `sleep delete /from [START_DATE] /to [END_DATE]`                                   | Delete Sleep Cycles within a range of dates   | 
+| `sleep save`                                                                       | Save sleep cycles                             |
+| `focus switch`                                                                     | Switch focus timer mode                       |
+| `focus start`                                                                      | Start a new focus timer                       |
+| `focus stop`                                                                       | Stop the current focus timer                  |
+| `focus pause`                                                                      | Pause the current focus timer                 |
+| `focus resume`                                                                     | Resume the current focus timer                |
+| `focus check`                                                                      | Check time for focus timer                    |
+| `focus set [MINUTES]`                                                              | Set focus time duration                       |
+| `fitness get [EXERCISE_TYPE]`                                                      | Get a pre-loaded list of different exercises  |
+| `fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]` | Add new exercises into the list               |
+| `fitness delete [EXERCISE_TYPE] [INDEX]`                                           | Delete exercises from the list                |
+| `fitness goal`, `fitness goal new`, `fitness goal [INDEX]`                         | Set exercise goals for the day                |
+| `fitness help`                                                                     | View Fitness Motivator help menu              |
+
+## FAQ
+
+**Q**: How do I transfer my data to another computer?
+
+**A**: After first time usage, if any data was saved during the session, it will be stored as text files under docs folder. Copy it over to
+another computer if you wish.

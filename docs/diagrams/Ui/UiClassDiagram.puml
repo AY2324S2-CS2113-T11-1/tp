@@ -1,0 +1,48 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+package ui {
+    class Ui {
+        - {static} SEP: String
+        + {static} greetUser(): void
+        + {static} promptUserInput(): void
+        + {static} sayGoodbye(): void
+        + {static} printMessageWithSepNewLine(message: String): void
+        + {static} printMessageWithoutNewLine(message: String): void
+        + {static} printList(list: ArrayList, message: String): void
+    }
+}
+
+package fitness {
+    class FitnessMotivator {
+    }
+}
+
+package focus {
+    class FocusTimer {
+    }
+}
+
+package habit {
+    class HabitTracker {
+    }
+}
+
+package reflection {
+    class ReflectionManager {
+    }
+}
+
+package sleep {
+    class SleepTracker {
+    }
+}
+
+FitnessMotivator ..> Ui : uses >
+focus ..> Ui : uses >
+habit ..> Ui : uses >
+reflection ..> Ui : uses >
+sleep ..> Ui : uses >
+
+@enduml

@@ -3,7 +3,10 @@ package parser;
 import commands.Command;
 import commands.habitcommands.AddHabitCommand;
 import commands.habitcommands.DeleteHabitCommand;
+import commands.habitcommands.HabitHelpCommand;
 import commands.habitcommands.ListHabitsCommand;
+import commands.habitcommands.SetPriorityCommand;
+import commands.habitcommands.SortHabitsCommand;
 import commands.habitcommands.UpdateHabitCountCommand;
 import exceptions.HabitException;
 import habit.HabitTracker;
@@ -14,6 +17,8 @@ import habit.HabitTracker;
  * Generates the respective Command objects to be executed, based on the parsed command keyword.
  */
 public class HabitCommandParser {
+    private static final int COMMAND_LENGTH = 2;
+
     /**
      * Parses user input into command and details, and creates the corresponding habit command objects.
      *
@@ -26,7 +31,7 @@ public class HabitCommandParser {
         String[] userCommand = commandArgs.trim().split("\\s+", 2);
         String userHabitCommand = userCommand[0].trim();
 
-        String habitCommandArgs = userCommand.length == 2 ? userCommand[1].trim() : "";
+        String habitCommandArgs = userCommand.length == COMMAND_LENGTH ? userCommand[1].trim() : "";
 
         switch(userHabitCommand) {
         case "add":
@@ -37,6 +42,12 @@ public class HabitCommandParser {
             return new UpdateHabitCountCommand(habitTracker, habitCommandArgs);
         case "delete":
             return new DeleteHabitCommand(habitTracker, habitCommandArgs);
+        case "set":
+            return new SetPriorityCommand(habitTracker, habitCommandArgs);
+        case "sort":
+            return new SortHabitsCommand(habitTracker);
+        case "help":
+            return new HabitHelpCommand();
         default:
             throw new HabitException("Unknown command");
         }
