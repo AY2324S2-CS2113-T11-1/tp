@@ -5,6 +5,8 @@ skinparam classAttributeIconSize 0
 
 package parser {
     class SleepCommandParser {
+
+    +determineSleepCommand(sleepTracker: SleepTracker, commandArgs: String)
     }
 
     class Parser {
@@ -46,10 +48,10 @@ package command {
 }
 
 package sleep {
-    interface "<<interface>>\nComparable" as Comparable {
+    interface "<<interface>>\nComparable" as Comparable<SleepCycle> {
     }
 
-    class SleepCycle implements Comparable{
+    class SleepCycle implements Comparable {
         - hoursSlept: double
         - dateOfSleep: LocalDate
 
@@ -104,6 +106,7 @@ SleepCommandParser .DOWN.> ListSleepCommand : creates >
 SleepCommandParser .DOWN.> SaveSleepCommand : creates >
 SleepCommandParser .DOWN.> UpdateSleepCommand : creates >
 SleepCommandParser .DOWN.> GetSleepCommand : creates >
+SleepCommandParser ..> SleepTracker
 
 AddSleepCommand --> SleepTracker : uses >
 DeleteSleepCommand --> SleepTracker : uses >
@@ -114,9 +117,9 @@ SaveSleepCommand --> SleepTracker : uses >
 UpdateSleepCommand --> SleepTracker : uses >
 
 
-SleepCycleList --> Ui : uses >
+SleepCycleList ..> Ui : uses >
 SleepTracker *--> "1" SleepCycleList: contains >
-SleepTracker --> SleepTrackerStorage : uses >
+SleepTracker ..> SleepTrackerStorage : uses >
 
 SleepCycleList *-- "*" SleepCycle : contains
 

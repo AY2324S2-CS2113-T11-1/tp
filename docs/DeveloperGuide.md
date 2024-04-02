@@ -12,6 +12,13 @@
   - [Ui component]()
   - [Command parser component]()
   - [Storage component]()
+    - [Description](#description)
+    - [Design Considerations](#design-considerations)
+      - [User Design Considerations](#user-design-considerations)
+      - [Developer Design Considerations](#developer-design-considerations)
+    - [Implementation](#implementation)
+      - [Class Diagram](#class-diagram)
+      - [Sequence Diagram](#sequence-diagram)
   - [Reflection component](#reflection-component)
     - [Description](#description)
     - [Design Considerations](#design-considerations)
@@ -126,6 +133,89 @@ The `Ui` class is created to standardise the output formatting of messages to be
 ### Command parser component
 
 ### Storage component
+#### Description
+The Storage component deals with the storage of all the data collected from the other components in the hard disk 
+in the form of text files so that data can be loaded from the hard disk when Wellness360 starts up.
+
+#### Design Considerations
+* ##### User Design Considerations
+  * File path for storage of data should all be in the folder /data for ease of locating the storage files
+  * Storage data can be easily read with the use of comma separated values
+
+* #### Developer Design Considerations
+  * SRP: Classes adhere to the Single Responsibility Principle. For example, Storage class is specifically for creating/
+  writing/reading of files, while HabitTrackerStorage/SleepTrackerStorage deals with the processing of data for storage 
+  and reading for their individual components
+  * Readability and Maintainability: Ensure there are no magic numbers used. For example, use of constants for 
+  information position in the text file.
+  * Exception Handling: Graceful error handling with meaningful messages.
+
+#### Implementation
+
+##### Class Diagram
+![StorageClassDiagram.png](diagrams/storage/StorageClassDiagram.png)
+
+* `Storage` class:
+  * Overview
+    * The `Storage` class is in charge of saving/loading of data.
+  * Methods
+    * `loadDataFromFile(String filepath)`: Stores lines in text file into an array of Strings.
+    * `createFolder(String filepath)`: Creates text file and folder to store file in.
+    * `saveTasksToFile(String filepath, ArrayList<T> data)`: Write data into text file
+    * `isFileCreated(String filepath)`: Checks if file has been created
+
+* `HabitTrackerStorage` class:
+  * Overview
+    * The `HabitTrackerStorage` class converts data into comma separated values and stores it in a text file.
+  * Attributes
+    * `HABIT_FILE_PATH`: File path for storage of habit list
+    * `COMMA_SEPARATION`: Separator to be placed between each data value
+    * `DATA_SIZE`: Number of values in a data point (Habit)
+  * Methods
+    * `saveHabitListToFile(ArrayList<Habit> habitList)`: Saves habit list into a text file.
+    * `loadHabitListFromFile()`: Loads habit list from a text file.
+  * Dependencies
+    * Storage: reading/writing/creating files
+  * UML Notes:
+    * It relies on `Storage` class for reading and writing of files
+
+* `SleepTrackerStorage`
+    * Overview
+        * The `SleepTrackerStorage` class converts data into comma separated values and stores it in a text file.
+    * Attributes
+      * `SLEEP_FILE_PATH`: File path for storage of sleep cycles
+      * `ERROR_MESSAGE`: Message to be print when file is corrupted
+      * `HOURS_POS`: position of hours parameter in comma separated values
+      * `DATE_POS`: position of date parameter in comma separated valuees
+    * Methods
+        * `saveSleepListToFile(ArrayList<SleepCycle> sleepList)`: Saves sleep list into a text file.
+        * `loadSleepListFromFile()`: Loads sleep list from a text file.
+    * Dependencies
+        * Storage: reading/writing/creating files
+    * UML Notes:
+        * It relies on `Storage` class for reading and writing of files
+
+
+
+##### Sequence Diagram 
+
+##### Loading Data Sequence Diagram
+![StorageSequenceDiagramSleep.png](diagrams/storage/StorageSequenceDiagramSleep.png)
+
+* Note: HabitTrackerStorage works in a similar way as SleepTrackerStorage
+
+When `Main` starts, `SleepTracker` object is created. `SleepTrackerStorage loadSleepListFromFile()` method is called to 
+Begin loading sleep cycles from text file. `SleepCycleList` is returned to `SleepTracker` class and Sleep Tracker class 
+is successfully instantiated.
+
+##### Saving Data Sequence Diagram
+![StorageSequenceSleep.png](diagrams/storage/StorageSequenceSleep.png)
+
+* Note: HabitTrackerStorage works in a similar way as SleepTrackerStorage
+
+When `SleepTracker` executes `saveSleepListToFile` method from `SleepTrackerStorage` class, `ArrayList<String>` is 
+created and after successfully converting sleepCycleList to String format, SleepTrackerStorage then calls 
+`saveTasksToFile` from `Storage` class to write data into text file.
 
 ### Reflection component
 #### Description

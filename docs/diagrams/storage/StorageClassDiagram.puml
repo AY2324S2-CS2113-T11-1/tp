@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam classAttributeIconSize 0
+
+class Storage {
+    +<u>loadDataFromFile(filePath: String): ArrayList<String></u>
+    +<u>createFolder(filePath: String)</u>
+    +<u>saveTasksToFile(filePath:String, data:ArrayList<T>)</u>
+    +<u>isFileCreated(filePath: String): boolean</u>
+}
+
+class HabitTrackerStorage {
+    <<constant>> -<u>HABIT_FILE_PATH: String</u>
+    <<constant>> -<u>COMMA_SEPARATION: String</u>
+    <<constant>> -<u>DATA_SIZE: int</u>
+
+    +<u>saveHabitListToFile(habitList: ArrayList<Habit>)</u>
+    +<u>loadHabitListFromFile(): ArrayList<Habit></u>
+}
+
+class SleepTrackerStorage {
+     <<constant>> -<u>SLEEP_FILE_PATH: String</u>
+     <<constant>> -<u>ERROR_MESSAGE: String</u>
+     <<constant>> -<u>HOURS_POS: int</u>
+     <<constant>> -<u>DATE_POS: int</u>
+
+     +<u>saveSleepListToFile(sleepList: ArrayList<SleepCycle>)</u>
+     +<u>loadSleepListFromFile(): SleepCycleList</u>
+}
+
+HabitTrackerStorage ..> Storage : uses >
+SleepTrackerStorage ..> Storage : uses >
+
+@enduml
