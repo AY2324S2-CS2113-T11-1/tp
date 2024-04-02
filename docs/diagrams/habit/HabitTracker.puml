@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam classAttributeIconSize 0
+
+package parser {
+    class HabitCommandParser {
+    }
+
+    class Parser {
+    }
+}
+
+package command {
+    interface "<<interface>>\nCommand" as Command {
+               + execute(): void
+               + isExit(): boolean
+    }
+
+    class HabitCommand implements Command {
+    }
+    note top of HabitCommand: Could represent: \n1. AddHabitCommand \n2. DeleteHabitCommand \n3. ListHabitsCommand \n4. SetPriorityCommand \n5. SortHabitsCommand \n6. UpdateHabitCountCommand \n7. HabitHelpCommand
+}
+
+Package habit {
+    class HabitTracker {
+        - habitList: ArrayList<habit>
+
+        + HabitTracker()
+        + getNumberOfHabits(): int
+        + addHabit(newHabit: Habit): void
+        + listHabits(): void
+        + isValidHabitID(habitID: int): boolean
+        + updateHabitCount(habitID: int, updatedCount: String): void
+        + deleteHabit(habitID: int): void
+        + setPriorityLevel(habitID: int, priority String): void
+        + sortHabits(): void
+        + clearHabitList(): void
+    }
+
+    class Habit {
+        - description: String
+        - habitCount: int
+        - priority: Priority
+
+        + Habit(description: String)
+        + Habit(description: String, habitCount: int, priority: Priority)
+        + getDescription(): String
+        + getHabitCount(): int
+        + getPriority(): Priority
+        + updateCount(updatedCount: String): int
+        + setPriority(priority: String): void
+    }
+
+    enum Priority {
+      HIGH
+      MED
+      LOW
+    }
+}
+
+Package storage {
+    class Storage {
+    }
+
+    class HabitTrackerStorage {
+        + saveHabitListToFile(habitList: ArrayList<Habit>): void
+        + loadHabitListFromFile(): ArrayList<Habit>
+    }
+}
+
+class Ui {
+}
+
+HabitTracker *-- "*" Habit : contains >
+Habit ..> Priority : uses >
+
+HabitTracker ..> HabitTrackerStorage : uses >
+HabitTrackerStorage ..> Storage : uses >
+HabitTracker ..> Ui : uses >
+
+Parser ..> HabitCommandParser : creates >
+HabitCommandParser .DOWN.> HabitCommand : creates >
+
+HabitCommand --> HabitTracker : uses >
+
+
+
+
+@enduml
+

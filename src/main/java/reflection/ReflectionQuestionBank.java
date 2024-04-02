@@ -77,7 +77,6 @@ public class ReflectionQuestionBank extends ReflectionList{
             ReflectionQuestion reflectionQuestion = new ReflectionQuestion(question);
             addReflectionQuestion(reflectionQuestion);
         }
-
         assert !reflectionList.isEmpty() : "Reflection question bank should not be empty";
     }
 

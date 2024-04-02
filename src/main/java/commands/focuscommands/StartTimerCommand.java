@@ -16,11 +16,11 @@ public class StartTimerCommand implements Command {
      * @param timer FocusTimer object to be started.
      */
     public StartTimerCommand(FocusTimer timer) {
-        this.focusTimer = timer;
+        focusTimer = timer;
     }
 
     /**
-     * Executes the command bye setting the start timing of the timer.
+     * Executes the command by setting the start timing of the timer.
      *
      * @throws FocusException If the status of focus timer is already running.
      */

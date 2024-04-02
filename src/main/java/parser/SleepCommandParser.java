@@ -2,8 +2,10 @@ package parser;
 
 import commands.Command;
 import commands.sleepcommands.AddSleepCommand;
+import commands.sleepcommands.DeleteSleepCommand;
 import commands.sleepcommands.GetSleepCommand;
 import commands.sleepcommands.ListSleepCommand;
+import commands.sleepcommands.SaveSleepCommand;
 import commands.sleepcommands.UpdateSleepCommand;
 import exceptions.SleepException;
 import sleep.SleepTracker;
@@ -38,6 +40,10 @@ public class SleepCommandParser {
             return new GetSleepCommand(sleepTracker, sleepCommandArgs);
         case "update":
             return new UpdateSleepCommand(sleepTracker, sleepCommandArgs);
+        case "delete":
+            return new DeleteSleepCommand(sleepTracker, sleepCommandArgs);
+        case "save":
+            return new SaveSleepCommand(sleepTracker, sleepCommandArgs);
         default:
             throw new SleepException("Unknown sleep command");
         }

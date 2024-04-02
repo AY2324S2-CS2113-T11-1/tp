@@ -16,6 +16,7 @@ import static parser.FocusCommandParser.determineFocusCommand;
 import exceptions.Wellness360Exception;
 
 public class Parser {
+    private static final int COMMAND_LENGTH = 2;
 
     public static Command determineCommand(SleepTracker sleepTracker,
                                            ReflectionManager reflection,
@@ -25,10 +26,11 @@ public class Parser {
                                            String userInput)
             throws Wellness360Exception {
 
+        userInput = userInput.toLowerCase();
         String[] userWords = userInput.trim().split("\\s+", 2);
         String userCommandSection = userWords[0];
 
-        String commandArgs = userWords.length == 2 ? userWords[1] : "";
+        String commandArgs = userWords.length == COMMAND_LENGTH ? userWords[1] : "";
 
         switch (userCommandSection) {
         case "reflect":
@@ -42,7 +44,7 @@ public class Parser {
         case "focus":
             return determineFocusCommand(focusTimer, commandArgs);
         case "exit":
-            return new ExitCommand(commandArgs);
+            return new ExitCommand(focusTimer, commandArgs);
         default:
             throw new Wellness360Exception("Unknown Wellness360 command");
         }
