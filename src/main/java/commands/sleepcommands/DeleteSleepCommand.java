@@ -105,7 +105,13 @@ public class DeleteSleepCommand implements Command {
     private void deleteSleepBetween(String sleepCommandArgs) throws SleepException {
         deleteMode = DeleteMode.BETWEEN;
         String[] userCommandStart = sleepCommandArgs.trim().split("/from", 2);
+        if (userCommandStart.length == 1) {
+            throw new SleepException(ERROR_MESSAGE);
+        }
         String[] userCommandEnd = userCommandStart[1].trim().split("/to", 2);
+        if (userCommandEnd.length == 1) {
+            throw new SleepException(ERROR_MESSAGE);
+        }
         if (!userCommandStart[0].isBlank() || userCommandStart.length != 2 || userCommandEnd.length != 2) {
             throw new SleepException(ERROR_MESSAGE);
         }
