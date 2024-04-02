@@ -17,7 +17,7 @@ public class SetTimingCommand implements Command {
      * @throws FocusException If the input duration is invalid
      */
     public SetTimingCommand(FocusTimer timer, String userInput) throws FocusException {
-        this.focusTimer = timer;
+        focusTimer = timer;
         String[] parts = userInput.trim().split("\\s", 2);
 
         try {

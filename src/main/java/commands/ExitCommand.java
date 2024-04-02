@@ -10,7 +10,7 @@ public class ExitCommand implements Command {
         if (!commandArgs.isEmpty()) {
             throw new Wellness360Exception("Unknown command");
         }
-        this.focustimer = timer;
+        focustimer = timer;
     }
 
     @Override

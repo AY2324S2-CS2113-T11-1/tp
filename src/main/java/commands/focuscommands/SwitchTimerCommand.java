@@ -17,7 +17,7 @@ public class SwitchTimerCommand implements Command {
      * @param timer FocusTimer object to be stopped.
      */
     public SwitchTimerCommand(FocusTimer timer) {
-        this.focusTimer = timer;
+        focusTimer = timer;
     }
 
     /**
