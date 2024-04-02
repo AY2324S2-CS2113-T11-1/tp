@@ -574,6 +574,7 @@ ________________________________________________________________________________
 ~~~
 * Outcome depends on the current timer mode.
 * `focus switch` will be disable if a timer is currently running.
+* Extraneous parameters for this command will be ignored. For example: `focus switch 123` will be taken as `focus switch`.
 
 ### Start a new focus timer: `focus start`
 Allow the user to start a new focus timer session. The user will be able
@@ -584,6 +585,7 @@ Format:
 ~~~
 focus start
 ~~~
+* Extraneous parameters for this command will be ignored. For example: `focus start 123` will be taken as `focus start`.
 
 Expected outcome:
 * Count up timer.
@@ -612,6 +614,8 @@ Format:
 ~~~
 focus stop
 ~~~
+
+* Extraneous parameters for this command will be ignored. For example: `focus stop 123` will be taken as `focus stop`.
 
 Expected outcome:
 * Count up timer
@@ -654,6 +658,8 @@ Format:
 focus pause
 ~~~
 
+* Extraneous parameters for this command will be ignored. For example: `focus pause 123` will be taken as `focus pause`.
+
 Expected outcome:
 * Count up timer
 ~~~
@@ -671,6 +677,8 @@ ________________________________________________________________________________
 ~~~
 ### Resume the current focus timer: `focus resume`
 Allow users to resume the paused timer.
+
+* Extraneous parameters for this command will be ignored. For example: `focus resume 123` will be taken as `focus resume`.
 
 Format:
 ~~~
@@ -699,6 +707,8 @@ Format:
 ~~~
 focus check
 ~~~
+
+* Extraneous parameters for this command will be ignored. For example: `focus check 123` will be taken as `focus check`.
 
 Expected outcome:
 * Count up timer
@@ -729,6 +739,7 @@ focus set [minutes]
 ~~~
 * Input `minutes` must be in numerical form and can be more than 60.
 * Example: *120 minutes implies 2 hours*
+* Extraneous parameters for this command will be ignored. For example: `focus set 10 123` will be taken as `focus set 10`.
 
 Example of usage:
 ~~~
