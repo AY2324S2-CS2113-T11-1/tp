@@ -800,7 +800,6 @@ Format:
 fitness get [EXERCISE_TYPE]
 ```
 
-* The `fitness` and `get` are case-sensitive. Use lower casing.
 * Running the command with no parameters will generate different exercises with each repeated command, but there should be one exercise from
   each type
 * The `[EXERCISE_TYPE]` parameter is optional, and only supports the following types:
@@ -852,7 +851,6 @@ Format:
 fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
 ```
 
-* The `fitness` and `add` are case-sensitive.
 * Use of comma between each parameter is required.
 * The `[EXERCISE_TYPE]` parameter only supports the following types:
   * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
@@ -878,7 +876,6 @@ Format:
 fitness delete [EXERCISE_TYPE] [INDEX]
 ```
 
-* The `fitness` and `delete` are case-sensitive.
 * The `[EXERCISE_TYPE]` parameter only supports the following types:
     * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
 * Use the `fitness get [EXERCISE_TYPE]` command to find out the indexes of the respective exercises
@@ -912,7 +909,6 @@ fitness goal new
 fitness goal [INDEX]
 ```
 
-* The `fitness` and `goal` are case-sensitive.
 * Running the command with no parameters will generate different exercises goals with each repeated command.
 * Use the `fitness goal` command to find out the indexes of the respective exercises goals.
 * Use the `fitness goal new` command to get a new randomised list of five exercise goals.
@@ -993,8 +989,6 @@ Format:
 ```
 fitness help
 ```
-
-* The `fitness` and `help` are case-sensitive.
 
 Example of usage:
 ```
