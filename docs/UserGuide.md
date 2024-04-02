@@ -122,7 +122,7 @@ reflect save [QUESTION_ID]
 * Questions that can be saved correspond to the most recent list of generated questions.
 * Users need to generate questions before attempting to save it to favourites, otherwise an error message will prompt user to generate questions first.
 * `QUESTION_ID` only accepts integers between 1 and 5 inclusive as each list of newly generated questions only contains 5 questions.
-
+* Saving duplicate questions are not allowed, any attempts to do so will result in an error message reminding users that duplicate questions are not allowed.
 
 Example of usage (After generating questions first):
 ```
