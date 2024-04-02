@@ -221,9 +221,6 @@ Format:
 habit add [HABIT_DESCRIPTION]
 ```
 
-* The `habit` and `add` are case-sensitive.
-* Use lower casing for this command.
-
 Example of usage:
 ```
 habit add vacuum and mop the floor
@@ -243,9 +240,6 @@ Format:
 ```
 habit list
 ```
-
-* The `habit` and `list` are case-sensitive.
-* Use lower casing for this command.
 
 Example of usage:
 ```
@@ -270,8 +264,6 @@ Format:
 habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 ```
 
-* The `habit`, `list`, `id` and `by` are case-sensitive.
-* Use lower casing for this command.
 * `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
 
 Example of usage (increasing count):
@@ -311,8 +303,6 @@ Format:
 habit delete /id <HABIT_ID>
 ```
 
-* The `habit` and `delete` are case-sensitive.
-* Use lower casing for this command.
 * `HABIT_ID` have to be numerical.
 
 Example of usage:
@@ -336,8 +326,6 @@ Format:
 habit set /id <HABIT_ID> /priority <PRIORITY_LEVEL>
 ```
 
-* The `habit` and `set` are case-sensitive.
-* Use lower casing for this command.
 * `HABIT_ID` have to be numerical.
 * For `PRIORITY_LEVEL`, user can set as `HIGH`, `MED` OR `LOW` (not case-sensitive).
 
@@ -362,9 +350,6 @@ Format:
 habit sort
 ```
 
-* The `habit` and `sort` are case-sensitive.
-* Use lower casing for this command.
-
 Example of usage:
 ```
 habit sort
@@ -373,6 +358,7 @@ Expected outcome:
 ```
 ________________________________________________________________________________________________________________
 Habits have been sorted according to priority.
+Use `habit list` to view the updated list.
 ________________________________________________________________________________________________________________
 ```
 
@@ -383,9 +369,6 @@ Format:
 ```
 habit help
 ```
-
-* The `habit` and `help` are case-sensitive.
-* Use lower casing for this command.
 
 Example of usage:
 ```
