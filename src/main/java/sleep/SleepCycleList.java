@@ -85,7 +85,7 @@ public class SleepCycleList {
         int numberOfDeletion = 0;
         while (startId < numberOfCycles) {
             SleepCycle currSleepCycle = sleepCycleList.get(startId);
-            if (startDate.isBefore(currSleepCycle.getDateOfSleep())) {
+            if (startDate.isAfter(currSleepCycle.getDateOfSleep())) {
                 startId++;
             } else {
                 break;
@@ -135,7 +135,7 @@ public class SleepCycleList {
                 Ui.printMessageWithSepNewLine("Hours slept on " + DateFormat.convertDateToString(date)
                         + ": " + currSleep.getHoursSlept());
                 return i;
-            } else if (!isSame && !isPrint) {
+            } else if (isSame && !isPrint) {
                 return i;
             }
         }
