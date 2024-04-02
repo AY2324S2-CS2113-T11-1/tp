@@ -582,8 +582,6 @@ Format:
 ~~~
 focus switch
 ~~~
-* The `focus` and `switch` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 ~~~
@@ -603,8 +601,6 @@ Format:
 ~~~
 focus start
 ~~~
-* The `focus` and `start` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 * Count up timer.
@@ -633,8 +629,6 @@ Format:
 ~~~
 focus stop
 ~~~
-* The `focus` and `stop` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 * Count up timer
@@ -676,8 +670,6 @@ Format:
 ~~~
 focus pause
 ~~~
-* The `focus` and `pause` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 * Count up timer
@@ -701,8 +693,6 @@ Format:
 ~~~
 focus resume
 ~~~
-* The `focus` and `resume` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 * Count up timer
@@ -726,8 +716,6 @@ Format:
 ~~~
 focus check
 ~~~
-* The `focus` and `check` are case-sensitive.
-* Use lower casing for this command.
 
 Expected outcome:
 * Count up timer
@@ -756,8 +744,6 @@ Format:
 ~~~
 focus set [minutes]
 ~~~
-* The `focus` and `set` are case-sensitive.
-* Use lower casing for this command.
 * Input `minutes` must be in numerical form and can be more than 60.
 * Example: *120 minutes implies 2 hours*
 
