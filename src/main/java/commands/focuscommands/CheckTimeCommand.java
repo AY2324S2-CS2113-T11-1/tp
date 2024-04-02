@@ -16,7 +16,7 @@ public class CheckTimeCommand implements Command {
      * @param timer FocusTimer object to be stopped.
      */
     public CheckTimeCommand(FocusTimer timer) {
-        this.focustimer = timer;
+        focustimer = timer;
     }
 
     /**
