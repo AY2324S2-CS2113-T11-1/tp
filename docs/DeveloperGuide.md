@@ -517,11 +517,11 @@ user's wellness.
     * `hoursSlept`: Number of hours slept
     * `dateOfSleep`: Date that user slept on
   * Methods:
-    * getHoursSlept(): Get Hours slept for this sleep cycle.
-    * getDateOfSleep(): Get date slept for this sleep cycle.
-    * setHoursOfSleep(double newHours): Set Hours slept for this sleep cycle to a new duration.
-    * compareTo(SleepCycle: SleepCycle): Comparison between sleep cycles.
-    * toString(): String format for what needs to be printed out for a sleep cycle.
+    * `getHoursSlept()`: Get Hours slept for this sleep cycle.
+    * `getDateOfSleep()`: Get date slept for this sleep cycle.
+    * `setHoursOfSleep(double newHours)`: Set Hours slept for this sleep cycle to a new duration.
+    * `compareTo(SleepCycle: SleepCycle)`: Comparison between sleep cycles.
+    * `toString()`: String format for what needs to be printed out for a sleep cycle.
   * `SleepCycleList` may contain 0 or more instances of `SleepCycle`.
   * UML Notes:
     * When a `SleepCycleList` object is destroyed, its associated `SleepCycle` instances are also destroyed,
