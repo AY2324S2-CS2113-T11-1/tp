@@ -17,6 +17,7 @@ import static fitness.UiMessageConstants.NEW_GOAL_MESSAGE;
 import static fitness.UiMessageConstants.GOAL_STATUS_MESSAGE;
 import static fitness.UiMessageConstants.HELP_MESSAGE;
 import static fitness.UiMessageConstants.DELETE_EXERCISE_MESSAGE;
+import static fitness.UiMessageConstants.MIN_EXERCISES_MESSAGE;
 import static fitness.UiMessageConstants.HELP_MENU_INSTRUCTIONS;
 
 
@@ -113,10 +114,14 @@ public class FitnessMotivator {
         ExerciseType type = ExerciseType.valueOf(commandArgs[0]);
         int index = Integer.parseInt(commandArgs[1]);
 
-        allExercises.remove(allExercises.get(type, index-1));
-        ArrayList<Exercise> exercisesByType = allExercises.getType(type);
+        if (allExercises.size(type) > 1) {
+            allExercises.remove(allExercises.get(type, index - 1));
+            ArrayList<Exercise> exercisesByType = allExercises.getType(type);
 
-        Ui.printList(exercisesByType, DELETE_EXERCISE_MESSAGE);
+            Ui.printList(exercisesByType, DELETE_EXERCISE_MESSAGE);
+        } else {
+            Ui.printMessageWithSepNewLine(MIN_EXERCISES_MESSAGE);
+        }
     }
 
     /**
@@ -151,6 +156,11 @@ public class FitnessMotivator {
      * will be marked as undone, and vice versa. All the goal status is then printed to the Ui.
      * */
     public void toggleGoal(int index) {
+        if (dailyGoals.isEmpty()) {
+            Ui.printMessageWithSepNewLine(EMPTY_GOAL_MESSAGE);
+            return;
+        }
+
         dailyGoals.findExercise(index - 1).toggle();
         dailyGoals.saveGoals();
 

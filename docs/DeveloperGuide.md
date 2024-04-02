@@ -12,6 +12,13 @@
   - [Ui component]()
   - [Command parser component]()
   - [Storage component]()
+    - [Description](#description)
+    - [Design Considerations](#design-considerations)
+      - [User Design Considerations](#user-design-considerations)
+      - [Developer Design Considerations](#developer-design-considerations)
+    - [Implementation](#implementation)
+      - [Class Diagram](#class-diagram)
+      - [Sequence Diagram](#sequence-diagram)
   - [Reflection component](#reflection-component)
     - [Description](#description)
     - [Design Considerations](#design-considerations)
@@ -126,6 +133,89 @@ The `Ui` class is created to standardise the output formatting of messages to be
 ### Command parser component
 
 ### Storage component
+#### Description
+The Storage component deals with the storage of all the data collected from the other components in the hard disk 
+in the form of text files so that data can be loaded from the hard disk when Wellness360 starts up.
+
+#### Design Considerations
+* ##### User Design Considerations
+  * File path for storage of data should all be in the folder /data for ease of locating the storage files
+  * Storage data can be easily read with the use of comma separated values
+
+* #### Developer Design Considerations
+  * SRP: Classes adhere to the Single Responsibility Principle. For example, Storage class is specifically for creating/
+  writing/reading of files, while HabitTrackerStorage/SleepTrackerStorage deals with the processing of data for storage 
+  and reading for their individual components
+  * Readability and Maintainability: Ensure there are no magic numbers used. For example, use of constants for 
+  information position in the text file.
+  * Exception Handling: Graceful error handling with meaningful messages.
+
+#### Implementation
+
+##### Class Diagram
+![StorageClassDiagram.png](diagrams/storage/StorageClassDiagram.png)
+
+* `Storage` class:
+  * Overview
+    * The `Storage` class is in charge of saving/loading of data.
+  * Methods
+    * `loadDataFromFile(String filepath)`: Stores lines in text file into an array of Strings.
+    * `createFolder(String filepath)`: Creates text file and folder to store file in.
+    * `saveTasksToFile(String filepath, ArrayList<T> data)`: Write data into text file
+    * `isFileCreated(String filepath)`: Checks if file has been created
+
+* `HabitTrackerStorage` class:
+  * Overview
+    * The `HabitTrackerStorage` class converts data into comma separated values and stores it in a text file.
+  * Attributes
+    * `HABIT_FILE_PATH`: File path for storage of habit list
+    * `COMMA_SEPARATION`: Separator to be placed between each data value
+    * `DATA_SIZE`: Number of values in a data point (Habit)
+  * Methods
+    * `saveHabitListToFile(ArrayList<Habit> habitList)`: Saves habit list into a text file.
+    * `loadHabitListFromFile()`: Loads habit list from a text file.
+  * Dependencies
+    * Storage: reading/writing/creating files
+  * UML Notes:
+    * It relies on `Storage` class for reading and writing of files
+
+* `SleepTrackerStorage`
+    * Overview
+        * The `SleepTrackerStorage` class converts data into comma separated values and stores it in a text file.
+    * Attributes
+      * `SLEEP_FILE_PATH`: File path for storage of sleep cycles
+      * `ERROR_MESSAGE`: Message to be print when file is corrupted
+      * `HOURS_POS`: position of hours parameter in comma separated values
+      * `DATE_POS`: position of date parameter in comma separated valuees
+    * Methods
+        * `saveSleepListToFile(ArrayList<SleepCycle> sleepList)`: Saves sleep list into a text file.
+        * `loadSleepListFromFile()`: Loads sleep list from a text file.
+    * Dependencies
+        * Storage: reading/writing/creating files
+    * UML Notes:
+        * It relies on `Storage` class for reading and writing of files
+
+
+
+##### Sequence Diagram 
+
+##### Loading Data Sequence Diagram
+![StorageSequenceDiagramSleep.png](diagrams/storage/StorageSequenceDiagramSleep.png)
+
+* Note: HabitTrackerStorage works in a similar way as SleepTrackerStorage
+
+When `Main` starts, `SleepTracker` object is created. `SleepTrackerStorage loadSleepListFromFile()` method is called to 
+Begin loading sleep cycles from text file. `SleepCycleList` is returned to `SleepTracker` class and Sleep Tracker class 
+is successfully instantiated.
+
+##### Saving Data Sequence Diagram
+![StorageSequenceSleep.png](diagrams/storage/StorageSequenceSleep.png)
+
+* Note: HabitTrackerStorage works in a similar way as SleepTrackerStorage
+
+When `SleepTracker` executes `saveSleepListToFile` method from `SleepTrackerStorage` class, `ArrayList<String>` is 
+created and after successfully converting sleepCycleList to String format, SleepTrackerStorage then calls 
+`saveTasksToFile` from `Storage` class to write data into text file.
 
 ### Reflection component
 #### Description
@@ -427,11 +517,11 @@ user's wellness.
     * `hoursSlept`: Number of hours slept
     * `dateOfSleep`: Date that user slept on
   * Methods:
-    * getHoursSlept(): Get Hours slept for this sleep cycle.
-    * getDateOfSleep(): Get date slept for this sleep cycle.
-    * setHoursOfSleep(double newHours): Set Hours slept for this sleep cycle to a new duration.
-    * compareTo(SleepCycle: SleepCycle): Comparison between sleep cycles.
-    * toString(): String format for what needs to be printed out for a sleep cycle.
+    * `getHoursSlept()`: Get Hours slept for this sleep cycle.
+    * `getDateOfSleep()`: Get date slept for this sleep cycle.
+    * `setHoursOfSleep(double newHours)`: Set Hours slept for this sleep cycle to a new duration.
+    * `compareTo(SleepCycle: SleepCycle)`: Comparison between sleep cycles.
+    * `toString()`: String format for what needs to be printed out for a sleep cycle.
   * `SleepCycleList` may contain 0 or more instances of `SleepCycle`.
   * UML Notes:
     * When a `SleepCycleList` object is destroyed, its associated `SleepCycle` instances are also destroyed,
@@ -567,6 +657,7 @@ fitness goals. This component aims to contribute to the goal of improving the us
 well-being.
 
 #### Design Considerations
+
 - #### User Design Considerations
     - Users are able to generate a list of 5 different exercises that target 5 different parts of the body: The arms, chest, abs, back and legs. The list is randomly generated each time, to allow for the mixing of exercises.
     - Users can also choose to generate exercises that generate a single part of the body, should they choose to target that part of the body for exercise.
@@ -577,22 +668,25 @@ well-being.
     - _Modularity_: All related classes are grouped together into packages. Command parsers are placed in the parser package, with individual command execution further placed into the fitnesscommands package. The execution of fitness logic are all grouped into the fitness package.
     - _Abstraction_: The command interface is used to specify methods to be implemented in every single exercise command, creating a pre-written template and behaviour for all command classes.
     - _Encapsulation_: The usage of private attributes and the use of helper methods help ensure data integrity. Get methods in the Exercise class and ExerciseList class ensure that the data is manipulated in the way that was intended by the developer and thus protecting the data.
+    - _Inheritance_: Commands with similar classes utilise inheritance to reduce code repetition of similar methods.
     - _Exception Handling_: Exception Handling prevents the code from reaching an unknown or unpredictable state, which could break the program.
     - _Design Pattern_: To Be Continued
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
 <!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
+
 #### Implementation
 #### Class Diagram
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
 ![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
+Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
 - `FitnessMotivator` Class
   - Overview
     - The `FitnessMotivator` class manages fitness related operations.
   - Attributes:
-    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
-    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator (Omitted from Class Diagram)
-    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. (Omitted from Class Diagram)
+    - `DATA_FILE_PATH`: A string that represents the path to the save file for the fitness motivator 
+    - `GOALS_FILE_PATH`: A string that represents the path to the save file for the fitness motivator 
+    - `REQUIRED_NUM_OF_PARAMETERS`: The number of parameters needed for the `add` command. 
     - `allExercise`: An instance of `ExerciseList`.
     - `dailyGoals`: An instance of `ExerciseGoalList`.
   - Methods:
@@ -618,9 +712,9 @@ methods, dependencies and UML Notes -->
     - `allExercises`: A private instance of an `ArrayList` of `Exercises`.
   - Methods:
     - `ExerciseList()`: A public constructor method, it checks if a local save file exists. If it does not, it creates a new file and initialises it with data, otherwise it will simply load the file.
-    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. (Omitted from Class Diagram)
-    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. (Omitted from Class Diagram)
-    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. (Omitted from Class Diagram)
+    - `initialiseSingleList(String[] list, ExerciseType type)`: A private helper method used to read an array of strings and convert it into exercises to be added into the list. 
+    - `initialiseData()`: A private helper method used to initialise all 5 list by calling `initialiseSingleList` five times. 
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. 
     - `add(Exercise exercise)`: A public helper method used to add an `Exercise` object into `allExercises`.
     - `get(ExerciseType type, int index)`: A public helper method used to query for an `Exercise` Object that matches the n-th `Exercise` with the matching `ExerciseType`, where n = index.
     - `getType(ExerciseType type)`: A public helper method used to query for all of the `Exercise` objects that match the `ExerciseType`.
@@ -645,10 +739,10 @@ methods, dependencies and UML Notes -->
     - `sets`: A private string storing the number of sets to be done.
     - `reps`: A private string storing the number of reps to be done.
   - Methods:
-    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. (Omitted from Class Diagram)
-    - `getExerciseName()`: A public helper method to obtain the name of the exercise. (Omitted from Class Diagram)
-    - `getSets()`: A public helper method to get the number of sets to be done per exercise. (Omitted from Class Diagram)
-    - `getReps()`: A public helper method to get the number of reps to be done per exercise. (Omitted from Class Diagram)
+    - `getType()`: A public helper method to obtain the `ExerciseType` of the exercise. 
+    - `getExerciseName()`: A public helper method to obtain the name of the exercise. 
+    - `getSets()`: A public helper method to get the number of sets to be done per exercise. 
+    - `getReps()`: A public helper method to get the number of reps to be done per exercise. 
     - `toString()`: An overriden public method used to specify the string format of the `Exercise` object.
   - Dependencies:
     - Enum ExerciseType: Utilised to allow only specified types of exercises.
@@ -660,11 +754,11 @@ methods, dependencies and UML Notes -->
     - Overview: 
       - The `ExerciseBank` class stores a collection of static string constants for initialisation.
     - Attributes:
-      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
-      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. (Omitted from Class Diagram)
+      - `INIT_ARM_EXERCISES` : A public static array of `String` storing arm exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_CHEST_EXERCISES`: A public static array of `String` storing chest exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_ABS_EXERCISES`: A public static array of `String` storing abs exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_BACK_EXERCISES`: A public static array of `String` storing back exercises, along with the exercise name, sets and reps to be done. 
+      - `INIT_LEGS_EXERCISES`: A public static array of `String` storing leg exercises, along with the exercise name, sets and reps to be done. 
     - UML Notes:
       - Used exclusively by `ExerciseList`.
 - `ExerciseGoalList` Class
@@ -674,14 +768,14 @@ methods, dependencies and UML Notes -->
     - `NUMBER_OF_GOALS`: A private static constant integer value representing the maximum number of goals in the `ExerciseGoalList`.
     - `goals`: A private `ArrayList` of `ExerciseGoal` objects.
   - Methods:
-    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. (Omitted from Class Diagram)
+    - `parseData(ArrayList<String> data)`: A private helper method used to further process the `ArrayList` of strings read by the Storage class. In this class, the data is initialised into `ExerciseGoal` Objects instead of `Exercise` Objects. 
     - `isEmpty()`: A public helper method used to check if the `ExerciseGoalList` is empty.
     - `clear()`: A public helper method used to reset the `ExerciseGoalList` by deleting all `ExerciseGoal` objects within.
     - `findExercise(int index)`: A public helper method used to find an `ExerciseGoal` based on its index.
     - `saveGoals()`: A public helper method used to save the current list to a local storage.
     - `newExercise(String[] parameters)`: An overriden public method from the parent class, it is used to create a new `ExerciseGoal` object, with its `isDone` attribute initialised to `false`.
     - `add(Exercise exercise, boolean isDone)`: A public method overloaded from the parent class, it adds a pre-existing `Exercise`, converts it with a declared `isDone` parameter, before adding it into the list and saving locally.
-    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseGoalList` object. 
   - Dependencies:
     - Storage: Utilised for persistent memory storage.
     - Enum ExerciseType: Utilised to allow only specified types of exercises.
@@ -708,14 +802,14 @@ methods, dependencies and UML Notes -->
   - Overview:
     - The `UiMessageConstants` class stores all constant `String` variables used in the various printing methods in `FitnessMotivator`.
   - Attributes:
-    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. (Omitted from Class Diagram)
-    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. (Omitted from Class Diagram)
-    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. (Omitted from Class Diagram)
-    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. (Omitted from Class Diagram)
-    - `HELP_MESSAGE`: A public static `String` constant storing the help message. (Omitted from Class Diagram)
-    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. (Omitted from Class Diagram)
-    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. (Omitted from Class Diagram)
-    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. (Omitted from Class Diagram)
+    - `NEW_GOAL_MESSAGE`: A public static `String` constant storing the new goal command message. 
+    - `EMPTY_GOAL_MESSAGE`: A public static `String` constant storing the empty goal message. 
+    - `GOAL_MESSAGE`: A public static `String` constant storing the goal command message. 
+    - `GOAL_STATUS_MESSAGE`: A public static `String` constant storing the goal status message. 
+    - `HELP_MESSAGE`: A public static `String` constant storing the help message. 
+    - `ADD_EXERCISE_MESSAGE`: A public static `String` constant storing the add exercise message. 
+    - `DELETE_EXERCISE_MESSAGE`: A public static `String` constant storing the delete exercise message. 
+    - `HELP_MENU_INSTRUCTIONS`: A public static `String` constant storing all possible commands and a brief description of each command. 
   - UML Notes:
     - Used exclusively by `FitnessMotivator`.
 - `ExerciseType` Enumeration
@@ -728,7 +822,7 @@ methods, dependencies and UML Notes -->
     - `BACK`: Exercises that work the Back
     - `LEGS`: Exercises that work the Legs
   - Methods:
-    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. (Omitted from Class Diagram)
+    - `toString()`: An overriden public method used to specify the string format of the `ExerciseType` Enumeration. 
   - Dependencies:
     - Does not require any dependencies.
   - UML Notes:
@@ -802,7 +896,11 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 | v2.0    | user     | delete habits from the habit tracker                                                  | remove habits that I no longer want to track.                       |
 | v2.0    | user     | check the total time elapsed                                                          | keep track of how long the session have been running.               |
 | v2.0    | user     | start a countdown timer                                                               | set a specific timing to focus on my tasks.                         |
-| v2.0    | user     | delete sleep cycles                                                                   | remove sleep cycles that I do not want to track                     |
+| v2.0    | user     | delete sleep cycles                                                                   | remove sleep cycles that I do not want to track.                    |
+| v2.0    | user     | add custom exercises                                                                  | view them later on.                                                 |
+| v2.0    | user     | delete exercises from the fitness motivator                                           | keep the list of exercises updated.                                 |
+| v2.0    | user     | create exercise goals                                                                 | work towards a daily goal.                                          |
+| v2.0    | user     | mark exercise goals                                                                   | keep track of what goals are done and what goals are not.           |
 
 
 ## Non-Functional Requirements
@@ -822,18 +920,18 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
     Expected outcome: Get 5 random questions
    ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     Generated Questions:
-   1. How do you prioritize self-care and well-being in your daily life?
-   2. Reflect on your communication style. In what ways do you excel, and where do you see room for improvement?
-   3. What role does creativity play in your life, and how do you nurture it?
-   4. What steps are you taking to advance your skills and knowledge in your field?
-   5. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
-   ________________________________________________________________________________________________________________
+    1. How do you prioritize self-care and well-being in your daily life?
+    2. Reflect on your communication style. In what ways do you excel, and where do you see room for improvement?
+    3. What role does creativity play in your life, and how do you nurture it?
+    4. What steps are you taking to advance your skills and knowledge in your field?
+    5. Describe a moment when you stepped outside of your comfort zone. What did you discover about yourself?
+    ________________________________________________________________________________________________________________
    ```
 2. Testcase: `get`
    
-    Expected outcome: Unknown reflection command
+    Expected outcome: Unknown command
 
     ```
    ________________________________________________________________________________________________________________
@@ -843,19 +941,29 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 3. Testcase: `get reflect`
 
-   Expected outcome: Unknown reflection command
+   Expected outcome: Unknown command
 
     ```
    ________________________________________________________________________________________________________________
    ERROR MSG: Unknown Wellness360 command
    ________________________________________________________________________________________________________________
    ```
+
+4. Testcase: `reflect get 10`
+   Expected outcome: No additional parameters allowed warning
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Additional parameters for 'reflect get' command are not allowed.
+    ________________________________________________________________________________________________________________
+    ```
+
+
 #### View list of saved favourite questions
 1. Testcase: Calling `reflect list` on an empty favourites list
     
     Expected outcome: Empty list message if no questions saved
     ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
@@ -864,19 +972,27 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Expected outcome: List of saved questions if list is not empty
     ```
    ________________________________________________________________________________________________________________
-    Favourites list:
+   Favourites list:
    1. Describe a memorable shared experience with someone you care about. What made it special?
    2. Reflect on a time when you faced a significant challenge at work. How did you overcome it?
    3. In what ways do you seek to grow and develop within your current role or industry?
    4. Describe a recent moment when you felt inspired by something or someone in your environment.
    ________________________________________________________________________________________________________________
    ```
+   
+3. Testcase: `reflect list 10`
+   Expected outcome: No additional parameters allowed warning
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Additional parameters for 'reflect list' command are not allowed.
+    ________________________________________________________________________________________________________________
+    ```
 #### Save favourite question
 1. Testcase: Calling `reflect save 1` without generating questions first (`reflect get`)
 
     Expected outcome: Error message prompting you to generate questions first.
     ```
-   ________________________________________________________________________________________________________________
+    ________________________________________________________________________________________________________________
     ERROR MSG: No questions generated yet. Generate questions using 'reflect get' command first.
     ________________________________________________________________________________________________________________
    ```
@@ -885,7 +1001,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Expected outcome: save question successful
 
     ```
-    ________________________________________________________________________________________________________________
+   ________________________________________________________________________________________________________________
    You:reflect get
    ________________________________________________________________________________________________________________
    Generated Questions:
@@ -920,6 +1036,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    Reflect on a time when you took a creative risk. What did you learn from the experience?
    ________________________________________________________________________________________________________________
    ```
+   
 ### Habit Tracker component
 #### Add Habit
 1. Testcase: `habit add` 
@@ -1098,4 +1215,68 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    
 ### Sleep Tracker component
 ### Focus Timer component
+
 ### Fitness Tracker component
+#### Get 5 different exercises
+1. Testcase: Calling `fitness get` when the jar is first executed.
+    </br>
+    Expected outcome: A list of 5 random different exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    These are some of the exercises you can do! LETS GET STRONK MY G
+
+    1. Arms: Preacher Curls, 3 sets & 8 reps
+    2. Chest: Cable Flies, 3 sets & 8 reps
+    3. Abs: Flutter Kicks, 4 sets & 20 reps
+    4. Back: Weighted Pull Ups, 3 sets & 6 reps
+    5. Legs: Leg Extensions, 3 sets & 10 reps
+
+    ________________________________________________________________________________________________________________
+    ```
+#### Get a list of specific type of exercises
+1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
+    </br>
+    Expected outcome: Error message prompts you to use the accepted types of exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Hmm...Invalid type of exercise...
+    Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
+    ________________________________________________________________________________________________________________
+    ```
+#### Add an exercise
+1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
+    </br>
+    Expected outcome: Error message prompts you to use the accepted types of exercises.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Hmm...Invalid type of exercise...
+    Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
+    ________________________________________________________________________________________________________________
+    ```
+#### Create a new Goal
+1. Testcase: Calling `fitness goal new` when the jar is first executed
+    </br>
+    Expected outcome: 5 randomly generated exercise goals with a status icon in front of the respective exercises
+    ```
+    ________________________________________________________________________________________________________________
+    Lets get working on today's exercises!
+
+    1. [ ] Arms: Skullcrushers, 3 sets & 8 reps
+    2. [ ] Chest: Diamond Push-up, 3 sets & 15 reps
+    3. [ ] Abs: Weighted Sit-Ups, 3 sets & 20 reps
+    4. [ ] Back: Lateral Rows, 3 sets & 8 reps
+    5. [ ] Legs: Leg Press, 3 sets & 8 reps
+
+    ________________________________________________________________________________________________________________
+    ```
+#### Mark a goal as done
+1. Testcase: Calling `fitness goal first` when the goals have been created.
+    </br>
+    Expected outcome:
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Are you trying to create a new goal? You can try 'goal new'!
+    You can also do 'goal <index>' to mark and unmark exercises!
+    ________________________________________________________________________________________________________________
+
+    ```

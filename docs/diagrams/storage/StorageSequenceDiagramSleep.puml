@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+participant Main
+participant SleepTracker
+participant SleepTrackerStorage
+participant Storage
+participant ArrayList
+participant SleepCycleList
+participant SleepCycle
+
+activate Main
+Create SleepTracker
+activate SleepTracker
+Main -> SleepTracker: null
+SleepTracker -> SleepTrackerStorage: calls loadSleepListFromFile()
+activate SleepTrackerStorage
+alt isFileCreated
+    SleepTrackerStorage -> Storage: calls createFolder(SLEEP_FILE_PATH)
+    activate Storage
+    deactivate Storage
+end
+SleepTrackerStorage -> Storage: loadDataFromFile
+activate Storage
+Storage --> SleepTrackerStorage: return ArrayList<String>
+deactivate Storage
+Create SleepCycleList
+SleepTrackerStorage -> SleepCycleList: null
+activate SleepCycleList
+loop until end of ArrayList<String>
+Create SleepCycle
+SleepTrackerStorage -> SleepCycle: hour, date
+activate SleepCycle
+SleepCycle --> SleepTrackerStorage: return sleep cycle to be added
+deactivate SleepCycle
+SleepTrackerStorage -> SleepCycleList: calls addSleepCycle(sleep cycle to be added)
+end
+
+SleepTrackerStorage --> SleepTracker: return sleep cycle list
+SleepTracker --> Main: return Sleep Tracker
+
+
+
+@enduml

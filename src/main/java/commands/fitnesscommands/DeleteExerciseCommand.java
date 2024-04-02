@@ -7,7 +7,7 @@ import fitness.ExerciseType;
 
 import static commands.fitnesscommands.ErrorMessageConstants.INSUFFICIENT_DELETE_PARAMS_ERROR_MESSAGE;
 import static commands.fitnesscommands.ErrorMessageConstants.INCORRECT_INTEGER_ERROR_MESSAGE;
-import static commands.fitnesscommands.ErrorMessageConstants.INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE;
+import static commands.fitnesscommands.ErrorMessageConstants.DELETE_INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE;
 
 public class DeleteExerciseCommand implements Command {
 
@@ -52,7 +52,7 @@ public class DeleteExerciseCommand implements Command {
 
         // Handles the case where the integer entered is out of bounds
         if (Integer.parseInt(tempCommandArgs[1]) > maxIndex) {
-            throw new FitnessException(INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE);
+            throw new FitnessException(DELETE_INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE);
         }
 
         return tempCommandArgs;

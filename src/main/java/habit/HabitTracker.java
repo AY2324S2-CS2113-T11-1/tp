@@ -184,4 +184,8 @@ public class HabitTracker {
         habitList.clear();
         saveHabitListToFile(habitList);
     }
+
+    public ArrayList<Habit> getHabitList() {
+        return habitList;
+    }
 }

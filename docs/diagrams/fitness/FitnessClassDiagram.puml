@@ -1,6 +1,7 @@
 @startuml
 
 skinparam classAttributeIconSize 0
+hide circle
 
 package parser {
     class FitnessCommandParser {
@@ -17,20 +18,9 @@ package commands {
         + isExit(): boolean
     }
 
-    class GetExerciseCommand implements Command {
+    class ExerciseCommand implements Command {
     }
-
-    class DeleteExerciseCommand implements Command {
-    }
-
-    class GoalExerciseCommand implements Command {
-    }
-
-    class HelpExerciseCommand implements Command {
-    }
-
-    class AddExerciseCommand implements Command {
-    }
+    note top of ExerciseCommand: Could represent: \n1.GetExerciseCommand \n2.GoalExerciseCommand \n3.HelpExerciseCommand \n4.DeleteExerciseCommand \n5.AddExerciseCommand
 }
 
 package fitness {
@@ -97,7 +87,7 @@ package fitness {
     }
 }
 
-enum ExerciseType {
+enum "<<enumeration>>\nExerciseType" as ExerciseType {
             ARMS
             CHEST
             ABS
@@ -112,18 +102,9 @@ class Ui {
 }
 
 Parser ..> FitnessCommandParser : uses >
-FitnessCommandParser ..> GetExerciseCommand : creates >
-FitnessCommandParser ..> DeleteExerciseCommand : creates >
-FitnessCommandParser ..> GoalExerciseCommand : creates >
-FitnessCommandParser ..> HelpExerciseCommand : creates >
-FitnessCommandParser ..> AddExerciseCommand : creates >
+FitnessCommandParser ..> ExerciseCommand : creates >
 
-AddExerciseCommand --> FitnessMotivator : uses >
-AddExerciseCommand ..> ExerciseType : uses >
-GetExerciseCommand --> FitnessMotivator : uses >
-DeleteExerciseCommand --> FitnessMotivator : uses >
-GoalExerciseCommand --> FitnessMotivator : uses >
-HelpExerciseCommand --> FitnessMotivator : uses >
+ExerciseCommand --> FitnessMotivator : uses >
 
 FitnessMotivator *--> "1" ExerciseList : contains >
 FitnessMotivator *--> "1" ExerciseGoalList : contains >
@@ -137,13 +118,10 @@ ExerciseList *--> "25..*" Exercise : contains >
 ExerciseGoalList *--> "0..5" ExerciseGoal : contains >
 
 ExerciseList ..> ExerciseType : uses >
-ExerciseGoalList ..> ExerciseType : uses >
-ExerciseGoal ..> ExerciseType : uses >
 FitnessMotivator ..> ExerciseType : uses >
 Exercise ..> ExerciseType : uses >
 
 ExerciseList ..> Storage : uses >
-ExerciseGoalList ..> Storage : uses >
 
 FitnessMotivator ..> Ui : uses >
 
