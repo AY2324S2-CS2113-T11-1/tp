@@ -71,8 +71,7 @@ A command has the general structure:
 <feature> <command> </arg1> <param1> </arg2> <param2>
 ```
 - Arguments and parameters are not compulsory for all commands. Refer to respective feature commands for specifics.  
-- Feature, command and arguments are case-sensitive. It is compulsory to use lower case.
-- Parameters are not case-sensitive.
+- Feature, command and arguments are not case-sensitive to make keying in commands more user-friendly.
 
 ## Usage
 
@@ -91,9 +90,7 @@ Format:
 ```
 reflect get
 ```
-
-* The `reflect` and `get` are case-sensitive.
-* Use lower casing for this command.
+* No additional parameters are allowed, otherwise an error message will be shown.
 
 Example of usage: 
 ```
@@ -122,13 +119,12 @@ Format:
 reflect save [QUESTION_ID]
 ```
 
-* The `reflect` and `save` keywords are case-sensitive. Use lower casing for these 2 keywords.
 * Questions that can be saved correspond to the most recent list of generated questions.
-* Users need to generate questions before attempting to save it to favourites.
-* `QUESTION_ID` only accepts integers between 1 and 5 inclusive.
+* Users need to generate questions before attempting to save it to favourites, otherwise an error message will prompt user to generate questions first.
+* `QUESTION_ID` only accepts integers between 1 and 5 inclusive as each list of newly generated questions only contains 5 questions.
 
 
-Example of usage:
+Example of usage (After generating questions first):
 ```
 reflect save 1
 ```
@@ -150,8 +146,8 @@ Format:
 reflect unsave [QUESTION_ID]
 ```
 
-* The `reflect` and `unsave` keywords are case-sensitive. Use lower casing for these 2 keywords.
 * Questions that can be unsaved correspond to the reflection questions favourites list.
+* If user attempts to unsave a question from an empty favourites list, an error message will prompt user to check range of questions in his favourites list again. 
 
 Example of usage:
 ```
@@ -173,7 +169,7 @@ Format:
 ```
 reflect list
 ```
-* The `reflect` and `list` keywords are case-sensitive. Use lower casing for these 2 keywords.  
+* No additional parameters are allowed, otherwise an error message will be shown.
 
 Example of usage:
 ```
@@ -197,7 +193,8 @@ Format:
 ```
 reflect help
 ```
-* The `reflect` and `help` keywords are case-sensitive. Use lower casing for these 2 keywords.
+
+* No additional parameters are allowed, otherwise an error message will be shown.
 
 Example of usage:
 ```
@@ -416,7 +413,6 @@ sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 ```
 
 * The `sleep`, `/date` and `add` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -437,9 +433,6 @@ Format:
 ```
 sleep list
 ```
-
-* The `sleep` and `list` are case-sensitive.
-* Use lower casing for this command.
 
 Example of usage:
 ```
@@ -462,8 +455,6 @@ Format:
 sleep get [DATE_OF_SLEEP]
 ```
 
-* The `sleep` and `get` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -485,8 +476,6 @@ Format:
 sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]
 ```
 
-* The `sleep`, `update` and `/new` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -509,8 +498,6 @@ Format:
 sleep delete /date [DATE_OF_SLEEP]
 ```
 
-* The `sleep`, `delete` and `/date` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -532,8 +519,6 @@ Format:
 sleep delete /before [DATE_OF_SLEEP]
 ```
 
-* The `sleep`, `delete` and `/before` are case-sensitive.
-* Use lower casing for this command.
 * `DATE_OF_SLEEP` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -554,8 +539,6 @@ Format:
 sleep delete /from [START_DATE] /to [END_DATE]
 ```
 
-* The `sleep`, `delete`, `/from` and `/to` are case-sensitive.
-* Use lower casing for this command.
 * `START_DATE` and `END_DATE` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -1055,3 +1038,7 @@ This section serves as a cheatsheet for commands.
 
 **A**: After first time usage, if any data was saved during the session, it will be stored as text files under docs folder. Copy it over to
 another computer if you wish.
+
+**Q**: Can I directly edit the text files that are meant as data storage?
+
+**A**: Absolutely not. Do not edit the text files directly. Only interact with the storage text files via commands when running the jar file. 

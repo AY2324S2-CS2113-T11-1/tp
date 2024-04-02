@@ -19,32 +19,11 @@ package command {
                 + isExit(): boolean
     }
 
-    class AddSleepCommand implements Command {
+    class SleepCommand implements Command {
     }
+    note top of SleepCommand: Could represent: \n1.AddSleepCommand \n2.DeleteSleepCommand \n3.GetSleepCommand \n4.ListSleepCommand \n5.SaveSleepCommand \n6.UpdateSleepCommand
 
-    class DeleteSleepCommand implements Command {
-        - startDate: LocalDate
-        - endDate: LocalDate
 
-        - deleteSleepBefore(sleepCommandArgs: String)
-        - deleteSleepBefore(sleepCommandArgs: String)
-        - deleteSleepBetween(sleepCommandArgs: String)
-    }
-
-    class GetSleepCommand implements Command {
-        -  date: LocalDate
-    }
-
-    class ListSleepCommand implements Command {
-    }
-
-    class SaveSleepCommand implements Command {
-    }
-
-    class UpdateSleepCommand implements Command {
-        - date: LocalDate
-        - hours: double
-    }
 }
 
 package sleep {
@@ -100,21 +79,10 @@ class Ui {
 
 Parser ..> SleepCommandParser: creates >
 
-SleepCommandParser .DOWN.> AddSleepCommand : creates >
-SleepCommandParser .DOWN.> DeleteSleepCommand : creates >
-SleepCommandParser .DOWN.> ListSleepCommand : creates >
-SleepCommandParser .DOWN.> SaveSleepCommand : creates >
-SleepCommandParser .DOWN.> UpdateSleepCommand : creates >
-SleepCommandParser .DOWN.> GetSleepCommand : creates >
+SleepCommandParser .DOWN.> SleepCommand : creates >
 SleepCommandParser ..> SleepTracker
 
-AddSleepCommand --> SleepTracker : uses >
-DeleteSleepCommand --> SleepTracker : uses >
-DeleteSleepCommand ..> "deleteMode  1" DeleteMode
-GetSleepCommand --> SleepTracker : uses >
-ListSleepCommand --> SleepTracker : uses >
-SaveSleepCommand --> SleepTracker : uses >
-UpdateSleepCommand --> SleepTracker : uses >
+SleepCommand --> SleepTracker : uses >
 
 
 SleepCycleList ..> Ui : uses >

@@ -3,12 +3,12 @@
 
 autonumber
 
-participant Main
-participant Scanner
-participant SleepTracker
-participant Parser
-participant SleepCommandParser
-participant PlaceholderSleepCommand
+participant ":Main" as Main
+participant ":Scanner" as Scanner
+participant ":SleepTracker" as SleepTracker
+participant "<<Class>>\nParser" as Parser
+participant "<<Class>>\nSleepCommandParser" as SleepCommandParser
+participant ":PlaceHolderSleepCommand" as PlaceholderSleepCommand
 
 activate Main
 
