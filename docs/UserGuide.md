@@ -986,7 +986,7 @@ This section serves as a cheatsheet for commands.
 
 | **Command**                                                                        | **Description**                              |
 |------------------------------------------------------------------------------------|----------------------------------------------|
-| `reflect get`                                                                      | get 5 random reflection questions            |
+| `reflect get`                                                                      | Get 5 random reflection questions            |
 | `reflect save [QUESTION_ID]`                                                       | Save favourite reflection question           |
 | `reflect unsave [QUESTION_ID]`                                                     | Unsave favourite reflection question         |
 | `reflect list`                                                                     | View favourite reflection questions          |
