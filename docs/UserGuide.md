@@ -48,16 +48,18 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`fitness delete` - Delete exercises from the list](#delete-exercises-from-the-list-fitness-delete)
           - [`fitness goal` - Set exercise goals for the day](#set-exercise-goals-for-the-day-fitness-goal)
           - [`fitness help` - View Fitness Motivator help menu](#view-fitness-motivator-help-menu-fitness-help)
-    - Command Summary
-    - FAQ
+    - [Command Summary](#command-summary)
+    - [FAQ](#faq)
+
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Wellness360` from [here](http://link.to/duke).
+2. Down the latest version of `Wellness360` from [here](https://github.com/AY2324S2-CS2113-T11-1/tp/releases).
 3. To start `Wellness360` Using the `jar` file, go to the containing folder for Wellness360. 
 Then, on your terminal of choice, run:
 ```
--$ java -jar tp.jar
+-$ java -jar v2.1.jar
 ```
 
 ## Features
@@ -1028,4 +1030,10 @@ another computer if you wish.
 
 **Q**: Can I directly edit the text files that are meant as data storage?
 
-**A**: Absolutely not. Do not edit the text files directly. Only interact with the storage text files via commands when running the jar file. 
+**A**: Absolutely not. Do not edit the text files directly. Only interact with the storage text files via commands when running the jar file.
+
+**Q**: What will happen if I accidentally edited the text files?
+
+**A**: Behaviour of application might become unpredictable as the text files may become corrupted. We recommend manually deleting corrupted text files and restarting the jar file.
+New text files will be created to replace the missing files, and you can continue using the app as usual. Note that by deleting the text files, any past data stored on it would be wiped.
+To prevent loss of data and having to remove corrupted files, DO NOT attempt to edit the text files directly as mentioned previously.
