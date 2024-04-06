@@ -48,6 +48,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`fitness delete` - Delete exercises from the list](#delete-exercises-from-the-list-fitness-delete)
           - [`fitness goal` - Set exercise goals for the day](#set-exercise-goals-for-the-day-fitness-goal)
           - [`fitness help` - View Fitness Motivator help menu](#view-fitness-motivator-help-menu-fitness-help)
+      - [`exit` - Exit application](#exit-application-exit)
     - [Command Summary](#command-summary)
     - [FAQ](#faq)
 
@@ -982,6 +983,26 @@ Here is a list of possible commands you can use with the Fitness Motivator!
 ________________________________________________________________________________________________________________
 ```
 
+### Exit application: `exit`
+Allows user to exit Wellness360 application.
+
+Format:
+
+`exit`
+
+* No additional parameters are allowed, otherwise an error message will be shown.
+
+Example of usage:
+
+`exit`
+
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Goodbye! See you again!
+________________________________________________________________________________________________________________
+```
+
 ## Command Summary
 
 This section serves as a cheatsheet for commands.
@@ -1020,6 +1041,8 @@ This section serves as a cheatsheet for commands.
 | `fitness delete [EXERCISE_TYPE] [INDEX]`                                           | Delete exercises from the list               |
 | `fitness goal`, `fitness goal new`, `fitness goal [INDEX]`                         | Set exercise goals for the day               |
 | `fitness help`                                                                     | View Fitness Motivator help menu             |
+| `exit`                                                                             | Exit application                             |
+
 
 ## FAQ
 
