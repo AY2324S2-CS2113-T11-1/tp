@@ -99,7 +99,7 @@ You are recommended to use Intellij IDEA:
 
 ### UI component
 #### Description
-`Ui` component is in charge of reading in user input and printing output. </br> </br>
+`Ui` component is in charge of reading in user input and printing output.
 
 The `Ui` class is created to standardise the output formatting of messages to be printed across all features. These formatting include the printing of messages and lists, reducing code repetition.
 
