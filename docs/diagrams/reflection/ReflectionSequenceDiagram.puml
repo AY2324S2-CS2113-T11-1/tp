@@ -10,6 +10,8 @@ participant "<<Class>>\nParser" as Parser
 participant "<<Class>>\nReflectionCommandParser" as ReflectionCommandParser
 participant ":PlaceholderReflectionCommand" as PlaceholderReflectionCommand
 
+hide footbox
+
 activate Main
 
 create Scanner
@@ -40,6 +42,7 @@ loop until isExit
         end
     end
 end
+
 
 @enduml
 
