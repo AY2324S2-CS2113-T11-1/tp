@@ -742,10 +742,11 @@ ________________________________________________________________________________
 ~~~
 
 ### Set focus timer duration: `focus set`
-> Using `focus set` command only affects count down timer.
+> <strong><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> Tip: 
+> * Using `focus set`  command only affects count down timer. 
 >
 
-Allow users to set the desired countdown timer duration for the session.
+Allow users to set the desired countdown timer duration in minutes for the session.
 
 Format:
 ~~~
@@ -753,6 +754,7 @@ focus set [minutes]
 ~~~
 * Input `minutes` must be in numerical form and can be more than 60.
 * Example: *120 minutes implies 2 hours*
+* Input `minutes` cannot be more than `MAX_VALUE: 2,147,483,647`.
 * Extraneous parameters for this command will be ignored. For example: `focus set 10 123` will be taken as `focus set 10`.
 
 Example of usage:
