@@ -1247,7 +1247,7 @@ Countdown timer started!
 Duration set: 1 minute(s) 0 second(s)
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus start` when timer is running. <Br>
+2. Testcase: `focus start` when timer is running <Br>
 Expected outcome: Error message informing users that timer has already started.
 
 ~~~
@@ -1274,7 +1274,7 @@ ________________________________________________________________________________
 Countdown timer stopped.
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus stop` when timer is not running. <Br>
+2. Testcase: `focus stop` when timer is not running <Br>
 Expected outcome: Error message informing users that timer is not running.
 
 ~~~
@@ -1283,7 +1283,7 @@ ERROR MSG: Error! Clock is not running.
 ________________________________________________________________________________________________________________
 ~~~
 #### Check time for focus timer
-1. Testcase: `focus check` when timer has started. <br>
+1. Testcase: `focus check` when timer has started <br>
 Expected outcome: Message informing users the total time elapsed or time remaining.
 
 Count up timer:
@@ -1300,7 +1300,7 @@ Remaining time:
 0 minutes 56 seconds left.
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus check` when timer is not running. <Br>
+2. Testcase: `focus check` when timer is not running <Br>
 Expected outcome: Error message informing users that timer is not running.
 
 ~~~
@@ -1309,7 +1309,7 @@ ERROR MSG: Timer have not started. Please use focus start.
 ________________________________________________________________________________________________________________
 ~~~
 #### Pause time for focus timer
-1. Testcase: `focus pause` when timer has started. <br>
+1. Testcase: `focus pause` when timer has started <br>
 Expected outcome: Message informing users that timer has been paused.
 
 Count up timer:
@@ -1325,7 +1325,7 @@ Timer paused.
 Remaining time: 0 minutes 56 seconds
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus pause` when timer is not running. <Br>
+2. Testcase: `focus pause` when timer is not running <Br>
 Expected outcome: Error message informing users that timer has been resumed.
 
 ~~~
@@ -1349,7 +1349,7 @@ ________________________________________________________________________________
 Countdown timer resumed.
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus resume` when timer is not running. <Br>
+2. Testcase: `focus resume` when timer is not running <Br>
 Expected outcome: Error message informing users that timer is not running or has already been resumed.
 
 ~~~
