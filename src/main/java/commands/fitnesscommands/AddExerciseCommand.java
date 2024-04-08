@@ -1,5 +1,6 @@
 package commands.fitnesscommands;
 
+import java.util.Arrays;
 import commands.Command;
 import exceptions.FitnessException;
 import fitness.ExerciseType;
@@ -31,12 +32,15 @@ public class AddExerciseCommand implements Command {
      * @throws FitnessException Thrown when improper command arguments are found
      * */
     private String[] checkCommandArgs(String commandArgs) throws FitnessException {
-        String[] tempCommandArgs = commandArgs.split(",", 4);
+        String[] processCommandArgs = commandArgs.split("/type|/name|/sets|/reps", 5);
 
         // Handles insufficient parameters entered
-        if (tempCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS) {
+        if (processCommandArgs.length != REQUIRED_NUM_OF_PARAMETERS + 1) {
             throw new FitnessException(INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE);
         }
+
+        // Remove redundant first string in the string array
+        String[] tempCommandArgs = Arrays.copyOfRange(processCommandArgs, 1, 5);
 
         // String Cleaning
         tempCommandArgs[0] = tempCommandArgs[0].trim();
