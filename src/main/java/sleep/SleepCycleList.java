@@ -38,7 +38,7 @@ public class SleepCycleList {
             startDate = sleepCycleList.get(0).getDateOfSleep();
             endDate = sleepCycleList.get(0).getDateOfSleep();
         }
-        while (totalHrsSlept >= Double.MAX_VALUE) {
+        while (totalHrsSlept >= Double.MAX_VALUE - 24) {
             cyclesDeleted += 1;
             SleepCycle currSleepCycle = sleepCycleList.get(0);
             endDate = currSleepCycle.getDateOfSleep();
