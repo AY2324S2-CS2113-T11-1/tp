@@ -33,7 +33,8 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
             - [Delete Sleep Cycle of a specific date](#delete-sleep-cycle-of-a-specific-date)
             - [Delete Sleep Cycles before a specific date](#delete-sleep-cycles-before-a-specific-date)
             - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
-          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
+          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save
+          - [`sleep help` - View sleep tracker help menu](#view-sleep-tracker-help-menu-sleep-help)
         - Focus Timer
           - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
@@ -402,14 +403,15 @@ ________________________________________________________________________________
 ```
 
 ### Add a new sleep cycle: `sleep add`
-Allow the user to add new sleep Cycles into the sleep tracker.
+Allow the user to add new sleep Cycles into the sleep tracker. Older sleep cycles will be deleted when total hrs reaches
+the `MAX_VALUE` for `double`.
 
 Format:
 ```
 sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 ```
 
-* The `sleep`, `/date` and `add` are case-sensitive.
+* `HOURS_SLEPT` will be rounded down to nearest 1 d.p
 * `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -570,7 +572,34 @@ ________________________________________________________________________________
 Saved list to storage file
 ________________________________________________________________________________________________________________
 ```
-=======
+
+### View sleep tracker help menu: `sleep help`
+Allows new users to check what commands are available for sleep tracker feature and their formats.
+
+Format:
+```
+sleep help
+```
+
+Example of usage:
+```
+sleep help
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Commands for sleep tracker feature:
+1. sleep add [HOURS_SLEPT] /date [DATE_SLEPT]: Add a new sleep cycle
+2. sleep list: List out all sleep cycles
+3. sleep get [DATE_OF_SLEEP]: Get hours slept on a specific date
+4. sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]: Updates hours slept on a specific date
+5. sleep delete /date [DATE_OF_SLEEP]: Delete Sleep Cycle of a specific date
+6. sleep delete /before [DATE_OF_SLEEP]: Delete Sleep Cycles before a specific date
+7. sleep delete /from [START_DATE] /to [END_DATE]: Delete Sleep Cycles within a range of dates
+8. sleep save: Allow user to save sleep cycles in a text file located in FILE_PATH: data/sleep.txt
+________________________________________________________________________________________________________________
+```
+
 ### Switch focus timer mode: `focus switch`
 Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose
 between count up timer and count down timer.
