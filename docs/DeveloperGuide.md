@@ -1215,7 +1215,156 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    
 ### Sleep Tracker component
 ### Focus Timer component
+#### Start a timer
+1. Testcase: `focus start` when timer is not running <br>
+Expected outcome: timer started successfully
 
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Your session has started. Time to grind!
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer started! 
+Duration set: 1 minute(s) 0 second(s)
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus start` when timer is running. <Br>
+Expected outcome: Message informing users that timer has already started.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Error! Clock has already started.
+________________________________________________________________________________________________________________
+~~~
+
+#### Stop a timer
+1. Testcase: `focus stop` when timer is currently running <br>
+   Expected outcome: timer stopped successfully
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Your focus session has ended.
+Total time spent: 0 hours, 3 minutes, 42 seconds
+To start a new session, use ‘focus start’ 
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer stopped.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus stop` when timer is not running. <Br>
+Expected outcome: Message informing users that timer is not running.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Error! Clock is not running.
+________________________________________________________________________________________________________________
+~~~
+#### Check time for focus timer
+1. Testcase: `focus check` when timer has started. <br>
+Expected outcome: Message informing users the total time elapsed or time remaining.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Total time elapsed: 
+0 hours, 0 minutes, 5 seconds
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Remaining time: 
+0 minutes 56 seconds left.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus check` when timer is not running. <Br>
+Expected outcome: Message informing users that timer is not running.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer have not started. Please use focus start.
+________________________________________________________________________________________________________________
+~~~
+#### Pause time for focus timer
+1. Testcase: `focus pause` when timer has started. <br>
+Expected outcome: Message informing users that timer has been paused
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Count up timer paused.
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Timer paused. 
+Remaining time: 0 minutes 56 seconds
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus pause` when timer is not running. <Br>
+Expected outcome: Message informing users that timer has been resumed.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer is already paused or Timer hasn't started.
+________________________________________________________________________________________________________________
+~~~
+#### Resume time for focus timer
+1. Testcase: `focus resume` when timer has started and has been paused. <br>
+Expected outcome: Message informing users the total time elapsed or time remaining.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Count up timer resumed
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer resumed.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus resume` when timer is not running. <Br>
+Expected outcome: Message informing users that timer is not running or has already been resumed.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer is already resumed or Timer hasn't started.
+________________________________________________________________________________________________________________
+~~~
+#### Set time for focus timer
+1. Testcase: `focus set 10` <br>
+   Expected outcome: Show that count down timer has been set to 10 minutes.
+
+~~~
+________________________________________________________________________________________________________________
+Countdown duration has been set to 10 minute(s)
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus set 0` <br>
+   Expected outcome: Error message prompting user to input a duration more than 0.
+~~~
+________________________________________________________________________________________________________________
+Duration cannot be less than 1.
+________________________________________________________________________________________________________________
+~~~
+3. Testcase: `focus set w` <br>
+   Expected outcome: Error message prompting user to input a valid duration
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Invalid duration.
+________________________________________________________________________________________________________________
+~~~
 ### Fitness Tracker component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.
