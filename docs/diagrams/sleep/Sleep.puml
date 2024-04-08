@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 skinparam classAttributeIconSize 0
+hide circle
 
 package parser {
     class SleepCommandParser {
