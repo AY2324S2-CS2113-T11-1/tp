@@ -3,12 +3,14 @@
 
 autonumber
 
-participant Main
-participant Scanner
-participant HabitTracker
-participant Parser
-participant HabitCommandParser
-participant PlaceholderHabitCommand
+participant ":Main" as Main
+participant ":Scanner" as Scanner
+participant ":HabitTracker" as HabitTracker
+participant "<<Class>>\nParser" as Parser
+participant "<<Class>>\nHabitCommandParser" as HabitCommandParser
+participant ":PlaceholderHabitCommand" as PlaceholderHabitCommand
+
+hide footbox
 
 activate Main
 

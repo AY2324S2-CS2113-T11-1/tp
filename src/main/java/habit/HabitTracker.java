@@ -144,7 +144,7 @@ public class HabitTracker {
     }
 
     /**
-     * Sort the habits in the habit tracker list according to their priority from HIGH to LOW
+     * Sort the habits in the habit tracker list according to their priority from HIGH to LOW.
      *
      * @throws HabitException If there are any exception errors when sorting.
      */
@@ -170,7 +170,13 @@ public class HabitTracker {
             throw new HabitException(e.getMessage());
         }
 
-        Ui.printMessageWithSepNewLine("Habits have been sorted according to priority.");
+        if (habitList.isEmpty()) {
+            Ui.printMessageWithSepNewLine("You have no habits to sort.");
+        } else {
+            Ui.printMessageWithSepNewLine("Habits have been sorted according to priority." +
+                    "\nUse `habit list` to view the updated list.");
+        }
+
         saveHabitListToFile(habitList);
     }
 

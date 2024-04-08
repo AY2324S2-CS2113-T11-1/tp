@@ -26,7 +26,7 @@ public class SetPriorityCommand implements Command {
 
         String[] parts = habitCommandArgs.trim().split("/id | /priority");
 
-        if (!(parts.length == REQUIRED_PARAMETERS)) {
+        if (parts.length != REQUIRED_PARAMETERS) {
             throw new HabitException("Incorrect set priority command formatting\n" +
                     "Use Format: habit set /id <habit_ID> /priority <priority_level>\n" +
                     "Note: for <priority_level>, there are 3 levels --> low, med, high");
@@ -39,11 +39,21 @@ public class SetPriorityCommand implements Command {
         }
 
         String priorityLevel = parts[2].trim().toLowerCase();
-        if (!priorityLevel.equals("high") && !priorityLevel.equals("med") && !priorityLevel.equals("low")) {
+        if (!isValidPriorityLevel(priorityLevel)) {
             throw new HabitException("Invalid priority level!");
         }
 
         this.priority = priorityLevel;
+    }
+    
+    /**
+     * Check if priority level is valid
+     *
+     * @param priorityLevel Priority level input to be checked
+     * @return True if priority level is valid.
+     */
+    private boolean isValidPriorityLevel(String priorityLevel) {
+        return priorityLevel.equals("high") || priorityLevel.equals("med") || priorityLevel.equals("low");
     }
 
     /**

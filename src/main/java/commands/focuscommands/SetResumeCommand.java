@@ -16,7 +16,7 @@ public class SetResumeCommand implements Command {
      * @param timer FocusTimer object to be stopped.
      */
     public SetResumeCommand(FocusTimer timer) {
-        this.focusTimer = timer;
+        focusTimer = timer;
     }
 
     /**
@@ -35,7 +35,7 @@ public class SetResumeCommand implements Command {
      */
     public void execute() throws FocusException {
         if (!timerStartedAndPaused()) {
-            throw new FocusException("Timer is already resumed or Timer hasn't started..");
+            throw new FocusException("Timer is already resumed or Timer hasn't started.");
         }
         focusTimer.setResumeTiming();
     }

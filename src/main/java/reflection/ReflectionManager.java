@@ -59,6 +59,18 @@ public class ReflectionManager {
         try {
             ReflectionQuestion questionToSave = fiveRandomQuestions.get(reflectionId - 1);
 
+            ArrayList<ReflectionQuestion> currentFavourites = favoriteReflectionsList.getReflectionList();
+
+            // Check for duplicate saved questions
+            for (ReflectionQuestion question: currentFavourites) {
+                String savedQuestion = question.toString();
+                String newQuestionToSave = questionToSave.toString();
+
+                if (newQuestionToSave.equals(savedQuestion)) {
+                    throw new ReflectException("Saving duplicate questions are not allowed");
+                }
+            }
+
             favoriteReflectionsList.addReflectionQuestion(questionToSave);
             Storage.saveTasksToFile(FAVOURITE_QUESTIONS_FILE_PATH, favoriteReflectionsList.getReflectionList());
 

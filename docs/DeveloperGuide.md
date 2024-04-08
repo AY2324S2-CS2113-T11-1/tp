@@ -27,13 +27,13 @@
     - [Implementation](#implementation)
       - [Class Diagram](#class-diagram)
       - [Sequence Diagram](#sequence-diagram)
-  - [Habit tracker component]()
-    - [Description](#description-1)
-    - [Design Considerations](#design-considerations-1)
-        - [User Design Considerations](#design-considerations-1)
-        - [Developer Design Considerations](#design-considerations-1)
-    - [Implementation](#implementation-1)
-        - [Class Diagram](#class-diagram-1)
+  - [Habit tracker component](#habit-tracker-component)
+    - [Description](#description-2)
+    - [Design Considerations](#design-considerations-2)
+        - [User Design Considerations](#design-considerations-2)
+        - [Developer Design Considerations](#design-considerations-2)
+    - [Implementation](#implementation-2)
+        - [Class Diagram](#class-diagram-2)
         - [Sequence Diagram](#sequence-diagram-1)
   - [Sleep tracker component](#sleep-tracker-component)
     - [Description](#description-2)
@@ -99,7 +99,7 @@ You are recommended to use Intellij IDEA:
 
 ### UI component
 #### Description
-`Ui` component is in charge of reading in user input and printing output. </br> </br>
+`Ui` component is in charge of reading in user input and printing output.
 
 The `Ui` class is created to standardise the output formatting of messages to be printed across all features. These formatting include the printing of messages and lists, reducing code repetition.
 
@@ -416,6 +416,8 @@ The habit tracker component aims to provide user with a tool to track and cultiv
         * `getHabitCount()`: Get the habit count of the habit.
         * `getPriority()`: Get the priority of the habit.
         * `toString()`: Method that formats the attributes of the habit for printing.
+    * Dependencies:
+        * Enum Priority: Utilized to allow only specific priority levels (`HIGH, MED, LOW`) for a habit.
     * UML notes:
         * `HabitTracker` can contain any number of `Habit` instances.
         * When a `HabitTracker` object is destroyed, its associated `Habit` instances are also destroyed, showcasing a composition relationship.
@@ -433,11 +435,11 @@ The habit tracker component aims to provide user with a tool to track and cultiv
         * Command format: `habit list`
     * `UpdateHabitCountCommand`: Increase habit count after completing a habit.
         * Command format: `habit update /id <habit_ID> /by <increment_count>`
-    * `SetPriorityCommand`: Set priority level of habit
+    * `SetPriorityCommand`: Set priority level of habit.
         * Command format: `habit set /id <habit_ID> /priority <priority_level>`
     * `SortHabitsCommand`: Sort habit list according to priority level.
         * Command format: `habit sort`
-    * `HabitHelpCommand`: Display a help menu of the habit-tracker commands
+    * `HabitHelpCommand`: Display a help menu of the habit-tracker commands.
         * Command format: `habit help`
 
 
@@ -572,6 +574,8 @@ user's wellness.
         * Command format:`sleep save`
     * `UpdateSleepCommand`: Change number of hours slept on a specific date.
         * Command format: `sleep update <date> /new <new_hours>`
+    * `HelpSleepCommand`: Help page for sleep commands.
+        * Command format: `sleep help`     
     
 ##### Sequence Diagram
 
@@ -1038,9 +1042,538 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
    ```
    
 ### Habit Tracker component
-### Sleep Tracker component
-### Focus Timer component
+#### Add Habit
+1. Testcase: `habit add` 
 
+   Expected outcome: Error message prompting you that the habit description cannot be empty.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Habit Description cannot be left empty.
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit add vacuum the floor`
+
+   Expected outcome: add habit successful.
+    ```
+   ________________________________________________________________________________________________________________
+   Great! You have added a new habit:
+      'vacuum the floor' was successfully added!
+   ________________________________________________________________________________________________________________
+   ```
+   
+#### Delete Habit
+1. Testcase: `habit delete /id`
+
+   Expected outcome: Error message prompting you to provide a habit ID.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a habit ID.
+    Use Format: habit delete <habit_ID>
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit delete /id w`
+
+   Expected outcome: Error message prompting you to provide a valid habit ID.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit delete /id 2` with one habit in the list.
+
+   Expected outcome: Error message prompting you to provide a valid habit ID.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+4. Testcase: `habit delete /id 1` with one habit in the list.
+
+   Expected outcome: Habit deleted successfully.
+    ```
+    ________________________________________________________________________________________________________________
+    Got it! I've removed this habit:
+       [LOW] vacuum the floor [count: 0]
+    Now you have 0 habits left in the list.
+    ________________________________________________________________________________________________________________
+    ```
+#### List habits
+1. Testcase: `habit list` with empty list.
+
+   Expected outcome: Show empty list message.
+    ```
+    ________________________________________________________________________________________________________________
+    Here is the list of all your habits!
+       <you currently have no habits, add one now!>
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit list` with 2 habits in the list.
+
+   Expected outcome: Prints a list of current habits.
+    ```
+    ________________________________________________________________________________________________________________
+    Here is the list of all your habits!
+       1. [LOW] vacuum the floor [count: 0]
+       2. [LOW] complete leetcode daily question [count: 0]
+    ________________________________________________________________________________________________________________
+    ```   
+#### Update habit count
+1. Testcase: `habit update` or `habit update /id` or `habit update /id /by`
+
+   Expected outcome: Error message displaying incorrect formatting.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Incorrect update command formatting
+    Use Format: habit update /id <habit_ID> /by <increment_count>
+    Note: for <increment_count>, use '+1' to increase by 1, '-1' to decrease by 1
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit update /id 3 /by +2` with 2 habits in the list.
+
+   Expected outcome: Error message prompting user to provide valid habit ID.
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit update /id 1 /by -1` with at least 1 habit in the list, and a zero habit count for the first habit.
+
+   Expected outcome: Error message informing user to not decrement habit count to below zero.
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: You cannot decrement a habit count to below zero
+    ________________________________________________________________________________________________________________
+    ```   
+4. Testcase: `habit update /id 1 /by +1` with at least 1 habit in the list, and a zero habit count for the first habit.
+
+   Expected outcome: Increase habit count successfully.
+
+    ```
+    ________________________________________________________________________________________________________________
+    Good Job! You have completed your habit!
+    The count for your habit has been updated:
+       1.  [LOW] vacuum the floor [count: 1]
+    ________________________________________________________________________________________________________________
+    ```      
+      
+#### Set habit priority level
+1. Testcase: `habit set` or `habit set /id` or `habit set /id /priority`
+
+   Expected outcome: Error message displaying incorrect formatting.
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Incorrect set priority command formatting
+    Use Format: habit set /id <habit_ID> /priority <priority_level>
+    Note: for <priority_level>, there are 3 levels --> low, med, high
+    ________________________________________________________________________________________________________________
+    ```
+2. Testcase: `habit set /id 3 /priority low` with 2 habits in the list.
+
+   Expected outcome: Error message prompting user to provide valid habit ID.
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please provide a valid habit ID.
+    ________________________________________________________________________________________________________________
+    ```
+3. Testcase: `habit set /id 1 /priority very high` with at least 1 habit in the list.
+
+   Expected outcome: Error message displaying invalid priority level.
+
+    ```
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Invalid priority level!
+    ________________________________________________________________________________________________________________
+    ```   
+4. Testcase: `habit set /id 1 /priority high` with at least 1 habit in the list.
+
+   Expected outcome: Priority level set to high successfully.
+
+    ```
+    ________________________________________________________________________________________________________________
+    The priority for your habit has been updated:
+       1.  [HIGH] vacuum the floor [count: 0]
+    ________________________________________________________________________________________________________________
+    ```   
+#### Sort habit list according to priority
+1. Testcase: `habit sort` without any habits in the list.
+
+   Expected outcome: Message informing user that he have no habits to sort.
+    ```
+    ________________________________________________________________________________________________________________
+    You have no habits to sort.
+    ________________________________________________________________________________________________________________
+    ```
+   
+2. Testcase: `habit sort` with at least 1 habit in the list.
+
+   Expected outcome: habit sorted successfully.
+    ```
+    ________________________________________________________________________________________________________________
+    Habits have been sorted according to priority.
+    Use `habit list` to view the updated list.
+    ________________________________________________________________________________________________________________
+    ```
+   
+### Sleep Tracker component
+#### Add Sleep Cycle
+1. Testcase: `sleep add`
+
+    Expected outcome: Error message prompting proper format use
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep add <hoursSlept> /date <date>
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep add -7.5 /date 07/04/2024`
+
+    Expected outcome: Error message prompting hours must be between valid range
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Number of hours must be between 0 and 24
+    E.g: 7.5
+    ________________________________________________________________________________________________________________
+    ~~~
+
+3. Testcase: `sleep add 12 /date <<TODAY_DATE>>`
+   
+    Expected outcome: Error message prompting date must be earlier than today's date
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: U can only add sleep cycles before today's date
+    
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+4. Testcase: `sleep add 13 /date 07/04/2024`
+
+    Expected outcome: Success add message
+    ~~~
+    ________________________________________________________________________________________________________________
+    --- SleepCycle for 07/04/2024 has been added ---
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+#### Get Sleep Cycle
+1. Testcase: `sleep get <<UNRECORDED_DATE>>`
+
+   Expected outcome: Error message to indicate sleep cycle not recorded in sleep list
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry found for the date.
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep get 07/04/2024`
+
+   Expected outcome: Success get message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Hours slept on 07/04/2024: 7.0
+    ________________________________________________________________________________________________________________
+    ~~~
+#### List Sleep Cycles
+
+1. Testcase: `sleep list <<RANDOM_STRING>>`
+
+   Expected outcome: Error message to prompt proper sleep list format usage
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep list
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep list`
+
+   Expected outcome: Success sleep list message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Total hrs slept: 7.0
+   1. 07/04/2024: 7.0
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Update Sleep Cycle
+
+1. Testcase: `sleep update <<UNRECORDED_DATE>> /new 5.5`
+
+   Expected outcome: Error message to indicate date not tracked 
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry found for the date.
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep update 07/04/2024 /new -4.5`
+
+   Expected outcome: Error message to indicate improper hours used
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Number of hours must be between 0 and 24
+    E.g: 7.5
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+3. Testcase: `sleep update 07/04/2024 /new 5.5`
+
+   Expected outcome: Success update sleep message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Hours of sleep for 07/04/2024 has been updated from 7.0 to 5.5
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Delete Sleep Cycle
+1. Testcase: `sleep delete`
+
+   Expected outcome: Error message to prompt proper delete sleep cycle formats
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format:
+    sleep delete /date <date>
+    OR
+    sleep delete /before <date>
+    OR
+    sleep delete /from <date> /to <date>
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep delete /date <<UNRECORDED_DATE>>`
+
+    Expected outcome: Error message to indicate no entry for the date
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry for sleep cycle on 27/01/2001
+    ________________________________________________________________________________________________________________
+    ~~~
+
+3. Testcase: `sleep delete /date 05/04/2012`
+
+   Expected outcome: Delete success message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Sleep cycle for 05/04/2012 has been removed from list
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+4. Testcase: `sleep delete /before 27/01/2001`
+
+   Expected outcome: Shows number of Sleep cycles deleted
+    ~~~
+   ________________________________________________________________________________________________________________
+    A total of 0 sleep cycles have been deleted
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+5. Testcase: `sleep delete /from 29/01/2002 /to 29/12/2002`
+
+   Expected outcome: Error message to indicate invalid date range
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Start date must be before end date
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+6. Testcase: `sleep delete /from 29/01/2002 /to 29/12/2002`
+
+   Expected outcome: Shows number of sleep cycles deleted
+    ~~~
+    ________________________________________________________________________________________________________________
+    A total of 0 sleep cycles have been deleted
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Save Sleep Cycle
+1. Testcase: `sleep save <<RANDOM_STRING>>`
+
+   Expected outcome: Error message to prompt proper sleep list format usage
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep save
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep save`
+
+   Expected outcome: Success sleep list message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Saved list to storage file
+    ________________________________________________________________________________________________________________
+    ~~~
+
+### Focus Timer component
+#### Switch timer mode
+1. Testcase: `focus switch` when no timer is running <br>
+Expected outcome: Message indicating that timer has been switched.
+~~~
+________________________________________________________________________________________________________________
+Switched to Count down timer
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus switch` when timer has been set to run by the user(`focus start`) <br>
+Expected outcome: Error message indicating that a timer is currently running.
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Unable to change as timer is running.
+________________________________________________________________________________________________________________
+~~~
+#### Start a timer
+1. Testcase: `focus start` when timer is not running <br>
+Expected outcome: Message indicating that timer has started successfully.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Your session has started. Time to grind!
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer started! 
+Duration set: 1 minute(s) 0 second(s)
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus start` when timer is running <Br>
+Expected outcome: Error message informing users that timer has already started.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Error! Clock has already started.
+________________________________________________________________________________________________________________
+~~~
+
+#### Stop a timer
+1. Testcase: `focus stop` when timer is currently running <br>
+   Expected outcome: Timer stopped successfully.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Your focus session has ended.
+Total time spent: 0 hours, 3 minutes, 42 seconds
+To start a new session, use ‘focus start’ 
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer stopped.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus stop` when timer is not running <Br>
+Expected outcome: Error message informing users that timer is not running.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Error! Clock is not running.
+________________________________________________________________________________________________________________
+~~~
+#### Check time for focus timer
+1. Testcase: `focus check` when timer has started <br>
+Expected outcome: Message informing users the total time elapsed or time remaining.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Total time elapsed: 
+0 hours, 0 minutes, 5 seconds
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Remaining time: 
+0 minutes 56 seconds left.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus check` when timer is not running <Br>
+Expected outcome: Error message informing users that timer is not running.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer have not started. Please use focus start.
+________________________________________________________________________________________________________________
+~~~
+#### Pause time for focus timer
+1. Testcase: `focus pause` when timer has started <br>
+Expected outcome: Message informing users that timer has been paused.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Count up timer paused.
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Timer paused. 
+Remaining time: 0 minutes 56 seconds
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus pause` when timer is not running <Br>
+Expected outcome: Error message informing users that timer has been resumed.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer is already paused or Timer hasn't started.
+________________________________________________________________________________________________________________
+~~~
+#### Resume time for focus timer
+1. Testcase: `focus resume` when timer has started and has been paused. <br>
+Expected outcome: Message informing users the total time elapsed or time remaining.
+
+Count up timer:
+~~~
+________________________________________________________________________________________________________________
+Count up timer resumed
+________________________________________________________________________________________________________________
+~~~
+Count down timer:
+~~~
+________________________________________________________________________________________________________________
+Countdown timer resumed.
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus resume` when timer is not running <Br>
+Expected outcome: Error message informing users that timer is not running or has already been resumed.
+
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Timer is already resumed or Timer hasn't started.
+________________________________________________________________________________________________________________
+~~~
+#### Set time for focus timer
+1. Testcase: `focus set 10` <br>
+   Expected outcome: Message showing that count down timer has been set to 10 minutes.
+
+~~~
+________________________________________________________________________________________________________________
+Countdown duration has been set to 10 minute(s)
+________________________________________________________________________________________________________________
+~~~
+2. Testcase: `focus set 0` <br>
+   Expected outcome: Error message prompting user to input a duration more than 0.
+~~~
+________________________________________________________________________________________________________________
+Duration cannot be less than 1.
+________________________________________________________________________________________________________________
+~~~
+3. Testcase: `focus set w` <br>
+   Expected outcome: Error message prompting user to input a valid duration.
+~~~
+________________________________________________________________________________________________________________
+ERROR MSG: Invalid duration.
+________________________________________________________________________________________________________________
+~~~
 ### Fitness Tracker component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.

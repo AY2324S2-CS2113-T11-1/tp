@@ -17,7 +17,7 @@ public class SwitchTimerCommand implements Command {
      * @param timer FocusTimer object to be stopped.
      */
     public SwitchTimerCommand(FocusTimer timer) {
-        this.focusTimer = timer;
+        focusTimer = timer;
     }
 
     /**
@@ -28,7 +28,7 @@ public class SwitchTimerCommand implements Command {
     @Override
     public void execute() throws FocusException {
         if (focusTimer.getStartStatus()) {
-            throw new FocusException("Unable to change as timer is running");
+            throw new FocusException("Unable to change as timer is running.");
         }
         focusTimer.switchTimer();
     }

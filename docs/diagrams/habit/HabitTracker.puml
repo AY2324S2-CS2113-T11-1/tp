@@ -1,7 +1,17 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+skinparam NoteFontSize 20
+
+skinparam class {
+    FontSize 20
+    AttributeFontSize 20
+    MethodFontSize 20
+}
+
 skinparam classAttributeIconSize 0
+hide circle
+
 
 package parser {
     class HabitCommandParser {
@@ -17,26 +27,9 @@ package command {
                + isExit(): boolean
     }
 
-    class AddHabitCommand implements Command {
+    class HabitCommand implements Command {
     }
-
-    class DeleteHabitCommand implements Command {
-    }
-
-    class ListHabitsCommand implements Command {
-    }
-
-    class SetPriorityCommand implements Command {
-    }
-
-    class SortHabitsCommand implements Command {
-    }
-
-    class UpdateHabitCountCommand implements Command {
-    }
-
-    class HabitHelpCommand implements Command {
-    }
+    note top of HabitCommand: Could represent: \n1. AddHabitCommand \n2. DeleteHabitCommand \n3. ListHabitsCommand \n4. SetPriorityCommand \n5. SortHabitsCommand \n6. UpdateHabitCountCommand \n7. HabitHelpCommand
 }
 
 Package habit {
@@ -89,28 +82,18 @@ Package storage {
 class Ui {
 }
 
-HabitTracker *-- "*" Habit : contains
-Habit *-- "1" Priority : contains
+HabitTracker *-- "*" Habit : contains >
+Habit ..> Priority : uses >
 
-HabitTracker --> HabitTrackerStorage : uses >
-HabitTrackerStorage --> Storage : uses >
-HabitTracker --> Ui : uses >
+HabitTracker ..> HabitTrackerStorage : uses >
+HabitTrackerStorage ..> Storage : uses >
+HabitTracker ..> Ui : uses >
 
 Parser ..> HabitCommandParser : creates >
-HabitCommandParser .DOWN.> AddHabitCommand : creates >
-HabitCommandParser .DOWN.> DeleteHabitCommand : creates >
-HabitCommandParser .DOWN.> ListHabitsCommand : creates >
-HabitCommandParser .DOWN.> SetPriorityCommand : creates >
-HabitCommandParser .DOWN.> SortHabitsCommand : creates >
-HabitCommandParser .DOWN.> UpdateHabitCountCommand : creates >
-HabitCommandParser .DOWN.> HabitHelpCommand : creates >
+HabitCommandParser .DOWN.> HabitCommand : creates >
 
-AddHabitCommand --> HabitTracker : uses >
-DeleteHabitCommand --> HabitTracker : uses >
-ListHabitsCommand --> HabitTracker : uses >
-SetPriorityCommand --> HabitTracker : uses >
-SortHabitsCommand --> HabitTracker : uses >
-UpdateHabitCountCommand --> HabitTracker : uses >
+HabitCommand --> HabitTracker : uses >
+
 
 
 

@@ -38,16 +38,23 @@ public class AddSleepCommand implements Command {
         double hourSlept;
         LocalDate dateSlept;
         try {
-            hourSlept = Double.parseDouble(userCommand[0].trim());
+            hourSlept = Math.round(Double.parseDouble(userCommand[0].trim()) * 10) / 10.0;
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours slept" + System.lineSeparator()
                 + "E.g: 7.5");
+        }
+        if (hourSlept < 0 || hourSlept > 24) {
+            throw new SleepException("Number of hours must be between 0 and 24" + System.lineSeparator()
+                    + "E.g: 7.5");
         }
         try {
             dateSlept = DateFormat.convertStringToDate(userCommand[1].trim());
         } catch (DateTimeParseException e) {
             throw new SleepException("Key in valid date of sleep" + System.lineSeparator()
                 + "E.g: 22/12/2023");
+        }
+        if (!dateSlept.isBefore(LocalDate.now())) {
+            throw new SleepException("U can only add sleep cycles before today's date" + System.lineSeparator());
         }
         assert !sleepCommandArgs.isEmpty() : "Sleep cycle should not be added";
         sleepCycleToAdd = new SleepCycle(hourSlept, dateSlept);
