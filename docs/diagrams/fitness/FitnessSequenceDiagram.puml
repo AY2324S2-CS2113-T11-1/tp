@@ -4,10 +4,10 @@ autonumber
 
 participant ":Main" as Main
 participant ":Scanner" as Scanner
-participant "<<Class>>\nFitnessMotivator" as FitnessMotivator
+participant ":FitnessMotivator" as FitnessMotivator
 participant "<<Class>>\nParser" as Parser
 participant "<<Class>>\nFitnessCommandParser" as FitnessCommandParser
-participant "<<Class>>\nPlaceholderFitnessCommand" as PlaceholderFitnessCommand
+participant ":PlaceholderFitnessCommand" as PlaceholderFitnessCommand
 
 hide footbox
 
