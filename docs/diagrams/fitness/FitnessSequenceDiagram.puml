@@ -2,12 +2,14 @@
 
 autonumber
 
-participant Main
-participant Scanner
-participant FitnessMotivator
-participant Parser
-participant FitnessCommandParser
-participant PlaceholderFitnessCommand
+participant ":Main" as Main
+participant ":Scanner" as Scanner
+participant "<<Class>>\nFitnessMotivator" as FitnessMotivator
+participant "<<Class>>\nParser" as Parser
+participant "<<Class>>\nFitnessCommandParser" as FitnessCommandParser
+participant "<<Class>>\nPlaceholderFitnessCommand" as PlaceholderFitnessCommand
+
+hide footbox
 
 activate Main
 
