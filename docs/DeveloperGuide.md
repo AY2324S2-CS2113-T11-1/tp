@@ -683,6 +683,7 @@ well-being.
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
 ![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
+</br>
 Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
 - `FitnessMotivator` Class
   - Overview
@@ -838,7 +839,7 @@ Note that certain details described below have been omitted from Class Diagram f
     - With parameters, the command retrieves all the exercises from the specified `ExerciseType` and prints it.
       - Command format: `fitness get arms`
   - `AddExerciseCommand`: Add a user specified exercise into the list.
-    - CommandFormat: `fitness add <ExerciseType>, <ExerciseName>, <Number_Of_Sets>, <Number_Of_Reps>`
+    - CommandFormat: `fitness add /type <ExerciseType> /name <ExerciseName> /sets <Number_Of_Sets> /reps <Number_Of_Reps>`
   - `DeleteExerciseCommand`: Deletes a user specified `Exercise` from the list. 
     - CommandFormat: `fitness delete <ExerciseType> <Index>`
   - `GoalExerciseCommand`:
@@ -855,6 +856,7 @@ Note that certain details described below have been omitted from Class Diagram f
 #### Sequence Diagram
 <!-- Insert image and description of the image -->
 ![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
+</br>
 - Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
 
 When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
@@ -1543,7 +1545,8 @@ ________________________________________________________________________________
 Countdown timer resumed.
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus resume` when timer is not running <Br>
+2. Testcase: `focus resume` when timer is not running 
+</br>
 Expected outcome: Error message informing users that timer is not running or has already been resumed.
 
 ~~~
@@ -1552,7 +1555,8 @@ ERROR MSG: Timer is already resumed or Timer hasn't started.
 ________________________________________________________________________________________________________________
 ~~~
 #### Set time for focus timer
-1. Testcase: `focus set 10` <br>
+1. Testcase: `focus set 10` 
+</br>
    Expected outcome: Message showing that count down timer has been set to 10 minutes.
 
 ~~~
@@ -1560,14 +1564,16 @@ ________________________________________________________________________________
 Countdown duration has been set to 10 minute(s)
 ________________________________________________________________________________________________________________
 ~~~
-2. Testcase: `focus set 0` <br>
+2. Testcase: `focus set 0` 
+</br>
    Expected outcome: Error message prompting user to input a duration more than 0.
 ~~~
 ________________________________________________________________________________________________________________
 Duration cannot be less than 1.
 ________________________________________________________________________________________________________________
 ~~~
-3. Testcase: `focus set w` <br>
+3. Testcase: `focus set w` 
+</br>
    Expected outcome: Error message prompting user to input a valid duration.
 ~~~
 ________________________________________________________________________________________________________________
