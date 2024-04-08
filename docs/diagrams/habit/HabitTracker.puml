@@ -1,7 +1,17 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+skinparam NoteFontSize 20
+
+skinparam class {
+    FontSize 20
+    AttributeFontSize 20
+    MethodFontSize 20
+}
+
 skinparam classAttributeIconSize 0
+hide circle
+
 
 package parser {
     class HabitCommandParser {
