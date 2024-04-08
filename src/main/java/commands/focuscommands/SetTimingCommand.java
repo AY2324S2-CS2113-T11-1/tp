@@ -23,7 +23,7 @@ public class SetTimingCommand implements Command {
         try {
             this.desiredDuration = Integer.parseInt(parts[0]);
         } catch (NumberFormatException e) {
-            String invalidIndex = "Invalid duration";
+            String invalidIndex = "Invalid duration.";
             throw new FocusException(invalidIndex);
         }
     }

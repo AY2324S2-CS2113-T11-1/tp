@@ -27,7 +27,7 @@ public class StopTimerCommand implements Command {
     @Override
     public void execute() throws FocusException {
         if (!focusTimer.getStartStatus()) {
-            throw new FocusException("Error! Clock is not running...");
+            throw new FocusException("Error! Clock is not running.");
         }
         focusTimer.setStopTiming();
     }
