@@ -273,6 +273,8 @@ habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 
 * `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
 * `INCREMENT_COUNT` can be set to 0, but the habit count will remain the same.
+* The habit count can only be incremented to a maximum of `2147483647`, which represents the maximum range of an 
+integer. Any exceeding count will result in an error message due to integer overflow.
 
 Example of usage (increasing count):
 ```
@@ -358,7 +360,7 @@ Format:
 habit sort
 ```
 
-* Extraneous parameters will be ignored. For eg, `habit sort 123` will be taken as `habit sort`
+* Extraneous parameters will be ignored. For eg, `habit sort 123` will be taken as `habit sort`.
 
 Example of usage:
 ```
@@ -379,6 +381,8 @@ Format:
 ```
 habit help
 ```
+
+* Extraneous parameters will be ignored. For eg, `habit help 123` will be taken as `habit help`.
 
 Example of usage:
 ```
