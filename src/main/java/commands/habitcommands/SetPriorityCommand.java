@@ -26,7 +26,7 @@ public class SetPriorityCommand implements Command {
 
         String[] parts = habitCommandArgs.trim().split("/id | /priority");
 
-        if (!(parts.length == REQUIRED_PARAMETERS)) {
+        if (parts.length != REQUIRED_PARAMETERS) {
             throw new HabitException("Incorrect set priority command formatting\n" +
                     "Use Format: habit set /id <habit_ID> /priority <priority_level>\n" +
                     "Note: for <priority_level>, there are 3 levels --> low, med, high");

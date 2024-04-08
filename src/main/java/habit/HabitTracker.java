@@ -144,7 +144,7 @@ public class HabitTracker {
     }
 
     /**
-     * Sort the habits in the habit tracker list according to their priority from HIGH to LOW
+     * Sort the habits in the habit tracker list according to their priority from HIGH to LOW.
      *
      * @throws HabitException If there are any exception errors when sorting.
      */
