@@ -44,6 +44,10 @@ public class UpdateSleepCommand implements Command {
         } catch (NumberFormatException e) {
             throw new SleepException("Key in valid number of hours to update to");
         }
+        if (hours < 0 || hours > 24) {
+            throw new SleepException("Number of hours must be between 0 and 24" + System.lineSeparator()
+                    + "E.g: 7.5");
+        }
 
     }
 

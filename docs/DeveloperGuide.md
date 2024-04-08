@@ -574,6 +574,8 @@ user's wellness.
         * Command format:`sleep save`
     * `UpdateSleepCommand`: Change number of hours slept on a specific date.
         * Command format: `sleep update <date> /new <new_hours>`
+    * `HelpSleepCommand`: Help page for sleep commands.
+        * Command format: `sleep help`     
     
 ##### Sequence Diagram
 
@@ -1216,6 +1218,196 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ```
    
 ### Sleep Tracker component
+#### Add Sleep Cycle
+1. Testcase: `sleep add`
+
+    Expected outcome: Error message prompting proper format use
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep add <hoursSlept> /date <date>
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep add -7.5 /date 07/04/2024`
+
+    Expected outcome: Error message prompting hours must be between valid range
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Number of hours must be between 0 and 24
+    E.g: 7.5
+    ________________________________________________________________________________________________________________
+    ~~~
+
+3. Testcase: `sleep add 12 /date <<TODAY_DATE>>`
+   
+    Expected outcome: Error message prompting date must be earlier than today's date
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: U can only add sleep cycles before today's date
+    
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+4. Testcase: `sleep add 13 /date 07/04/2024`
+
+    Expected outcome: Success add message
+    ~~~
+    ________________________________________________________________________________________________________________
+    --- SleepCycle for 07/04/2024 has been added ---
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+#### Get Sleep Cycle
+1. Testcase: `sleep get <<UNRECORDED_DATE>>`
+
+   Expected outcome: Error message to indicate sleep cycle not recorded in sleep list
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry found for the date.
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep get 07/04/2024`
+
+   Expected outcome: Success get message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Hours slept on 07/04/2024: 7.0
+    ________________________________________________________________________________________________________________
+    ~~~
+#### List Sleep Cycles
+
+1. Testcase: `sleep list <<RANDOM_STRING>>`
+
+   Expected outcome: Error message to prompt proper sleep list format usage
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep list
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep list`
+
+   Expected outcome: Success sleep list message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Total hrs slept: 7.0
+   1. 07/04/2024: 7.0
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Update Sleep Cycle
+
+1. Testcase: `sleep update <<UNRECORDED_DATE>> /new 5.5`
+
+   Expected outcome: Error message to indicate date not tracked 
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry found for the date.
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep update 07/04/2024 /new -4.5`
+
+   Expected outcome: Error message to indicate improper hours used
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Number of hours must be between 0 and 24
+    E.g: 7.5
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+3. Testcase: `sleep update 07/04/2024 /new 5.5`
+
+   Expected outcome: Success update sleep message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Hours of sleep for 07/04/2024 has been updated from 7.0 to 5.5
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Delete Sleep Cycle
+1. Testcase: `sleep delete`
+
+   Expected outcome: Error message to prompt proper delete sleep cycle formats
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format:
+    sleep delete /date <date>
+    OR
+    sleep delete /before <date>
+    OR
+    sleep delete /from <date> /to <date>
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+2. Testcase: `sleep delete /date <<UNRECORDED_DATE>>`
+
+    Expected outcome: Error message to indicate no entry for the date
+    ~~~
+    ________________________________________________________________________________________________________________
+    No entry for sleep cycle on 27/01/2001
+    ________________________________________________________________________________________________________________
+    ~~~
+
+3. Testcase: `sleep delete /date 05/04/2012`
+
+   Expected outcome: Delete success message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Sleep cycle for 05/04/2012 has been removed from list
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+4. Testcase: `sleep delete /before 27/01/2001`
+
+   Expected outcome: Shows number of Sleep cycles deleted
+    ~~~
+   ________________________________________________________________________________________________________________
+    A total of 0 sleep cycles have been deleted
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+5. Testcase: `sleep delete /from 29/01/2002 /to 29/12/2002`
+
+   Expected outcome: Error message to indicate invalid date range
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Start date must be before end date
+    ________________________________________________________________________________________________________________
+    ~~~
+   
+6. Testcase: `sleep delete /from 29/01/2002 /to 29/12/2002`
+
+   Expected outcome: Shows number of sleep cycles deleted
+    ~~~
+    ________________________________________________________________________________________________________________
+    A total of 0 sleep cycles have been deleted
+    ________________________________________________________________________________________________________________
+    ~~~
+
+#### Save Sleep Cycle
+1. Testcase: `sleep save <<RANDOM_STRING>>`
+
+   Expected outcome: Error message to prompt proper sleep list format usage
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Please use proper format: 
+    sleep save
+    ________________________________________________________________________________________________________________
+    ~~~
+
+2. Testcase: `sleep save`
+
+   Expected outcome: Success sleep list message
+    ~~~
+    ________________________________________________________________________________________________________________
+    Saved list to storage file
+    ________________________________________________________________________________________________________________
+    ~~~
+
 ### Focus Timer component
 #### Switch timer mode
 1. Testcase: `focus switch` when no timer is running <br>
