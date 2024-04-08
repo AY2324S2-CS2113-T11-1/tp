@@ -30,14 +30,34 @@ public class SleepCycleList {
      * @param isPrint true if user wants to print out message, false otherwise
      */
     public void addSleepCycle(SleepCycle sleepCycle, boolean isPrint) {
+        int cyclesDeleted = 0;
+        String message = "";
+        LocalDate startDate = null;
+        LocalDate endDate = null;
+        if (numberOfCycles > 0) {
+            startDate = sleepCycleList.get(0).getDateOfSleep();
+            endDate = sleepCycleList.get(0).getDateOfSleep();
+        }
+        while (totalHrsSlept >= Double.MAX_VALUE) {
+            cyclesDeleted += 1;
+            SleepCycle currSleepCycle = sleepCycleList.get(0);
+            endDate = currSleepCycle.getDateOfSleep();
+            totalHrsSlept -= currSleepCycle.getHoursSlept();
+            sleepCycleList.remove(0);
+            numberOfCycles--;
+        }
+        if (cyclesDeleted > 0) {
+            message += "Deleted sleep cycles from " + startDate + " to " + endDate;
+        }
         sleepCycleList.add(sleepCycle);
         totalHrsSlept += sleepCycle.getHoursSlept();
         numberOfCycles += 1;
         if (isPrint) {
-            Ui.printMessageWithSepNewLine("--- SleepCycle for "
+            message += ("--- SleepCycle for "
                     + DateFormat.convertDateToString(sleepCycle.getDateOfSleep())
                     + " has been added ---");
         }
+        Ui.printMessageWithSepNewLine(message);
         Collections.sort(sleepCycleList);
     }
 
