@@ -1,0 +1,32 @@
+@startuml
+
+hide circle
+hide attributes
+hide methods
+
+skinparam class {
+    FontSize 20
+    AttributeFontSize 20
+    MethodFontSize 20
+}
+
+skinparam defaultFontColor white
+
+Package " "<<Rectangle>>{
+    Class Ui #green
+    Class Logic #blue
+    Class Storage #goldenrod
+    Class Parser #grey
+}
+
+Class User #red
+Class File #lightgreen
+
+Parser -[#grey]> Logic
+Ui -[#green]-> Parser
+Logic -[#blue]-> Storage
+Logic -[#blue]-> Ui
+
+Storage .[#goldenrod].>File
+User ..> Ui #red
+@enduml
