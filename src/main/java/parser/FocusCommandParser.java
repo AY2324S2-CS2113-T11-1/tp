@@ -1,8 +1,15 @@
 package parser;
 
 import commands.Command;
-import commands.focuscommands.*;
 
+import commands.focuscommands.CheckTimeCommand;
+import commands.focuscommands.FocusHelpCommand;
+import commands.focuscommands.SetPauseCommand;
+import commands.focuscommands.SetResumeCommand;
+import commands.focuscommands.SetTimingCommand;
+import commands.focuscommands.StartTimerCommand;
+import commands.focuscommands.StopTimerCommand;
+import commands.focuscommands.SwitchTimerCommand;
 import exceptions.FocusException;
 import focus.FocusTimer;
 
