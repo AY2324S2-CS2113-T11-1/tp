@@ -10,6 +10,8 @@ participant "<<Class>>\nParser" as Parser
 participant "<<Class>>\nHabitCommandParser" as HabitCommandParser
 participant ":PlaceholderHabitCommand" as PlaceholderHabitCommand
 
+hide footbox
+
 activate Main
 
 create Scanner

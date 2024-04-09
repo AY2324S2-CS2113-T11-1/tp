@@ -4,6 +4,7 @@ import commands.Command;
 import commands.sleepcommands.AddSleepCommand;
 import commands.sleepcommands.DeleteSleepCommand;
 import commands.sleepcommands.GetSleepCommand;
+import commands.sleepcommands.HelpSleepCommand;
 import commands.sleepcommands.ListSleepCommand;
 import commands.sleepcommands.SaveSleepCommand;
 import commands.sleepcommands.UpdateSleepCommand;
@@ -32,6 +33,8 @@ public class SleepCommandParser {
         String sleepCommandArgs = userCommand.length == 2 ? userCommand[1] : "";
 
         switch(userSleepCommand) {
+        case "help":
+            return new HelpSleepCommand(sleepCommandArgs);
         case "add":
             return new AddSleepCommand(sleepTracker, sleepCommandArgs);
         case "list":

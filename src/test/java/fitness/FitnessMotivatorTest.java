@@ -88,9 +88,9 @@ public class FitnessMotivatorTest {
         Wellness360Exception exceptionOne = assertThrows(FitnessException.class, () ->
                 new AddExerciseCommand(fitnessMotivator, "testing"));
         Wellness360Exception exceptionTwo = assertThrows(FitnessException.class, () ->
-                new AddExerciseCommand(fitnessMotivator, "arms, testing, a, b"));
+                new AddExerciseCommand(fitnessMotivator, "/type arms /name testing /sets a /reps b"));
         Wellness360Exception exceptionThree = assertThrows(FitnessException.class, () ->
-                new AddExerciseCommand(fitnessMotivator, "testing, testing, 3, 10"));
+                new AddExerciseCommand(fitnessMotivator, "/type testing /name testing /sets 3 /reps 10"));
 
         assertEquals("ERROR MSG: " + INSUFFICIENT_ADD_PARAMS_ERROR_MESSAGE, exceptionOne.getMessage());
         assertEquals("ERROR MSG: " + INCORRECT_SETS_REPS_ERROR_MESSAGE, exceptionTwo.getMessage());
@@ -122,16 +122,16 @@ public class FitnessMotivatorTest {
 
     @Test
     public void toggleGoal_markGoalDone_success() {
-        int INDEX = 3;
+        int index = 3;
 
         // Create goal, get status of goal 3
         fitnessMotivator.newGoals();
-        ExerciseGoal testExerciseBeforeToggle = dailyGoals.findExercise(INDEX - 1);
+        ExerciseGoal testExerciseBeforeToggle = dailyGoals.findExercise(index - 1);
         assertFalse(testExerciseBeforeToggle.getStatus());
 
         // Mark goal 3 using toggle, then get status of goal 3
-        fitnessMotivator.toggleGoal(INDEX);
-        ExerciseGoal testExerciseAfterToggle = dailyGoals.findExercise(INDEX - 1);
+        fitnessMotivator.toggleGoal(index);
+        ExerciseGoal testExerciseAfterToggle = dailyGoals.findExercise(index - 1);
         assertTrue(testExerciseAfterToggle.getStatus());
     }
 }

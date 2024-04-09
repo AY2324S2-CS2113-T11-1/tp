@@ -14,10 +14,6 @@ public class ErrorMessageConstants {
             System.lineSeparator() + System.lineSeparator() +
             "Example: fitness delete <type> <index>";
 
-    public static final String DELETE_INDEX_OUT_OF_BOUNDS_ERROR_MESSAGE =
-            "Please enter an index within bounds!" + System.lineSeparator() +
-            "You can do 'fitness get <type> to see the indexes of the exercises!";
-
     public static final String ILLEGAL_TYPE_ERROR_MESSAGE = "Hmm...Invalid type of exercise..." +
             System.lineSeparator() + "Only the following exercise types are allowed: " +
             "Arms, Chest, Abs, Back and Legs!";
@@ -28,7 +24,7 @@ public class ErrorMessageConstants {
     public static final String ADDITIONAL_PARAMS_ERROR_MESSAGE =
             "Additional parameters detected. Don't be extra please.";
 
-    public static final String INCORRECT_DELETE_PARAMS_ERROR_MESSAGE =
+    public static final String INVALID_DELETE_INDEX_ERROR_MESSAGE =
             "Please use a valid delete index. " +
             "Use 'fitness get [Exercise_Type]' to get the indexes!";
 

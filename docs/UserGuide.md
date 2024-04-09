@@ -33,7 +33,8 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
             - [Delete Sleep Cycle of a specific date](#delete-sleep-cycle-of-a-specific-date)
             - [Delete Sleep Cycles before a specific date](#delete-sleep-cycles-before-a-specific-date)
             - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
-          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
+          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save
+          - [`sleep help` - View sleep tracker help menu](#view-sleep-tracker-help-menu-sleep-help)
         - Focus Timer
           - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
           - [`focus start` - Start a new focus timer](#start-a-new-focus-timer-focus-start)
@@ -273,6 +274,8 @@ habit update /id [HABIT_ID] /by [INCREMENT_COUNT]
 
 * `HABIT_ID` and `INCREMENT_COUNT` have to be numerical.
 * `INCREMENT_COUNT` can be set to 0, but the habit count will remain the same.
+* The habit count can only be incremented to a maximum of `2147483647`, which represents the maximum range of an 
+integer. Any exceeding count will result in an error message due to integer overflow.
 
 Example of usage (increasing count):
 ```
@@ -358,7 +361,7 @@ Format:
 habit sort
 ```
 
-* Extraneous parameters will be ignored. For eg, `habit sort 123` will be taken as `habit sort`
+* Extraneous parameters will be ignored. For eg, `habit sort 123` will be taken as `habit sort`.
 
 Example of usage:
 ```
@@ -380,6 +383,8 @@ Format:
 habit help
 ```
 
+* Extraneous parameters will be ignored. For eg, `habit help 123` will be taken as `habit help`.
+
 Example of usage:
 ```
 habit help
@@ -398,14 +403,15 @@ ________________________________________________________________________________
 ```
 
 ### Add a new sleep cycle: `sleep add`
-Allow the user to add new sleep Cycles into the sleep tracker.
+Allow the user to add new sleep Cycles into the sleep tracker. Older sleep cycles will be deleted when total hrs reaches
+the `MAX_VALUE` for `double`.
 
 Format:
 ```
 sleep add [HOURS_SLEPT] /date [DATE_SLEPT]
 ```
 
-* The `sleep`, `/date` and `add` are case-sensitive.
+* `HOURS_SLEPT` will be rounded down to nearest 1 d.p
 * `DATE_SLEPT` must be of format dd/MM/yyyy
 
 Example of usage:
@@ -566,7 +572,34 @@ ________________________________________________________________________________
 Saved list to storage file
 ________________________________________________________________________________________________________________
 ```
-=======
+
+### View sleep tracker help menu: `sleep help`
+Allows new users to check what commands are available for sleep tracker feature and their formats.
+
+Format:
+```
+sleep help
+```
+
+Example of usage:
+```
+sleep help
+```
+Expected outcome:
+```
+________________________________________________________________________________________________________________
+Commands for sleep tracker feature:
+1. sleep add [HOURS_SLEPT] /date [DATE_SLEPT]: Add a new sleep cycle
+2. sleep list: List out all sleep cycles
+3. sleep get [DATE_OF_SLEEP]: Get hours slept on a specific date
+4. sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]: Updates hours slept on a specific date
+5. sleep delete /date [DATE_OF_SLEEP]: Delete Sleep Cycle of a specific date
+6. sleep delete /before [DATE_OF_SLEEP]: Delete Sleep Cycles before a specific date
+7. sleep delete /from [START_DATE] /to [END_DATE]: Delete Sleep Cycles within a range of dates
+8. sleep save: Allow user to save sleep cycles in a text file located in FILE_PATH: data/sleep.txt
+________________________________________________________________________________________________________________
+```
+
 ### Switch focus timer mode: `focus switch`
 Focus timer offers 2 kind of timer for the user. Using `focus switch` command allows user to choose
 between count up timer and count down timer.
@@ -614,8 +647,8 @@ ________________________________________________________________________________
 ~~~
 
 ### Stop the current focus timer: `focus stop`
-> [!NOTE]
-> Countdown timer will automatically stop when the duration expires.
+> <strong><img class="emoji" title=":information_source:" alt=":information_source:" src="https://github.githubassets.com/images/icons/emoji/unicode/2139.png" height="20" width="20"> NOTE: <Br>
+> * Countdown timer will automatically stop when the duration expires.
 >
 Allow users to stop a timer that is currently running. The users will be able to see the total
 time elapsed upon a successful stop.
@@ -659,6 +692,10 @@ ________________________________________________________________________________
 Count down timer completed!
 ________________________________________________________________________________________________________________
 ~~~
+
+> <strong><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20">
+ Warning:
+> * The countdown timer will display the above messages when there are 5 seconds left on the timer, which may disrupt user input. Please wait until the timer is up before trying to input new commands into the CLI, as this is part of the countdown timer feature.
 
 ### Pause the current focus timer: `focus pause`
 Allow users to pause the timer momentarily while the timer is running.
@@ -738,10 +775,11 @@ ________________________________________________________________________________
 ~~~
 
 ### Set focus timer duration: `focus set`
-> Using `focus set` command only affects count down timer.
+> <strong><img class="emoji" title=":bulb:" alt=":bulb:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f4a1.png" height="20" width="20"> Tip: 
+> * Using `focus set`  command only affects count down timer. 
 >
 
-Allow users to set the desired countdown timer duration for the session.
+Allow users to set the desired countdown timer duration in minutes for the session.
 
 Format:
 ~~~
@@ -749,6 +787,7 @@ focus set [minutes]
 ~~~
 * Input `minutes` must be in numerical form and can be more than 60.
 * Example: *120 minutes implies 2 hours*
+* Input `minutes` cannot be more than `MAX_VALUE: 2,147,483,647`.
 * Extraneous parameters for this command will be ignored. For example: `focus set 10 123` will be taken as `focus set 10`.
 
 Example of usage:
@@ -821,16 +860,15 @@ Allows the user to add their own exercises to the list of exercises.
 
 Format:
 ```
-fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]
+fitness add /type [EXERCISE_TYPE] /name [EXERCISE_NAME] /sets [NUMBER_OF_SETS] /reps [NUMBER_OF_REPS]
 ```
 
-* Use of comma between each parameter is required.
 * The `[EXERCISE_TYPE]` parameter only supports the following types:
   * Arms, Chest, Abs, Back, Legs (Not Case Sensitive)
 
 Example of usage:
 ```
-fitness add Arms, Tricep Dips, 8, 10
+fitness add /type Arms /name Tricep Dips /sets 8 /reps 10
 ```
 
 Expected outcome:
@@ -972,12 +1010,15 @@ Expected Outcome:
 ________________________________________________________________________________________________________________
 Here is a list of possible commands you can use with the Fitness Motivator!
 
-1. fitness get: Get 5 random reflection questions
+1. fitness get: Get 5 random exercises each of different type.
 2. fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type
-3. fitness add <exercise_type>, <exercise_name>, <sets>, <reps>: add an exercise to the list of exercises
-4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.The index is based on the index when you run 'fitness get <exercise_type>
+3. fitness add /type <exercise_type>, /name <exercise_name>, /sets <sets>, /reps <reps>: add an exercise to
+    the list of exercises
+4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.The index is based
+    on the index when you run 'fitness get <exercise_type>
 5. fitness goal: Retrieves the status of all current goals, if it exists
-6. fitness goal new: Overwrites current goals with new set of goals if it exists, otherwise creates a brand new set of goals
+6. fitness goal new: Overwrites current goals with new set of goals if it exists, otherwise creates a brand 
+    new set of goals
 7. fitness goal <index>: Toggle the status of the goal
 8. fitness help: Get help menu for reflect commands
 ________________________________________________________________________________________________________________
@@ -1007,41 +1048,41 @@ ________________________________________________________________________________
 
 This section serves as a cheatsheet for commands.
 
-| **Command**                                                                        | **Description**                              |
-|------------------------------------------------------------------------------------|----------------------------------------------|
-| `reflect get`                                                                      | Get 5 random reflection questions            |
-| `reflect save [QUESTION_ID]`                                                       | Save favourite reflection question           |
-| `reflect unsave [QUESTION_ID]`                                                     | Unsave favourite reflection question         |
-| `reflect list`                                                                     | View favourite reflection questions          |
-| `reflect help`                                                                     | View reflection help menu                    |
-| `habit add [HABIT_DESCRIPTION]`                                                    | Add a new habit                              |
-| `habit list`                                                                       | List out all habits                          |
-| `habit update /id [HABIT_ID] /by [INCREMENT_COUNT]`                                | Update habit count after completing a habit  |
-| `habit delete /id [HABIT_ID]`                                                      | Delete a habit                               |
-| `habit set /id [HABIT_ID] /priority [PRIORITY_LEVEL]`                              | Set priority of habit                        |
-| `habit sort`                                                                       | Sort habit tracker list                      |
-| `habit help`                                                                       | View habit tracker help menu                 |
-| `sleep add [HOURS_SLEPT] /date [DATE_SLEPT]`                                       | Add a new sleep cycle                        |
-| `sleep list `                                                                      | List out all sleep cycles                    |
-| `sleep get [DATE_OF_SLEEP]`                                                        | Get hours slept on specific date             |
-| `sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]`                               | Update hours slept on specific date          |
-| `sleep delete /date [DATE_OF_SLEEP]`                                               | Delete Sleep Cycle of a specific date        |
-| `sleep delete /before [DATE_OF_SLEEP]`                                             | Delete Sleep Cycles before a specific date   | 
-| `sleep delete /from [START_DATE] /to [END_DATE]`                                   | Delete Sleep Cycles within a range of dates  | 
-| `sleep save`                                                                       | Save sleep cycles                            |
-| `focus switch`                                                                     | Switch focus timer mode                      |
-| `focus start`                                                                      | Start a new focus timer                      |
-| `focus stop`                                                                       | Stop the current focus timer                 |
-| `focus pause`                                                                      | Pause the current focus timer                |
-| `focus resume`                                                                     | Resume the current focus timer               |
-| `focus check`                                                                      | Check time for focus timer                   |
-| `focus set [MINUTES]`                                                              | Set focus time duration                      |
-| `fitness get`, `fitness get [EXERCISE_TYPE]`                                       | Get a pre-loaded list of different exercises |
-| `fitness add [EXERCISE_TYPE], [EXERCISE_NAME], [NUMBER_OF_SETS], [NUMBER_OF_REPS]` | Add new exercises into the list              |
-| `fitness delete [EXERCISE_TYPE] [INDEX]`                                           | Delete exercises from the list               |
-| `fitness goal`, `fitness goal new`, `fitness goal [INDEX]`                         | Set exercise goals for the day               |
-| `fitness help`                                                                     | View Fitness Motivator help menu             |
-| `exit`                                                                             | Exit application                             |
+| **Command**                                                                                             | **Description**                              |
+|---------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| `reflect get`                                                                                           | Get 5 random reflection questions            |
+| `reflect save [QUESTION_ID]`                                                                            | Save favourite reflection question           |
+| `reflect unsave [QUESTION_ID]`                                                                          | Unsave favourite reflection question         |
+| `reflect list`                                                                                          | View favourite reflection questions          |
+| `reflect help`                                                                                          | View reflection help menu                    |
+| `habit add [HABIT_DESCRIPTION]`                                                                         | Add a new habit                              |
+| `habit list`                                                                                            | List out all habits                          |
+| `habit update /id [HABIT_ID] /by [INCREMENT_COUNT]`                                                     | Update habit count after completing a habit  |
+| `habit delete /id [HABIT_ID]`                                                                           | Delete a habit                               |
+| `habit set /id [HABIT_ID] /priority [PRIORITY_LEVEL]`                                                   | Set priority of habit                        |
+| `habit sort`                                                                                            | Sort habit tracker list                      |
+| `habit help`                                                                                            | View habit tracker help menu                 |
+| `sleep add [HOURS_SLEPT] /date [DATE_SLEPT]`                                                            | Add a new sleep cycle                        |
+| `sleep list `                                                                                           | List out all sleep cycles                    |
+| `sleep get [DATE_OF_SLEEP]`                                                                             | Get hours slept on specific date             |
+| `sleep update [DATE_OF_SLEEP] /new [HOURS_OF_SLEEP]`                                                    | Update hours slept on specific date          |
+| `sleep delete /date [DATE_OF_SLEEP]`                                                                    | Delete Sleep Cycle of a specific date        |
+| `sleep delete /before [DATE_OF_SLEEP]`                                                                  | Delete Sleep Cycles before a specific date   | 
+| `sleep delete /from [START_DATE] /to [END_DATE]`                                                        | Delete Sleep Cycles within a range of dates  | 
+| `sleep save`                                                                                            | Save sleep cycles                            |
+| `focus switch`                                                                                          | Switch focus timer mode                      |
+| `focus start`                                                                                           | Start a new focus timer                      |
+| `focus stop`                                                                                            | Stop the current focus timer                 |
+| `focus pause`                                                                                           | Pause the current focus timer                |
+| `focus resume`                                                                                          | Resume the current focus timer               |
+| `focus check`                                                                                           | Check time for focus timer                   |
+| `focus set [MINUTES]`                                                                                   | Set focus time duration                      |
+| `fitness get`, `fitness get [EXERCISE_TYPE]`                                                            | Get a pre-loaded list of different exercises |
+| `fitness add /type [EXERCISE_TYPE] /name [EXERCISE_NAME] /sets [NUMBER_OF_SETS] /reps [NUMBER_OF_REPS]` | Add new exercises into the list              |
+| `fitness delete [EXERCISE_TYPE] [INDEX]`                                                                | Delete exercises from the list               |
+| `fitness goal`, `fitness goal new`, `fitness goal [INDEX]`                                              | Set exercise goals for the day               |
+| `fitness help`                                                                                          | View Fitness Motivator help menu             |
+| `exit`                                                                                                  | Exit application                             |
 
 
 ## FAQ

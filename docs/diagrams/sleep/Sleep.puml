@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 skinparam classAttributeIconSize 0
+hide circle
 
 package parser {
     class SleepCommandParser {
@@ -21,7 +22,7 @@ package command {
 
     class SleepCommand implements Command {
     }
-    note top of SleepCommand: Could represent: \n1.AddSleepCommand \n2.DeleteSleepCommand \n3.GetSleepCommand \n4.ListSleepCommand \n5.SaveSleepCommand \n6.UpdateSleepCommand
+    note top of SleepCommand: Could represent: \n1.AddSleepCommand \n2.DeleteSleepCommand \n3.GetSleepCommand \n4.ListSleepCommand \n5.SaveSleepCommand \n6.UpdateSleepCommand \n7.HelpSleepCommand
 
 
 }
