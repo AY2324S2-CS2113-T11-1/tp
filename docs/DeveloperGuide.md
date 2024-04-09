@@ -8,7 +8,7 @@
   - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
   - [Before writing code](#before-writing-code)
 - [Design & implementation]()
-  - [Architecture]()
+  - [Architecture](#architecture)
   - [Ui component]()
   - [Command parser component]()
   - [Storage component]()
@@ -58,12 +58,12 @@
         - [Class Diagram](#class-diagram-3)
         - [Sequence Diagram](#sequence-diagram-3)
 - [Appendix: Requirements]()
-  - [Product Scope]()
-  - [User Stories]()
-  - [Non Functional Requirements]()
-  - [Glossary]()
-- [Appendix: Instructions for manual testing]()
-  - [Reflection component]()
+  - [Product Scope](#product-scope)
+  - [User Stories](#user-stories)
+  - [Non Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
+  - [Reflection component](#reflection-component-1)
 
 ## Acknowledgements
 
