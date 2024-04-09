@@ -1,13 +1,7 @@
 package parser;
 
 import commands.Command;
-import commands.focuscommands.SetResumeCommand;
-import commands.focuscommands.StartTimerCommand;
-import commands.focuscommands.StopTimerCommand;
-import commands.focuscommands.SwitchTimerCommand;
-import commands.focuscommands.SetPauseCommand;
-import commands.focuscommands.CheckTimeCommand;
-import commands.focuscommands.SetTimingCommand;
+import commands.focuscommands.*;
 
 import exceptions.FocusException;
 import focus.FocusTimer;
@@ -45,6 +39,8 @@ public class FocusCommandParser {
             return new CheckTimeCommand(focusTimer);
         case "set":
             return new SetTimingCommand(focusTimer, focusTimerCommandArgs);
+        case "help":
+            return new FocusHelpCommand();
         default:
             throw new FocusException("Unknown Focus Timer command");
         }
