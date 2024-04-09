@@ -3,10 +3,10 @@
 
 autonumber
 
-participant SleepTracker
-participant SleepTrackerStorage
-participant Storage
-participant ArrayList
+participant ":SleepTracker" as SleepTracker
+participant "<<Class>>\nSleepTrackerStorage" as SleepTrackerStorage
+participant "<<Class>>\nStorage" as Storage
+participant ":ArrayList" as ArrayList
 
 activate SleepTracker
 SleepTracker -> SleepTrackerStorage: calls saveSleepListToFile(ArrayList<SleepCycle> sleepList)

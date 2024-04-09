@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 skinparam classAttributeIconSize 0
+hide circle
 
 class Storage {
     +<u>loadDataFromFile(filePath: String): ArrayList<String></u>
