@@ -64,6 +64,10 @@
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
   - [Reflection component](#reflection-component-1)
+  - [Habit Tracker component](#habit-tracker-component-1)
+  - [Sleep Tracker component](#sleep-tracker-component-1)
+  - [Focus Timer component](#focus-timer-component-1)
+  - [Fitness Tracker component](#fitness-tracker-component)
 
 ## Acknowledgements
 
