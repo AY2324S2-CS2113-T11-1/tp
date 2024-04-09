@@ -11,7 +11,7 @@
   - [Architecture]()
   - [Ui component]()
   - [Command parser component]()
-  - [Storage component]()
+  - [Storage component](#storage-component)
     - [Description](#description)
     - [Design Considerations](#design-considerations)
       - [User Design Considerations](#user-design-considerations)
