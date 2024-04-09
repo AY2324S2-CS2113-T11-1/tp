@@ -64,6 +64,10 @@
   - [Glossary](#glossary)
 - [Appendix: Instructions for manual testing](#instructions-for-manual-testing)
   - [Reflection component](#reflection-component-1)
+  - [Habit Tracker component](#habit-tracker-component-1)
+  - [Sleep Tracker component](#sleep-tracker-component-1)
+  - [Focus Timer component](#focus-timer-component-1)
+  - [Fitness Tracker component](#fitness-tracker-component)
 
 ## Acknowledgements
 
@@ -637,12 +641,32 @@ utility logic to identify state and manage the different timers.
     * `setStopTiming()`: Stop the timer.
     * `setPauseTiming()`: Pause the timer.
     * `setResumeTiming()`: Resume the timer.
-    * `checkTime`: Get the total time elapsed or time remaining in the timer.
-    * `setDuration`: Change countdown timer duration.
-    
+    * `checkTime()`: Get the total time elapsed or time remaining in the timer.
+    * `setDuration()`: Change countdown timer duration.
+  * UML notes:
+    * When a `FocusTimer` object is destroyed, its associated `CountdownTimer` and `CountupTimer`  are also destroyed, showcasing a composition relationship.
+
 * `CountupTimer` and `CountdownTimer` object
   * Dependencies:
     * `Ui` object: Utilized for user interface interactions.
+
+* Focus timer command classes
+  * `SwitchTimerCommand`: Switch between Count up timer and Count down timer.
+    * Command format: `focus switch`
+  * `StartTimerCommand`: Start the current timer.
+    * Command format: `focus start`
+  * `StopTimerCommand`: Stop the current timer.
+    * Command format: `focus stop`
+  * `SetPauseCommand`: Pause the current timer.
+    * Command format: `focus pause`
+  * `SetResumeCommand`: Resume the current timer.
+    * Command format: `focus resume`
+  * `CheckTimeCommand`: Check the time elapsed/remaining for the current timer, depending on the timer currently in use.
+      * Command format: `focus check`
+  * `SetTimingCommand`: Set the desired timing in minutes for count down timer.
+      * Command format: `focus set [minutes]`
+  * `FocusHelpCommand`: Display a help menu of the focus timer commands.
+    * Command format: `focus help`
 
 #### Focus State transition Diagram
 There are many commands for the focus timer feature. However, some commands logically cannot be executed in cetain 
