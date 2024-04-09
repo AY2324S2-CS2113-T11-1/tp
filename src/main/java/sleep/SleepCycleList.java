@@ -56,8 +56,8 @@ public class SleepCycleList {
             message += ("--- SleepCycle for "
                     + DateFormat.convertDateToString(sleepCycle.getDateOfSleep())
                     + " has been added ---");
+            Ui.printMessageWithSepNewLine(message);
         }
-        Ui.printMessageWithSepNewLine(message);
         Collections.sort(sleepCycleList);
     }
 
