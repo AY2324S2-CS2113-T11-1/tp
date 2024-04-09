@@ -18,14 +18,16 @@ public class FocusHelpCommand implements Command {
         "focus stop: Stop the timer",
         "focus pause: Pause the timer",
         "focus resume: Resume the timer",
-        "focus set [minutes]: Set the desired countdown timer duration in minutes",
+        "focus check: Check the time elapsed/remaining for the current timer, " +
+                "depending on the timer currently in use.",
+        "focus set [minutes]: Set the desired countdown timer duration in minutes"
     };
 
     @Override
     public void execute() {
         ArrayList<String> helpMenuInstructionsList = new ArrayList<>(Arrays.asList(HELP_MENU_INSTRUCTIONS));
 
-        assert helpMenuInstructionsList.size() == 6 : "Help menu should have 6 instructions";
+        assert helpMenuInstructionsList.size() == 7 : "Help menu should have 6 instructions";
 
         Ui.printList(helpMenuInstructionsList, "Commands for focus timer feature:");
     }
