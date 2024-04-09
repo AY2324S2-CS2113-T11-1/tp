@@ -572,7 +572,7 @@ user's wellness.
     * determineSleepCommand(SleepTracker sleepTracker, String commandArgs)
 
 * Sleep command classes
-    * `AddSleep Command`: Add a sleep cycle.
+    * `AddSleepCommand`: Add a sleep cycle.
         * Command format: `sleep add`
     * `DeleteSleepCommand`: Delete sleep cycles.
         * Delete sleep cycle matching date command format: `sleep delete /date <date>`
