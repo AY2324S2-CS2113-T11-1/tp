@@ -3,13 +3,12 @@
 
 autonumber
 
-participant Main
-participant SleepTracker
-participant SleepTrackerStorage
-participant Storage
-participant ArrayList
-participant SleepCycleList
-participant SleepCycle
+participant ":Main" as Main
+participant ":SleepTracker" as SleepTracker
+participant "<<class>>\nSleepTrackerStorage" as SleepTrackerStorage
+participant "<<class>>\nStorage" as Storage
+participant ":SleepCycleList" as SleepCycleList
+participant ":SleepCycle" as SleepCycle
 
 activate Main
 Create SleepTracker
