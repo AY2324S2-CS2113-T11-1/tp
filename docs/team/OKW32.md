@@ -18,7 +18,7 @@ including a Fitness Tracker, Focus Timer, Habit Tracker, Self Reflection and Sle
   * Justification: [Refer to developer guide for design considerations](https://ay2324s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html)
   * Highlights: User friendly and intuitive commands.
 * User Guide contributions:
-* `ReflectionManger`
+* `SleepTracker`
   * [`sleep add` command](https://ay2324s2-cs2113-t11-1.github.io/tp/UserGuide.html#add-a-new-sleep-cycle-sleep-add)
   * [`sleep list` command](https://ay2324s2-cs2113-t11-1.github.io/tp/UserGuide.html#list-out-all-sleep-cycles-sleep-list)
   * [`sleep get` command](https://ay2324s2-cs2113-t11-1.github.io/tp/UserGuide.html#get-hours-slept-on-specific-date-sleep-get)
