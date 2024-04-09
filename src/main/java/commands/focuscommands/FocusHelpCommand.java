@@ -18,7 +18,7 @@ public class FocusHelpCommand implements Command {
         "focus stop: Stop the timer",
         "focus pause: Pause the timer",
         "focus resume: Resume the timer",
-        "focus set [MINUTES]: Set the desired countdown timer duration in minutes",
+        "focus set [minutes]: Set the desired countdown timer duration in minutes",
     };
 
     @Override
