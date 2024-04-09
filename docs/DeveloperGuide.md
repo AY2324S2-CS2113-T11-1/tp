@@ -96,6 +96,18 @@ You are recommended to use Intellij IDEA:
 ## Design & implementation
 
 ### Architecture
+![architecture.png](diagrams/architecture/architecture.png)
+
+The Architecture Diagram given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+The bulk of the app’s work is done by the following four components:
+
+* Ui: Handles user interactions, including prompting for input and handling outputs to console.
+* Parser: Parses user input to identify command and parameters, if any. 
+* Logic: The command executor. 
+* Storage: Reads data from, and writes data to, the respective text files for each feature where applicable.
 
 ### UI component
 #### Description
