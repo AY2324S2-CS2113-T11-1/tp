@@ -675,12 +675,6 @@ ________________________________________________________________________________
 * Timer will automatically stop if the duration expires. However, users will still be able to stop it manually
 ~~~
 ________________________________________________________________________________________________________________
-5 seconds left
-________________________________________________________________________________________________________________
-________________________________________________________________________________________________________________
-4 seconds left
-________________________________________________________________________________________________________________
-________________________________________________________________________________________________________________
 3 seconds left
 ________________________________________________________________________________________________________________
 ________________________________________________________________________________________________________________
@@ -696,7 +690,7 @@ ________________________________________________________________________________
 
 > <strong><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20">
  Warning:
-> * The countdown timer will display the above messages when there are 5 seconds left on the timer, which may disrupt user input. Please wait until the timer is up before trying to input new commands into the CLI, as this is part of the countdown timer feature.
+> * The countdown timer will display the above messages when there are 3 seconds left on the timer, which may disrupt user input. Please wait until the timer is up before trying to input new commands into the CLI, as this is part of the countdown timer feature.
 
 ### Pause the current focus timer: `focus pause`
 Allow users to pause the timer momentarily while the timer is running.
