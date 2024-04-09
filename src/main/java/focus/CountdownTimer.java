@@ -16,7 +16,7 @@ public class CountdownTimer {
     private static final int MAX_SECONDS = 59;
     private static final int TIME_DELAY = 0;
     private static final int STOP_TIME = 0;
-    private static final int START_WARNING = 5;
+    private static final int START_WARNING = 3;
     private static final String ASSERTION_TIMER_NOT_RUNNING = "Timer should not be running";
     private static final String ASSERTION_INVALID_STOP = "Timer should be running.";
     private int minutes;

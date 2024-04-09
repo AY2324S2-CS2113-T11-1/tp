@@ -33,7 +33,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
             - [Delete Sleep Cycle of a specific date](#delete-sleep-cycle-of-a-specific-date)
             - [Delete Sleep Cycles before a specific date](#delete-sleep-cycles-before-a-specific-date)
             - [Delete Sleep Cycles within a range of dates](#delete-sleep-cycles-within-a-range-of-dates)
-          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save
+          - [`sleep save` - Save sleep cycles](#save-sleep-cycles-sleep-save)
           - [`sleep help` - View sleep tracker help menu](#view-sleep-tracker-help-menu-sleep-help)
         - Focus Timer
           - [`focus switch` - Switch focus timer mode](#switch-focus-timer-mode-focus-switch)
@@ -43,6 +43,7 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
           - [`focus resume` - Resume the current focus timer](#resume-the-current-focus-timer-focus-resume)
           - [`focus check` - Check time for focus timer](#check-time-for-focus-timer-focus-check)
           - [`focus set` - Set focus time duration](#set-focus-timer-duration-focus-set)
+          - [`focus help` - View focus timer help menu](#view-focus-timer-help-menu-focus-help)
       - Fitness Motivator
           - [`fitness get` - Get a pre-loaded list of different exercises](#get-a-list-of-exercises-fitness-get)
           - [`fitness add` - Add new exercises into the list](#add-exercises-to-the-list-fitness-add)
@@ -674,12 +675,6 @@ ________________________________________________________________________________
 * Timer will automatically stop if the duration expires. However, users will still be able to stop it manually
 ~~~
 ________________________________________________________________________________________________________________
-5 seconds left
-________________________________________________________________________________________________________________
-________________________________________________________________________________________________________________
-4 seconds left
-________________________________________________________________________________________________________________
-________________________________________________________________________________________________________________
 3 seconds left
 ________________________________________________________________________________________________________________
 ________________________________________________________________________________________________________________
@@ -695,7 +690,7 @@ ________________________________________________________________________________
 
 > <strong><img class="emoji" title=":warning:" alt=":warning:" src="https://github.githubassets.com/images/icons/emoji/unicode/26a0.png" height="20" width="20">
  Warning:
-> * The countdown timer will display the above messages when there are 5 seconds left on the timer, which may disrupt user input. Please wait until the timer is up before trying to input new commands into the CLI, as this is part of the countdown timer feature.
+> * The countdown timer will display the above messages when there are 3 seconds left on the timer, which may disrupt user input. Please wait until the timer is up before trying to input new commands into the CLI, as this is part of the countdown timer feature.
 
 ### Pause the current focus timer: `focus pause`
 Allow users to pause the timer momentarily while the timer is running.
@@ -801,6 +796,34 @@ ________________________________________________________________________________
 Countdown duration has been set to 10 minute(s)
 ________________________________________________________________________________________________________________
 
+~~~
+
+### View focus timer help menu: `focus help`
+Allows new users to check what commands are available for focus timer feature and their formats.
+
+Format:
+~~~
+focus help
+~~~
+
+* Extraneous parameters will be ignored. For eg, `focus help 123` will be taken as `focus help`.
+
+Example of usage:
+~~~
+focus help
+~~~
+
+Expected outcome:
+~~~
+________________________________________________________________________________________________________________
+Commands for focus timer feature:
+1. focus swtich: Switch between count up timer and count down timer
+2. focus start: Start the timer
+3. focus stop: Stop the timer
+4. focus pause: Pause the timer
+5. focus resume: Resume the timer
+6. focus set [minutes]: Set the desired countdown timer duration in minutes
+________________________________________________________________________________________________________________
 ~~~
 
 ### Get a list of exercises: `fitness get`
