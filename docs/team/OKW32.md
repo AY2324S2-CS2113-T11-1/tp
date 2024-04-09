@@ -6,7 +6,8 @@ and want to keep track of their overall wellbeing. Our app offers comprehensive 
 tools, providing personalized support to alleviate stress and enhance overall well-being with features
 including a Fitness Tracker, Focus Timer, Habit Tracker, Self Reflection and Sleep Tracker.
 
-### Summary of Contributions
+### Summary of Team Project Contributions
+
 The common class Ui allows for printing on a command-line interface (CLI), which streamlines output formatting and 
 interaction. It typically provides methods to display text and format output. This abstraction simplifies
 UI development by encapsulating common tasks like displaying programme's output.
@@ -21,3 +22,14 @@ showing the classes, their attributes, methods, and relationships. A sequence di
 interact after user keys in an input to be executed by Sleep Tracker, showing the sequence of messages exchanged.
 Another sequence diagram was also done up to illustrate the flow of the programme when the programme saves data to and reads data from
 the text files.
+
+Click on the [link](https://nus-cs2113-ay2324s2.github.io/tp-dashboard/?search=okw32&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-02-23&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other) here
+to see code contributed.
+
+### Review/Mentoring contributions
+
+1. [Individual Project Coding Standard Review](https://github.com/nus-cs2113-AY2324S2/ip/pull/173)
+2. [Individual Project Code Quality Review](https://github.com/nus-cs2113-AY2324S2/ip/pull/139)
+3. Team Project Reviews:
+   1. [Review 1](https://github.com/AY2324S2-CS2113-T11-1/tp/pull/88#discussion_r1536734904)
+   2. [Review 2](https://github.com/AY2324S2-CS2113-T11-1/tp/pull/119#discussion_r1544293656)
