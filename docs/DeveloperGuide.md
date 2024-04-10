@@ -7,56 +7,55 @@
 - [Setting up, getting started](#setting-up-getting-started)
   - [Setting up the project in your computer](#setting-up-the-project-in-your-computer)
   - [Before writing code](#before-writing-code)
-- [Design & implementation]()
-  - [Architecture](#architecture)
-  - [Ui component]()
-  - [Command parser component]()
-  - [Storage component](#storage-component)
-    - [Description](#description)
-    - [Design Considerations](#design-considerations)
-      - [User Design Considerations](#user-design-considerations)
-      - [Developer Design Considerations](#developer-design-considerations)
-    - [Implementation](#implementation)
-      - [Class Diagram](#class-diagram)
-      - [Sequence Diagram](#sequence-diagram)
-  - [Reflection component](#reflection-component)
-    - [Description](#description)
-    - [Design Considerations](#design-considerations)
-      - [User Design Considerations](#user-design-considerations)
-      - [Developer Design Considerations](#developer-design-considerations)
-    - [Implementation](#implementation)
-      - [Class Diagram](#class-diagram)
-      - [Sequence Diagram](#sequence-diagram)
-  - [Habit tracker component](#habit-tracker-component)
-    - [Description](#description-2)
-    - [Design Considerations](#design-considerations-2)
-        - [User Design Considerations](#design-considerations-2)
-        - [Developer Design Considerations](#design-considerations-2)
-    - [Implementation](#implementation-2)
-        - [Class Diagram](#class-diagram-2)
-        - [Sequence Diagram](#sequence-diagram-1)
-  - [Sleep tracker component](#sleep-tracker-component)
-    - [Description](#description-2)
-    - [Design Considerations](#design-considerations-2)
-      - [User Design Considerations](#user-design-considerations-2)
-      - [Developer Design Considerations](#developer-design-considerations-1)
-    - [Implementation](#implementation-2)
-      - [Class Diagram](#class-diagram-2)
-      - [Sequence Diagram](#sequence-diagram-2)
-  - [Focus timer component](#focus-timer-component)
-    - [Design Considerations](#design-considerations-3)
-    - [Implementation](#implementation-3)
-      - [Focus Class Diagram](#focus-class-diagram)
-      - [Focus State Transition Diagram](#focus-state-transition-diagram)
-      - [Focus Sequence Diagram](#focus-sequence-diagram)
-  - [Fitness tracker component](#fitness-motivator-component)
-    - [Description](#description-3)
-    - [Design Considerations](#design-considerations-4)
-        - [User Design Considerations](#user-design-considerations-4)
-        - [Developer Design Considerations](#developer-design-considerations-4)
-    - [Implementation](#implementation-4)
-        - [Class Diagram](#class-diagram-3)
-        - [Sequence Diagram](#sequence-diagram-3)
+- [Design & implementation](#design--implementation)
+  1. [Architecture](#architecture)
+  2. [Ui component](#ui-component)
+     - [Description](#description)
+     - [Design Considerations](#design-considerations)
+     - [Implementation](#implementation)
+       - [Class Diagram](#class-diagram)
+  3. [Command parser component](#command-parser-component)
+     - [Description](#description-1)
+     - [Design Considerations](#design-considerations-1)
+     - [Implementation](#implementation-1)
+       - [Class Diagram](#class-diagram-1)
+       - [Sequence Diagram](#sequence-diagram)    
+  4. [Storage component](#storage-component)
+     - [Description](#description-2)
+     - [Design Considerations](#design-considerations-2)
+     - [Implementation](#implementation-2)
+       - [Class Diagram](#class-diagram-2)
+       - [Sequence Diagram](#sequence-diagram-)
+  5. [Reflection component](#reflection-component)
+     - [Description](#description-3)
+     - [Design Considerations](#design-considerations-3)
+     - [Implementation](#implementation-3)
+       - [Class Diagram](#class-diagram-3)
+       - [Sequence Diagram](#sequence-diagram-1)
+  6. [Habit tracker component](#habit-tracker-component)
+     - [Description](#description-4)
+     - [Design Considerations](#design-considerations-4)
+     - [Implementation](#implementation-4)
+       - [Class Diagram](#class-diagram-4)
+       - [Sequence Diagram](#sequence-diagram-2)
+  7. [Sleep tracker component](#sleep-tracker-component)
+     - [Description](#description-5)
+     - [Design Considerations](#design-considerations-5)
+     - [Implementation](#implementation-5)
+       - [Class Diagram](#class-diagram-5)
+       - [Sequence Diagram](#sequence-diagram-3)
+  8. [Focus timer component](#focus-timer-component)
+     - [Design Considerations](#design-considerations-6)
+     - [Implementation](#implementation-6)
+       - [Focus Class Diagram](#focus-class-diagram)
+       - [Focus State Transition Diagram](#focus-state-transition-diagram)
+       - [Focus Sequence Diagram](#focus-sequence-diagram)
+  9. [Fitness tracker component](#fitness-motivator-component)
+     - [Description](#description-6)
+     - [Design Considerations](#design-considerations-7)
+     - [Implementation](#implementation-7)
+       - [Class Diagram](#class-diagram-6)
+       - [Sequence Diagram](#sequence-diagram-4)
 - [Appendix: Requirements]()
   - [Product Scope](#product-scope)
   - [User Stories](#user-stories)
@@ -146,7 +145,98 @@ The `Ui` class is created to standardise the output formatting of messages to be
     - `printMessagewithSepNewLine(String message)`: A public static method used to print a message with a separation line.
     - `printMessageWithoutNewLine(String message)`: A public static method used to print a message without a separation line.
     - `printList(ArrayList list, String message)`: A public static method to print a list of type `ArrayList`, along with a message and a separation line.
+
 ### Command parser component
+
+#### Description
+The Parser component is responsible for interpreting user input commands and converting them into executable commands for the Wellness360 system. 
+It facilitates the interaction between the user interface and the underlying functionality of the system.
+
+#### Design Considerations
+* ##### User Design Considerations
+    * User commands should be clear and intuitive, following a consistent syntax across different features. 
+    * Error messages should be informative and guide users on how to correct their input if it's invalid.
+
+* #### Developer Design Considerations
+    * Single Responsibility Principle (SRP): Each parser class should have a single responsibility, such as parsing commands related to a specific feature. 
+    * Modularity: Parsers should be modular and easily extendable to accommodate new features or commands. 
+    * Exception Handling: Ensure robust error handling to gracefully manage invalid user input or system errors. 
+
+#### Implementation
+
+##### Class Diagram
+![CommandParserClass.png](diagrams/parser/CommandParserClass.png)
+
+* `Parser` class:
+    * Overview
+        * The Parser class is responsible for determining the appropriate command to execute based on user input.
+    * Methods
+        * `determineCommand()`: Determines the command to execute based on user input and delegates to specific feature command parsers.
+    * Dependencies
+        * HabitCommandParser, FitnessCommandParser, ReflectionCommandParser, FocusCommandParser, SleepCommandParser: To further parse user input to determine the command specific to the feature 
+
+* `HabitCommandParser` class:
+    * Overview
+        * The `HabitCommandParser` class parses user input related to habits and creates corresponding command objects.
+    * Methods
+        * `determineHabitCommand()`: Determines the habit-related command to execute based on user input.
+    * Dependencies
+        * HabitTracker: For storing and managing habits.
+        * Command: To represent executable habit-related commands.
+
+* `FitnessCommandParser` class:
+    * Overview
+        * The `FitnessCommandParser` class parses user input related to fitness and creates corresponding command objects.
+    * Methods
+        * `determineFitnessCommand()`: Determines the fitness-related command to execute based on user input.
+    * Dependencies
+        * FitnessMotivator: For managing fitness-related tasks. 
+        * Command: To represent executable fitness-related commands.
+  
+* `ReflectionCommandParser` class:
+    * Overview
+        * The `ReflectionCommandParser` class parses user input related to reflection and creates corresponding command objects.
+    * Methods
+        * `determineReflectionCommand()`: Determines the reflection-related command to execute based on user input.
+    * Dependencies
+        * ReflectionManager: For handling reflection-related operations. 
+        * Command: To represent executable reflection-related commands.
+
+* `FocusCommandParser` class:
+    * Overview
+        * The `FocusCommandParser` class parses user input related to focus and creates corresponding command objects.
+    * Methods
+        * `determineFocusCommand():` Determines the focus-related command to execute based on user input.
+    * Dependencies
+        * FocusTimer: For managing focus-related tasks.
+        * Command: To represent executable focus-related commands.
+
+* `SleepCommandParser` class:
+    * Overview
+        * The `SleepCommandParser` class parses user input related to sleep and creates corresponding command objects.
+    * Methods
+        * `determineSleepCommand()`: Determines the sleep-related command to execute based on user input.
+    * Dependencies
+        * SleepTracker: For managing sleep-related data. 
+        * Command: To represent executable sleep-related commands.
+
+
+##### Sequence Diagram
+
+![CommandParserSequence.png](diagrams/parser/CommandParserSequence.png)
+
+When the User enters a command, the Main class receives the user input and forwards it to the Parser class. 
+The Parser class then activates and determines the appropriate command parser based on the user input.
+
+If the user input corresponds to a HabitCommand, the Parser activates the HabitCommandParser class, 
+which creates a command object representing the habit-related command. 
+The command object is returned to the Parser, which then returns it to the Main class for execution.
+
+Similarly, if the user input corresponds to a FitnessCommand, FocusCommand, ReflectionCommand, or SleepCommand, 
+the Parser activates the corresponding command parser (FitnessCommandParser, FocusCommandParser, ReflectionCommandParser, 
+SleepCommandParser respectively), creates the corresponding command object, and returns it to the Main class for execution.
+
+
 
 ### Storage component
 #### Description
@@ -359,7 +449,7 @@ Note that certain details described below have been omitted from Class Diagram f
       * Command format:`reflect unsave <reflection_id>`
 
 
-#### Sequence Diagram
+##### Sequence Diagram
 ![ReflectionSequenceDiagram.png](diagrams/reflection/ReflectionSequenceDiagram.png)
 * Note that `PlaceholderReflectionCommand` can refer to any of the reflection commands as mentioned above, as all of them follow the same call pattern.
 
@@ -459,7 +549,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
         * Command format: `habit help`
 
 
-#### Sequence Diagram
+##### Sequence Diagram
 ![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
 * Note that `PlaceholderHabitCommand` can refer to any of the habit commands. 
 
@@ -889,7 +979,7 @@ Note that certain details described below have been omitted from Class Diagram f
   - `HelpExerciseCommand`: Prints a list of executable commands for Fitness Motivator
     - Command format: `fitness help`
 
-#### Sequence Diagram
+##### Sequence Diagram
 <!-- Insert image and description of the image -->
 ![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
 </br>

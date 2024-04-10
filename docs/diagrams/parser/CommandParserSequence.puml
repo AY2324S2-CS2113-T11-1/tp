@@ -1,0 +1,70 @@
+@startuml
+
+participant ":Main" as Main
+participant "<<class>>\nParser" as Parser
+participant "<<class>>\nHabitCommandParser" as HabitCommandParser
+participant "<<class>>\nFitnessCommandParser" as FitnessCommandParser
+participant "<<class>>\nFocusCommandParser" as FocusCommandParser
+participant "<<class>>\nReflectionCommandParser" as ReflectionCommandParser
+participant "<<class>>\nSleepCommandParser" as SleepCommandParser
+participant ":Command" as Command
+
+Main -> Parser: userInput
+
+hide footbox
+
+activate Parser
+
+alt if userInput is HabitCommand
+    Parser -> HabitCommandParser: determineHabitCommand
+    activate HabitCommandParser
+    HabitCommandParser -> Command: create Command object
+    activate Command
+    Command --> HabitCommandParser: Command object
+    deactivate Command
+    HabitCommandParser --> Parser: return Command
+    deactivate HabitCommandParser
+else if userInput is FitnessCommand
+    Parser -> FitnessCommandParser: determineFitnessCommand
+    activate FitnessCommandParser
+    FitnessCommandParser -> Command: create Command object
+    activate Command
+    Command --> FitnessCommandParser: Command object
+    deactivate Command
+    FitnessCommandParser --> Parser: return Command
+    deactivate FitnessCommandParser
+else if userInput is FocusCommand
+    Parser -> FocusCommandParser: determineFocusCommand
+    activate FocusCommandParser
+    FocusCommandParser -> Command: create Command object
+    activate Command
+    Command --> FocusCommandParser: Command object
+    deactivate Command
+    FocusCommandParser --> Parser: return Command
+    deactivate FocusCommandParser
+else if userInput is ReflectionCommand
+    Parser -> ReflectionCommandParser: determineReflectionCommand
+    activate ReflectionCommandParser
+    ReflectionCommandParser -> Command: create Command object
+    activate Command
+    Command --> ReflectionCommandParser: Command object
+    deactivate Command
+    ReflectionCommandParser --> Parser: return Command
+    deactivate ReflectionCommandParser
+else if userInput is SleepCommand
+    Parser -> SleepCommandParser: determineSleepCommand
+    activate SleepCommandParser
+    SleepCommandParser -> Command: create Command object
+    activate Command
+    Command --> SleepCommandParser: Command object
+    deactivate Command
+    SleepCommandParser --> Parser: return Command
+    deactivate SleepCommandParser
+end
+
+deactivate Parser
+
+Parser -> Main: return Command
+deactivate Parser
+
+@enduml

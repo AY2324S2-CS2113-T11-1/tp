@@ -1,0 +1,50 @@
+
+
+@startuml
+
+skinparam NoteFontSize 20
+
+skinparam class {
+    FontSize 20
+    AttributeFontSize 20
+    MethodFontSize 20
+}
+
+skinparam classAttributeIconSize 0
+hide circle
+
+class Parser {
+    + determineCommand(sleepTracker: SleepTracker, reflection: ReflectionManager, habitTracker: HabitTracker, focusTimer: FocusTimer, fitnessMotivator: FitnessMotivator, userInput: String): Command
+}
+
+class HabitCommandParser {
+    + determineHabitCommand(habitTracker: HabitTracker, commandArgs: String): Command
+}
+
+class FitnessCommandParser {
+    + determineFitnessCommand(fitnessMotivator: FitnessMotivator, commandArgs: String): Command
+}
+
+class FocusCommandParser {
+    + determineFocusCommand(focusTimer: FocusTimer, commandArgs: String): Command
+}
+
+class ReflectionCommandParser {
+    + determineReflectionCommand(reflectionManager: ReflectionManager, commandArgs: String): Command
+}
+
+class SleepCommandParser {
+    + determineSleepCommand(sleepTracker: SleepTracker, commandArgs: String): Command
+}
+
+
+
+Parser ---> HabitCommandParser : uses >
+Parser --> FitnessCommandParser : uses >
+Parser ---> FocusCommandParser : uses >
+Parser --> ReflectionCommandParser : uses >
+Parser ---> SleepCommandParser : uses >
+
+
+
+@enduml
