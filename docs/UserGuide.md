@@ -1035,13 +1035,13 @@ Here is a list of possible commands you can use with the Fitness Motivator!
 
 1. fitness get: Get 5 random exercises each of different type.
 2. fitness get <exercise_type>: Get a full list of exercises belonging to the exercise type
-3. fitness add /type <exercise_type>, /name <exercise_name>, /sets <sets>, /reps <reps>: add an exercise to
-    the list of exercises
-4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.The index is based
-    on the index when you run 'fitness get <exercise_type>
+3. fitness add /type <exercise_type> /name <exercise_name> /sets <sets> /reps <reps>: 
+add an exercise to the list of exercises
+4. fitness delete <exercise_type> <index>: Delete the exercise from the list of exercise.
+The index is based on the index when you run 'fitness get <exercise_type>
 5. fitness goal: Retrieves the status of all current goals, if it exists
-6. fitness goal new: Overwrites current goals with new set of goals if it exists, otherwise creates a brand 
-    new set of goals
+6. fitness goal new: Overwrites current goals with new set of goals if it exists, 
+otherwise creates a brand new set of goals
 7. fitness goal <index>: Toggle the status of the goal
 8. fitness help: Get help menu for reflect commands
 ________________________________________________________________________________________________________________
