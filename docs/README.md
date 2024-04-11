@@ -8,4 +8,8 @@ Useful links:
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
 * Project Profile Page
+  * [Ari Lim Ee Lik](team/genexus85.md)
+  * [Damien Wee](team/damiwee.md)
+  * [Davian Kho Yong Quan]() 
+  * [Lim Jing Hao](team/JingHaoooo.md)
   * [Ong Kan Wu](team/OKW32.md)
