@@ -97,7 +97,7 @@ public class CountupTimer {
         }
         Ui.printMessageWithSepNewLine("Your focus session has ended.\n" + "Total time spent: " +
                 totalHours + " hours, " + totalMinutes + " minutes, " + totalSeconds + " seconds" + "\n" +
-                "To start a new session, use ‘focus start’ ");
+                "To start a new session, use focus start ");
     }
 
     /**
