@@ -19,6 +19,7 @@ activate SleepTrackerStorage
 alt isFileCreated
     SleepTrackerStorage -> Storage: calls createFolder(SLEEP_FILE_PATH)
     activate Storage
+    Storage --> SleepTrackerStorage
     deactivate Storage
 end
 SleepTrackerStorage -> Storage: loadDataFromFile
@@ -26,8 +27,10 @@ activate Storage
 Storage --> SleepTrackerStorage: return ArrayList<String>
 deactivate Storage
 Create SleepCycleList
-SleepTrackerStorage -> SleepCycleList: null
+SleepTrackerStorage -> SleepCycleList: SleepCycleList()
 activate SleepCycleList
+SleepCycleList --> SleepTrackerStorage
+deactivate SleepCycleList
 loop until end of ArrayList<String>
 Create SleepCycle
 SleepTrackerStorage -> SleepCycle: hour, date
@@ -35,11 +38,13 @@ activate SleepCycle
 SleepCycle --> SleepTrackerStorage: return sleep cycle to be added
 deactivate SleepCycle
 SleepTrackerStorage -> SleepCycleList: calls addSleepCycle(sleep cycle to be added)
+activate SleepCycleList
+SleepCycleList --> SleepTrackerStorage
+deactivate SleepCycleList
 end
 
 SleepTrackerStorage --> SleepTracker: return sleep cycle list
+deactivate SleepTrackerStorage
 SleepTracker --> Main: return Sleep Tracker
-
-
-
+deactivate SleepTracker
 @enduml
