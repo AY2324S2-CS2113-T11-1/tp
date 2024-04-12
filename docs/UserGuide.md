@@ -1052,13 +1052,17 @@ Allows user to exit Wellness360 application.
 
 Format:
 
-`exit`
+```
+exit
+```
 
 * No additional parameters are allowed, otherwise an error message will be shown.
 
 Example of usage:
 
-`exit`
+```
+exit
+```
 
 Expected outcome:
 ```

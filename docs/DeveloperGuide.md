@@ -350,6 +350,7 @@ This component aims to contribute to the goal of improving user's wellness.
 #### Implementation
 
 ##### Class Diagram
+
 ![ReflectionClassDiagram.png](diagrams/reflection/ReflectionClassDiagram.png)
 
 Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
