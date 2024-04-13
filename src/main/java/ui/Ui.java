@@ -22,7 +22,13 @@ public class Ui {
      * Greets the user upon starting the application.
      */
     public static void greetUser() {
-        System.out.println("Welcome to Wellness360!\n" + SEP);
+        System.out.println("Welcome to Wellness360!\n\n" +
+                "Use the following help commands to view the various help menus:\n" +
+                "- reflect help: Reflection Manager\n" +
+                "- habit help: Habit Tracker\n" +
+                "- sleep help: Sleep Tracker\n" +
+                "- focus help: Focus Timer\n" +
+                "- fitness help: Fitness Motivator\n" + SEP);
     }
 
     /**
