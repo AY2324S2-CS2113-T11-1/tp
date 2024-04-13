@@ -1,3 +1,16 @@
+__        __   _ _                     _____  __    ___
+\ \      / /__| | |_ __   ___  ___ ___|___ / / /_  / _ \
+ \ \ /\ / / _ \ | | '_ \ / _ \/ __/ __| |_ \| '_ \| | | |
+  \ V  V /  __/ | | | | |  __/\__ \__ \___) | (_) | |_| |
+   \_/\_/ \___|_|_|_| |_|\___||___/___/____/ \___/ \___/
+
 Welcome to Wellness360!
+
+Use the following help commands to view the various help menus:
+- reflect help: Reflection Manager
+- habit help: Habit Tracker
+- sleep help: Sleep Tracker
+- focus help: Focus Timer
+- fitness help: Fitness Motivator
 ________________________________________________________________________________________________________________
 You:
