@@ -1097,6 +1097,7 @@ This section serves as a cheatsheet for commands.
 | `sleep delete /before [DATE_OF_SLEEP]`                                                                  | Delete Sleep Cycles before a specific date   | 
 | `sleep delete /from [START_DATE] /to [END_DATE]`                                                        | Delete Sleep Cycles within a range of dates  | 
 | `sleep save`                                                                                            | Save sleep cycles                            |
+| `sleep help`                                                                                            | View sleep tracker help menu                 |
 | `focus switch`                                                                                          | Switch focus timer mode                      |
 | `focus start`                                                                                           | Start a new focus timer                      |
 | `focus stop`                                                                                            | Stop the current focus timer                 |
@@ -1104,6 +1105,7 @@ This section serves as a cheatsheet for commands.
 | `focus resume`                                                                                          | Resume the current focus timer               |
 | `focus check`                                                                                           | Check time for focus timer                   |
 | `focus set [MINUTES]`                                                                                   | Set focus time duration                      |
+| `focus help`                                                                                            | View focus timer help menu                   |
 | `fitness get`, `fitness get [EXERCISE_TYPE]`                                                            | Get a pre-loaded list of different exercises |
 | `fitness add /type [EXERCISE_TYPE] /name [EXERCISE_NAME] /sets [NUMBER_OF_SETS] /reps [NUMBER_OF_REPS]` | Add new exercises into the list              |
 | `fitness delete [EXERCISE_TYPE] [INDEX]`                                                                | Delete exercises from the list               |
