@@ -16,7 +16,7 @@ including a Fitness Tracker, Focus Timer, Habit Tracker, Self Reflection and Sle
 * Releasing [Wellness360 v1.0](https://github.com/AY2324S2-CS2113-T11-1/tp/releases/tag/v1.0)
 * Feature: `FocusTimer` [#15](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/15) [#19](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/19) [#20](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/20) [#62](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/62) [#63](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/63) [#68](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/68) [#69](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/69) [#78](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/78)
   * What it does: Allow users to use a focus timer, be it count up timer or count down timer.
-  * Justification: [Refer to developer guide for design considerations](https://ay2324s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html)
+  * Justification: [Refer to developer guide for design considerations](https://ay2324s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html#design-considerations-6)
   * Highlights: User friendly and intuitive commands.
 * User Guide contributions:
 * `FocusTimer`
