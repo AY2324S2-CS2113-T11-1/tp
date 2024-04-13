@@ -817,7 +817,7 @@ Expected outcome:
 ~~~
 ________________________________________________________________________________________________________________
 Commands for focus timer feature:
-1. focus swtich: Switch between count up timer and count down timer
+1. focus switch: Switch between count up timer and count down timer
 2. focus start: Start the timer
 3. focus stop: Stop the timer
 4. focus pause: Pause the timer
