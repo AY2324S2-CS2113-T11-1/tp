@@ -814,7 +814,7 @@ well-being.
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
 ![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
-</br>
+<br>
 Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
 - `FitnessMotivator` Class
   - Overview
@@ -987,7 +987,7 @@ Note that certain details described below have been omitted from Class Diagram f
 ##### Sequence Diagram
 <!-- Insert image and description of the image -->
 ![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
-</br>
+<br>
 - Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
 
 When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
@@ -1678,7 +1678,7 @@ Countdown timer resumed.
 ________________________________________________________________________________________________________________
 ~~~
 2. Testcase: `focus resume` when timer is not running 
-</br>
+<br>
 Expected outcome: Error message informing users that timer is not running or has already been resumed.
 
 ~~~
@@ -1688,7 +1688,7 @@ ________________________________________________________________________________
 ~~~
 #### Set time for focus timer
 1. Testcase: `focus set 10` 
-</br>
+<br>
    Expected outcome: Message showing that count down timer has been set to 10 minutes.
 
 ~~~
@@ -1697,7 +1697,7 @@ Countdown duration has been set to 10 minute(s)
 ________________________________________________________________________________________________________________
 ~~~
 2. Testcase: `focus set 0` 
-</br>
+<br>
    Expected outcome: Error message prompting user to input a duration more than 0.
 ~~~
 ________________________________________________________________________________________________________________
@@ -1705,7 +1705,7 @@ Duration cannot be less than 1.
 ________________________________________________________________________________________________________________
 ~~~
 3. Testcase: `focus set w` 
-</br>
+<br>
    Expected outcome: Error message prompting user to input a valid duration.
 ~~~
 ________________________________________________________________________________________________________________
@@ -1715,7 +1715,7 @@ ________________________________________________________________________________
 ### Fitness Motivator component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.
-    </br>
+    <br>
     Expected outcome: A list of 5 random different exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1731,7 +1731,7 @@ ________________________________________________________________________________
     ```
 #### Get a list of specific type of exercises
 1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
-    </br>
+    <br>
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1741,7 +1741,7 @@ ________________________________________________________________________________
     ```
 #### Add an exercise
 1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
-    </br>
+    <br>
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1751,7 +1751,7 @@ ________________________________________________________________________________
     ```
 #### Create a new Goal
 1. Testcase: Calling `fitness goal new` when the jar is first executed
-    </br>
+    <br>
     Expected outcome: 5 randomly generated exercise goals with a status icon in front of the respective exercises
     ```
     ________________________________________________________________________________________________________________
@@ -1767,7 +1767,7 @@ ________________________________________________________________________________
     ```
 #### Mark a goal as done
 1. Testcase: Calling `fitness goal first` when the goals have been created.
-    </br>
+    <br>
     Expected outcome:
     ```
     ________________________________________________________________________________________________________________
