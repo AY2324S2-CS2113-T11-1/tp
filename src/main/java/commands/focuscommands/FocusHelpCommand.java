@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class FocusHelpCommand implements Command {
 
     private static final String[] HELP_MENU_INSTRUCTIONS = {
-        "focus swtich: Switch between count up timer and count down timer",
+        "focus switch: Switch between count up timer and count down timer",
         "focus start: Start the timer",
         "focus stop: Stop the timer",
         "focus pause: Pause the timer",
