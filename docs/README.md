@@ -10,6 +10,6 @@ Useful links:
 * Project Profile Page
   * [Ari Lim Ee Lik](team/genexus85.md)
   * [Damien Wee](team/damiwee.md)
-  * [Davian Kho Yong Quan]() 
-  * [Lim Jing Hao](team/JingHaoooo.md)
+  * [Davian Kho Yong Quan](team/daviancold.md) 
+  * [Lim Jing Hao](team/jinghaoooo.md)
   * [Ong Kan Wu](team/OKW32.md)
