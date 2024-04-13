@@ -58,11 +58,11 @@ Wellness360 is a wellness app. It is meant for stressed Engineering Students who
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Wellness360` from [here](https://github.com/AY2324S2-CS2113-T11-1/tp/releases).
-3. To start `Wellness360` Using the `jar` file, go to the containing folder for Wellness360. 
+2. Download the latest version of `Wellness360` from [here](https://github.com/AY2324S2-CS2113-T11-1/tp/releases).
+3. To start `Wellness360` using the `jar` file, go to the containing folder for Wellness360. 
 Then, on your terminal of choice, run:
 ```
--$ java -jar wellness360.jar
+-$ java -jar Wellness360.jar
 ```
 
 ## Features

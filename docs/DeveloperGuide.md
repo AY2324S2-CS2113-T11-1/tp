@@ -50,7 +50,7 @@
        - [Focus Class Diagram](#focus-class-diagram)
        - [Focus State Transition Diagram](#focus-state-transition-diagram)
        - [Focus Sequence Diagram](#focus-sequence-diagram)
-  9. [Fitness tracker component](#fitness-motivator-component)
+  9. [Fitness Motivator component](#fitness-motivator-component)
      - [Description](#description-6)
      - [Design Considerations](#design-considerations-7)
      - [Implementation](#implementation-7)
@@ -66,7 +66,7 @@
   - [Habit Tracker component](#habit-tracker-component-1)
   - [Sleep Tracker component](#sleep-tracker-component-1)
   - [Focus Timer component](#focus-timer-component-1)
-  - [Fitness Tracker component](#fitness-tracker-component)
+  - [Fitness Motivator component](#fitness-motivator-component-1)
 
 ## Acknowledgements
 
@@ -707,10 +707,14 @@ productivity and well-being.
   * Users can start, pause, resume, stop the timer at any point in time.
   * Users will also be able to navigate to other functions while running the timer concurrently.
   * Error messages will inform users the current status of the timer and reason the error appeared.
+  * A help menu is also provided for users to guide them on how to use the focus timer.
 
 * #### Developer Design Considerations
   * The `Focus Timer` component is a wrapper class for both `CountupTimer` and `CountdownTimer`, which contains 
 utility logic to identify state and manage the different timers.
+  * Modularity: Encapsulate related functionalities within classes to promote re-usability and maintainability. 
+  * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages.
+  * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
 
 #### Implementation
 
@@ -1707,7 +1711,7 @@ ________________________________________________________________________________
 ERROR MSG: Invalid duration.
 ________________________________________________________________________________________________________________
 ~~~
-### Fitness Tracker component
+### Fitness Motivator component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.
     </br>
