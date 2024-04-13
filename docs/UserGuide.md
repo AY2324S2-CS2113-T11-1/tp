@@ -1104,7 +1104,7 @@ This section serves as a cheatsheet for commands.
 | `focus pause`                                                                                           | Pause the current focus timer                |
 | `focus resume`                                                                                          | Resume the current focus timer               |
 | `focus check`                                                                                           | Check time for focus timer                   |
-| `focus set [MINUTES]`                                                                                   | Set focus time duration                      |
+| `focus set [minutes]`                                                                                   | Set focus time duration                      |
 | `focus help`                                                                                            | View focus timer help menu                   |
 | `fitness get`, `fitness get [EXERCISE_TYPE]`                                                            | Get a pre-loaded list of different exercises |
 | `fitness add /type [EXERCISE_TYPE] /name [EXERCISE_NAME] /sets [NUMBER_OF_SETS] /reps [NUMBER_OF_REPS]` | Add new exercises into the list              |
