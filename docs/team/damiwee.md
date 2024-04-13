@@ -8,14 +8,14 @@ including a Fitness Tracker, Focus Timer, Habit Tracker, Self Reflection and Sle
 
 Given below is the summary of my contributions.
 
-* Code contribution: [Reposense](https://nus-cs2113-ay2324s2.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-02-23)
+* Code contribution: [Reposense](https://nus-cs2113-ay2324s2.github.io/tp-dashboard/?search=damiwee&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-02-23&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 * Feature: `Storage` [#21](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/21)
   * What it does: Common class shared by developers to store and load data from a text file. No parsing is done.
   * Justification: Different developers parse their data in different ways. By creating a generic and basic template, it can be used on its own or other developers can use inheritance to add functionality based on their own use case.
   * Highlights: Handles exceptions such as file not found by creating new file and other IO exceptions.
 * Feature: `ReflectionManager` [#6](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/6) [#39](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/39) [#45](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/45) [#73](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/73) [#74](https://github.com/AY2324S2-CS2113-T11-1/tp/issues/74)
   * What it does: Allow user to conduct self reflection.
-  * Justification: [Refer to developer guide for design considerations](https://ay2324s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html)
+  * Justification: [Refer to developer guide for design considerations](https://ay2324s2-cs2113-t11-1.github.io/tp/DeveloperGuide.html#reflection-component)
   * Highlights: User friendly and intuitive commands.
 * User guide contributions:
   * [Introduction](https://ay2324s2-cs2113-t11-1.github.io/tp/UserGuide.html#wellness360-user-guide)
