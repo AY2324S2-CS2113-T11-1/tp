@@ -56,7 +56,7 @@
      - [Implementation](#implementation-7)
        - [Class Diagram](#class-diagram-6)
        - [Sequence Diagram](#sequence-diagram-4)
-- [Appendix: Requirements]()
+- [Appendix: Requirements](#appendix-requirements)
   - [Product Scope](#product-scope)
   - [User Stories](#user-stories)
   - [Non Functional Requirements](#non-functional-requirements)
@@ -992,6 +992,7 @@ Note that certain details described below have been omitted from Class Diagram f
 
 When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
 
+## Appendix: Requirements
 ## Product scope
 ### Target user profile
 
