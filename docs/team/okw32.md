@@ -1,4 +1,4 @@
-# OKW32 - Project Portfolio Page
+# Ong Kan Wu's Project Portfolio Page
 
 ## Overview
 Wellness360 is a wellness app meant for stressed Engineering Students who prefer CLI over GUI 
