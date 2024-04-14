@@ -12,4 +12,4 @@ Useful links:
   * [Damien Wee](team/damiwee.md)
   * [Davian Kho Yong Quan](team/daviancold.md) 
   * [Lim Jing Hao](team/jinghaoooo.md)
-  * [Ong Kan Wu](team/OKW32.md)
+  * [Ong Kan Wu](team/okw32.md)
