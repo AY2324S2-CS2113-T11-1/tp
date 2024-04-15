@@ -1129,6 +1129,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
+    <br>   
 2. Testcase: Calling `reflect list` on a non-empty favourites list
 
     Expected outcome: List of saved questions if list is not empty
