@@ -1602,7 +1602,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ________________________________________________________________________________________________________________
     Your focus session has ended.
     Total time spent: 0 hours, 3 minutes, 42 seconds
-    To start a new session, use ‘focus start’ 
+    To start a new session, use focus start
     ________________________________________________________________________________________________________________
     ~~~
     Count down timer:
