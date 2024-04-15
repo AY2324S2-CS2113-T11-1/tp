@@ -667,7 +667,7 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 Your focus session has ended.
  Time spent: X hours, X minutes, XX seconds
-To start a new session, use ‘focustimer start’ 
+To start a new session, use focus start 
 ________________________________________________________________________________________________________________
 ~~~
 
