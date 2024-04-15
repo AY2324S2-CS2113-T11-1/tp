@@ -468,6 +468,8 @@ determined if it is a command related to the reflection feature. If it is, it wi
 the command. The corresponding reflection command object is then created and is returned to `Main`, where `execute` will then be called
 and the corresponding method in `ReflectionManager` is invoked.
 
+<div style="page-break-after: always;"></div>
+
 ### Habit tracker component
 
 #### Description
@@ -606,9 +608,9 @@ user's wellness.
     * Exception Handling: Extensive coverage of exceptions in sleepCommand classes to ensure all errors are handled 
     properly
 
-<div style="page-break-after: always;"></div>
-
 #### Implementation
+
+<div style="page-break-after: always;"></div>
 
 ##### Class Diagram
 ![SleepDiagram.png](diagrams/sleep/SleepDiagram.png)
@@ -709,6 +711,8 @@ When main starts, scanner and SleepTracker objects are created. Upon receiving u
 be determined if it is a command related to the sleep tracker feature. If it is, it will be further parsed by 
 SleepTrackerParser to determine the command. The corresponding sleep command object is then created and is 
 returned to Main, where execute will then be called and the corresponding method in SleepTracker is invoked.
+
+<div style="page-break-after: always;"></div>
 
 ### Focus timer component
 The focus timer component provides users with a countdown timer and a count up timer, which enables the user to set a 
@@ -1009,6 +1013,8 @@ Note that certain details described below have been omitted from Class Diagram f
 - Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
 
 When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Requirements
 ## Product scope
