@@ -68,6 +68,8 @@
   - [Focus Timer component](#focus-timer-component-1)
   - [Fitness Motivator component](#fitness-motivator-component-1)
 
+<div style="page-break-after: always;"></div>
+
 ## Acknowledgements
 
 Reference to AB-3 Developer Guide
@@ -95,6 +97,8 @@ You are recommended to use Intellij IDEA:
 1. Configure the coding style: [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html)
 2. Set up CI: This project comes with a GitHub Actions config files (in .github/workflows folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the master branch or to any PR. No set up required.
 3. Read the developer guide to understand the design.
+
+<div style="page-break-after: always;"></div>
 
 ## Design & implementation
 
@@ -256,6 +260,8 @@ in the form of text files so that data can be loaded from the hard disk when Wel
   information position in the text file.
   * Exception Handling: Graceful error handling with meaningful messages.
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation
 
 ##### Class Diagram
@@ -346,6 +352,8 @@ This component aims to contribute to the goal of improving user's wellness.
   * Dependency Injection: Dependencies injected via constructors for loose coupling.
   * SRP: Classes adhere to the Single Responsibility Principle. For example, the ReflectionManager class is responsible for managing reflection-related operations, while the ReflectionCommandParser class handles parsing and determining reflection commands.
   * Readability and Maintainability: Descriptive naming, comments, and documentation for clarity.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -449,6 +457,7 @@ Note that certain details described below have been omitted from Class Diagram f
     * `UnsaveFromFavouritesCommand`: Unsave a reflection item from favorites.
       * Command format:`reflect unsave <reflection_id>`
 
+<div style="page-break-after: always;"></div>
 
 ##### Sequence Diagram
 ![ReflectionSequenceDiagram.png](diagrams/reflection/ReflectionSequenceDiagram.png)
@@ -480,6 +489,8 @@ The habit tracker component aims to provide user with a tool to track and cultiv
     * Data Encapsulation: Control the access to a class's internal attributes, accessible only through getters and setters
     * Interface Segregation: Segregation of command interface to represent different command types for specific use cases.
     * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -549,6 +560,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
     * `HabitHelpCommand`: Display a help menu of the habit-tracker commands.
         * Command format: `habit help`
 
+<div style="page-break-after: always;"></div>
 
 ##### Sequence Diagram
 ![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
@@ -593,6 +605,8 @@ user's wellness.
     and promoting a clear interface for interacting with the list.
     * Exception Handling: Extensive coverage of exceptions in sleepCommand classes to ensure all errors are handled 
     properly
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -716,6 +730,8 @@ utility logic to identify state and manage the different timers.
   * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages.
   * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation
 
 #### Focus Class Diagram
@@ -808,6 +824,8 @@ well-being.
     - _Design Pattern_: To Be Continued
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
 <!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 #### Class Diagram
