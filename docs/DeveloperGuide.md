@@ -1118,7 +1118,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Additional parameters for 'reflect get' command are not allowed.
     ________________________________________________________________________________________________________________
     ```
-
+<div style="page-break-after: always;"></div>
 
 #### View list of saved favourite questions
 1. Testcase: Calling `reflect list` on an empty favourites list
