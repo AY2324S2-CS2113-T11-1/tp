@@ -144,7 +144,7 @@ The `Ui` class is created to standardise the output formatting of messages to be
     - `SEP`: A private static string constant that stores a separation line.
   - Methods:
     - `greetUser()`: A public static method that prints a welcome message when Wellness360 is started.
-    - `promptUserInput()`: A public static method that prints a "You: " message before the input cursor, to signal the input of
+    - `promptUserInput()`: A public static method that prints a "You: " message before the input cursor, to signal where the input will go.
     - `sayGoodbye()`: A public static method that prints a farewell message when Wellness360 is terminated by the user.
     - `printMessagewithSepNewLine(String message)`: A public static method used to print a message with a separation line.
     - `printMessageWithoutNewLine(String message)`: A public static method used to print a message without a separation line.
@@ -1129,7 +1129,8 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
-    <br>   
+   <br/><br/>
+   
 2. Testcase: Calling `reflect list` on a non-empty favourites list
 
     Expected outcome: List of saved questions if list is not empty
@@ -1524,7 +1525,8 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Sleep cycle for 05/04/2012 has been removed from list
     ________________________________________________________________________________________________________________
     ~~~
-   
+   <br/><br/>   
+
 4. Testcase: `sleep delete /before 27/01/2001`
 
    Expected outcome: Shows number of Sleep cycles deleted
@@ -1759,7 +1761,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 ### Fitness Motivator component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.
-    <br>
+    
     Expected outcome: A list of 5 random different exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1776,7 +1778,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 #### Get a list of specific type of exercises
 1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
-    <br>
+    
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1787,7 +1789,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 #### Add an exercise
 1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
-    <br>
+    
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1798,7 +1800,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 #### Create a new Goal
 1. Testcase: Calling `fitness goal new` when the jar is first executed
-    <br>
+    
     Expected outcome: 5 randomly generated exercise goals with a status icon in front of the respective exercises
     ```
     ________________________________________________________________________________________________________________
@@ -1815,7 +1817,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 #### Mark a goal as done
 1. Testcase: Calling `fitness goal first` when the goals have been created.
-    <br>
+    
     Expected outcome:
     ```
     ________________________________________________________________________________________________________________
