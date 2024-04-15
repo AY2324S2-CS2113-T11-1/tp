@@ -667,7 +667,7 @@ Expected outcome:
 ________________________________________________________________________________________________________________
 Your focus session has ended.
  Time spent: X hours, X minutes, XX seconds
-To start a new session, use ‘focustimer start’ 
+To start a new session, use focus start 
 ________________________________________________________________________________________________________________
 ~~~
 
@@ -817,7 +817,7 @@ Expected outcome:
 ~~~
 ________________________________________________________________________________________________________________
 Commands for focus timer feature:
-1. focus swtich: Switch between count up timer and count down timer
+1. focus switch: Switch between count up timer and count down timer
 2. focus start: Start the timer
 3. focus stop: Stop the timer
 4. focus pause: Pause the timer
@@ -1097,13 +1097,15 @@ This section serves as a cheatsheet for commands.
 | `sleep delete /before [DATE_OF_SLEEP]`                                                                  | Delete Sleep Cycles before a specific date   | 
 | `sleep delete /from [START_DATE] /to [END_DATE]`                                                        | Delete Sleep Cycles within a range of dates  | 
 | `sleep save`                                                                                            | Save sleep cycles                            |
+| `sleep help`                                                                                            | View sleep tracker help menu                 |
 | `focus switch`                                                                                          | Switch focus timer mode                      |
 | `focus start`                                                                                           | Start a new focus timer                      |
 | `focus stop`                                                                                            | Stop the current focus timer                 |
 | `focus pause`                                                                                           | Pause the current focus timer                |
 | `focus resume`                                                                                          | Resume the current focus timer               |
 | `focus check`                                                                                           | Check time for focus timer                   |
-| `focus set [MINUTES]`                                                                                   | Set focus time duration                      |
+| `focus set [minutes]`                                                                                   | Set focus time duration                      |
+| `focus help`                                                                                            | View focus timer help menu                   |
 | `fitness get`, `fitness get [EXERCISE_TYPE]`                                                            | Get a pre-loaded list of different exercises |
 | `fitness add /type [EXERCISE_TYPE] /name [EXERCISE_NAME] /sets [NUMBER_OF_SETS] /reps [NUMBER_OF_REPS]` | Add new exercises into the list              |
 | `fitness delete [EXERCISE_TYPE] [INDEX]`                                                                | Delete exercises from the list               |

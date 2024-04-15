@@ -68,6 +68,8 @@
   - [Focus Timer component](#focus-timer-component-1)
   - [Fitness Motivator component](#fitness-motivator-component-1)
 
+<div style="page-break-after: always;"></div>
+
 ## Acknowledgements
 
 Reference to AB-3 Developer Guide
@@ -95,6 +97,8 @@ You are recommended to use Intellij IDEA:
 1. Configure the coding style: [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html)
 2. Set up CI: This project comes with a GitHub Actions config files (in .github/workflows folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the master branch or to any PR. No set up required.
 3. Read the developer guide to understand the design.
+
+<div style="page-break-after: always;"></div>
 
 ## Design & implementation
 
@@ -140,7 +144,7 @@ The `Ui` class is created to standardise the output formatting of messages to be
     - `SEP`: A private static string constant that stores a separation line.
   - Methods:
     - `greetUser()`: A public static method that prints a welcome message when Wellness360 is started.
-    - `promptUserInput()`: A public static method that prints a "You: " message before the input cursor, to signal the input of
+    - `promptUserInput()`: A public static method that prints a "You: " message before the input cursor, to signal where the input will go.
     - `sayGoodbye()`: A public static method that prints a farewell message when Wellness360 is terminated by the user.
     - `printMessagewithSepNewLine(String message)`: A public static method used to print a message with a separation line.
     - `printMessageWithoutNewLine(String message)`: A public static method used to print a message without a separation line.
@@ -256,6 +260,8 @@ in the form of text files so that data can be loaded from the hard disk when Wel
   information position in the text file.
   * Exception Handling: Graceful error handling with meaningful messages.
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation
 
 ##### Class Diagram
@@ -346,6 +352,8 @@ This component aims to contribute to the goal of improving user's wellness.
   * Dependency Injection: Dependencies injected via constructors for loose coupling.
   * SRP: Classes adhere to the Single Responsibility Principle. For example, the ReflectionManager class is responsible for managing reflection-related operations, while the ReflectionCommandParser class handles parsing and determining reflection commands.
   * Readability and Maintainability: Descriptive naming, comments, and documentation for clarity.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -449,6 +457,7 @@ Note that certain details described below have been omitted from Class Diagram f
     * `UnsaveFromFavouritesCommand`: Unsave a reflection item from favorites.
       * Command format:`reflect unsave <reflection_id>`
 
+<div style="page-break-after: always;"></div>
 
 ##### Sequence Diagram
 ![ReflectionSequenceDiagram.png](diagrams/reflection/ReflectionSequenceDiagram.png)
@@ -458,6 +467,8 @@ When `Main` starts, `scanner` and `ReflectionManager` objects are created. Upon 
 determined if it is a command related to the reflection feature. If it is, it will be further parsed by `ReflectionCommandParser` to determine
 the command. The corresponding reflection command object is then created and is returned to `Main`, where `execute` will then be called
 and the corresponding method in `ReflectionManager` is invoked.
+
+<div style="page-break-after: always;"></div>
 
 ### Habit tracker component
 
@@ -480,6 +491,8 @@ The habit tracker component aims to provide user with a tool to track and cultiv
     * Data Encapsulation: Control the access to a class's internal attributes, accessible only through getters and setters
     * Interface Segregation: Segregation of command interface to represent different command types for specific use cases.
     * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -549,6 +562,7 @@ The habit tracker component aims to provide user with a tool to track and cultiv
     * `HabitHelpCommand`: Display a help menu of the habit-tracker commands.
         * Command format: `habit help`
 
+<div style="page-break-after: always;"></div>
 
 ##### Sequence Diagram
 ![HabitSequenceDiagram.png](diagrams/habit/HabitSequenceDiagram.png)
@@ -595,6 +609,8 @@ user's wellness.
     properly
 
 #### Implementation
+
+<div style="page-break-after: always;"></div>
 
 ##### Class Diagram
 ![SleepDiagram.png](diagrams/sleep/SleepDiagram.png)
@@ -696,6 +712,8 @@ be determined if it is a command related to the sleep tracker feature. If it is,
 SleepTrackerParser to determine the command. The corresponding sleep command object is then created and is 
 returned to Main, where execute will then be called and the corresponding method in SleepTracker is invoked.
 
+<div style="page-break-after: always;"></div>
+
 ### Focus timer component
 The focus timer component provides users with a countdown timer and a count up timer, which enables the user to set a 
 goal to focus entirely on their work. This component aims to allow users to keep track of their time, improving their
@@ -715,6 +733,8 @@ utility logic to identify state and manage the different timers.
   * Modularity: Encapsulate related functionalities within classes to promote re-usability and maintainability. 
   * Exception Handling: Use of custom exceptions to differentiate between various types of errors, and to handle them appropriately with error messages.
   * Readability and Maintainability: Descriptive naming, robust documentation for code clarity.
+
+<div style="page-break-after: always;"></div>
 
 #### Implementation
 
@@ -809,12 +829,14 @@ well-being.
     - _Code Readability_: Proper coding convention, Java Docs and comments were added for clarity so that other developers can more easily review our code.
 <!-- Modularity, Inheritance, Encapsulation, Exception Handling, Design Pattern, readability, etc --> 
 
+<div style="page-break-after: always;"></div>
+
 #### Implementation
 #### Class Diagram
 <!-- Insert image and description of each class, with its overview, attributes,
 methods, dependencies and UML Notes -->
 ![FitnessClassDiagram](./diagrams/fitness/FitnessClassDiagram.png)
-</br>
+<br>
 Note that certain details described below have been omitted from Class Diagram for simplicity and to improve readability.
 - `FitnessMotivator` Class
   - Overview
@@ -987,10 +1009,12 @@ Note that certain details described below have been omitted from Class Diagram f
 ##### Sequence Diagram
 <!-- Insert image and description of the image -->
 ![FitnessSequenceDiagram](./diagrams/fitness/FitnessSequenceDiagram.png)
-</br>
+<br>
 - Note that `PlaceholderFitnessCommand` can refer to any of the fitness commands mentioned above, as all of them follow the same call pattern.
 
 When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon receiving user input, the input will first be determined if it is a command related to the habit tracker feature. if it is, it will be further parsed by `FitnessCommandParser` to determine the command. The corresponding fitness command object is then created and is returend to `Main`, where `execute()` will then be called and the corresponding method in `FitnessMotivator` is invoked.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Requirements
 ## Product scope
@@ -1105,6 +1129,8 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
+   <br/><br/>
+   
 2. Testcase: Calling `reflect list` on a non-empty favourites list
 
     Expected outcome: List of saved questions if list is not empty
@@ -1125,6 +1151,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Additional parameters for 'reflect list' command are not allowed.
     ________________________________________________________________________________________________________________
     ```
+
 #### Save favourite question
 1. Testcase: Calling `reflect save 1` without generating questions first (`reflect get`)
 
@@ -1231,6 +1258,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Now you have 0 habits left in the list.
     ________________________________________________________________________________________________________________
     ```
+
 #### List habits
 1. Testcase: `habit list` with empty list.
 
@@ -1251,6 +1279,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
        2. [LOW] complete leetcode daily question [count: 0]
     ________________________________________________________________________________________________________________
     ```   
+
 #### Update habit count
 1. Testcase: `habit update` or `habit update /id` or `habit update /id /by`
 
@@ -1331,6 +1360,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
        1.  [HIGH] vacuum the floor [count: 0]
     ________________________________________________________________________________________________________________
     ```   
+
 #### Sort habit list according to priority
 1. Testcase: `habit sort` without any habits in the list.
 
@@ -1410,6 +1440,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Hours slept on 07/04/2024: 7.0
     ________________________________________________________________________________________________________________
     ~~~
+
 #### List Sleep Cycles
 
 1. Testcase: `sleep list <<RANDOM_STRING>>`
@@ -1494,7 +1525,8 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Sleep cycle for 05/04/2012 has been removed from list
     ________________________________________________________________________________________________________________
     ~~~
-   
+   <br/><br/>   
+
 4. Testcase: `sleep delete /before 27/01/2001`
 
    Expected outcome: Shows number of Sleep cycles deleted
@@ -1544,178 +1576,192 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
 ### Focus Timer component
 #### Switch timer mode
-1. Testcase: `focus switch` when no timer is running <br>
-Expected outcome: Message indicating that timer has been switched.
-~~~
-________________________________________________________________________________________________________________
-Switched to Count down timer
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus switch` when timer has been set to run by the user(`focus start`) <br>
-Expected outcome: Error message indicating that a timer is currently running.
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Unable to change as timer is running.
-________________________________________________________________________________________________________________
-~~~
+1. Testcase: `focus switch` when no timer is running
+
+    Expected outcome: Message indicating that timer has been switched.
+    ~~~
+    ________________________________________________________________________________________________________________
+    Switched to Count down timer
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus switch` when timer has been set to run by the user(`focus start`)
+
+    Expected outcome: Error message indicating that a timer is currently running.
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Unable to change as timer is running.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 #### Start a timer
 1. Testcase: `focus start` when timer is not running <br>
-Expected outcome: Message indicating that timer has started successfully.
+    Expected outcome: Message indicating that timer has started successfully.
+    
+    Count up timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Your session has started. Time to grind!
+    ________________________________________________________________________________________________________________
+    ~~~
+    Count down timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Countdown timer started! 
+    Duration set: 1 minute(s) 0 second(s)
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus start` when timer is running
 
-Count up timer:
-~~~
-________________________________________________________________________________________________________________
-Your session has started. Time to grind!
-________________________________________________________________________________________________________________
-~~~
-Count down timer:
-~~~
-________________________________________________________________________________________________________________
-Countdown timer started! 
-Duration set: 1 minute(s) 0 second(s)
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus start` when timer is running <Br>
-Expected outcome: Error message informing users that timer has already started.
-
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Error! Clock has already started.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Error message informing users that timer has already started.
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Error! Clock has already started.
+    ________________________________________________________________________________________________________________
+    ~~~
 
 #### Stop a timer
-1. Testcase: `focus stop` when timer is currently running <br>
+1. Testcase: `focus stop` when timer is currently running
+
    Expected outcome: Timer stopped successfully.
 
-Count up timer:
-~~~
-________________________________________________________________________________________________________________
-Your focus session has ended.
-Total time spent: 0 hours, 3 minutes, 42 seconds
-To start a new session, use ‘focus start’ 
-________________________________________________________________________________________________________________
-~~~
-Count down timer:
-~~~
-________________________________________________________________________________________________________________
-Countdown timer stopped.
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus stop` when timer is not running <Br>
-Expected outcome: Error message informing users that timer is not running.
+    Count up timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Your focus session has ended.
+    Total time spent: 0 hours, 3 minutes, 42 seconds
+    To start a new session, use focus start
+    ________________________________________________________________________________________________________________
+    ~~~
+    Count down timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Countdown timer stopped.
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus stop` when timer is not running
 
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Error! Clock is not running.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Error message informing users that timer is not running.
+    
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Error! Clock is not running.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 #### Check time for focus timer
-1. Testcase: `focus check` when timer has started <br>
-Expected outcome: Message informing users the total time elapsed or time remaining.
+1. Testcase: `focus check` when timer has started
 
-Count up timer:
-~~~
-________________________________________________________________________________________________________________
-Total time elapsed: 
-0 hours, 0 minutes, 5 seconds
-________________________________________________________________________________________________________________
-~~~
-Count down timer:
-~~~
-________________________________________________________________________________________________________________
-Remaining time: 
-0 minutes 56 seconds left.
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus check` when timer is not running <Br>
-Expected outcome: Error message informing users that timer is not running.
+    Expected outcome: Message informing users the total time elapsed or time remaining.
+    
+    Count up timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Total time elapsed: 
+    0 hours, 0 minutes, 5 seconds
+    ________________________________________________________________________________________________________________
+    ~~~
+    Count down timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Remaining time: 
+    0 minutes 56 seconds left.
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus check` when timer is not running
 
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Timer have not started. Please use focus start.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Error message informing users that timer is not running.
+    
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Timer have not started. Please use focus start.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 #### Pause time for focus timer
-1. Testcase: `focus pause` when timer has started <br>
-Expected outcome: Message informing users that timer has been paused.
+1. Testcase: `focus pause` when timer has started
 
-Count up timer:
-~~~
-________________________________________________________________________________________________________________
-Count up timer paused.
-________________________________________________________________________________________________________________
-~~~
-Count down timer:
-~~~
-________________________________________________________________________________________________________________
-Timer paused. 
-Remaining time: 0 minutes 56 seconds
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus pause` when timer is not running <Br>
-Expected outcome: Error message informing users that timer has been resumed.
+    Expected outcome: Message informing users that timer has been paused.
+    
+    Count up timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Count up timer paused.
+    ________________________________________________________________________________________________________________
+    ~~~
+    Count down timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Timer paused. 
+    Remaining time: 0 minutes 56 seconds
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus pause` when timer is not running
 
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Timer is already paused or Timer hasn't started.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Error message informing users that timer has been resumed.
+    
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Timer is already paused or Timer hasn't started.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 #### Resume time for focus timer
-1. Testcase: `focus resume` when timer has started and has been paused. <br>
-Expected outcome: Message informing users the total time elapsed or time remaining.
+1. Testcase: `focus resume` when timer has started and has been paused.
 
-Count up timer:
-~~~
-________________________________________________________________________________________________________________
-Count up timer resumed
-________________________________________________________________________________________________________________
-~~~
-Count down timer:
-~~~
-________________________________________________________________________________________________________________
-Countdown timer resumed.
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus resume` when timer is not running 
-</br>
-Expected outcome: Error message informing users that timer is not running or has already been resumed.
+    Expected outcome: Message informing users the total time elapsed or time remaining.
+    
+    Count up timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Count up timer resumed
+    ________________________________________________________________________________________________________________
+    ~~~
+    Count down timer:
+    ~~~
+    ________________________________________________________________________________________________________________
+    Countdown timer resumed.
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus resume` when timer is not running
 
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Timer is already resumed or Timer hasn't started.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Error message informing users that timer is not running or has already been resumed.
+    
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Timer is already resumed or Timer hasn't started.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 #### Set time for focus timer
 1. Testcase: `focus set 10` 
-</br>
-   Expected outcome: Message showing that count down timer has been set to 10 minutes.
 
-~~~
-________________________________________________________________________________________________________________
-Countdown duration has been set to 10 minute(s)
-________________________________________________________________________________________________________________
-~~~
-2. Testcase: `focus set 0` 
-</br>
-   Expected outcome: Error message prompting user to input a duration more than 0.
-~~~
-________________________________________________________________________________________________________________
-Duration cannot be less than 1.
-________________________________________________________________________________________________________________
-~~~
-3. Testcase: `focus set w` 
-</br>
-   Expected outcome: Error message prompting user to input a valid duration.
-~~~
-________________________________________________________________________________________________________________
-ERROR MSG: Invalid duration.
-________________________________________________________________________________________________________________
-~~~
+    Expected outcome: Message showing that count down timer has been set to 10 minutes.
+    ~~~
+    ________________________________________________________________________________________________________________
+    Countdown duration has been set to 10 minute(s)
+    ________________________________________________________________________________________________________________
+    ~~~
+2. Testcase: `focus set 0`
+
+    Expected outcome: Error message prompting user to input a duration more than 0.
+    ~~~
+    ________________________________________________________________________________________________________________
+    Duration cannot be less than 1.
+    ________________________________________________________________________________________________________________
+    ~~~
+3. Testcase: `focus set w`
+
+    Expected outcome: Error message prompting user to input a valid duration.
+    ~~~
+    ________________________________________________________________________________________________________________
+    ERROR MSG: Invalid duration.
+    ________________________________________________________________________________________________________________
+    ~~~
+
 ### Fitness Motivator component
 #### Get 5 different exercises
 1. Testcase: Calling `fitness get` when the jar is first executed.
-    </br>
+    
     Expected outcome: A list of 5 random different exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1729,9 +1775,10 @@ ________________________________________________________________________________
 
     ________________________________________________________________________________________________________________
     ```
+
 #### Get a list of specific type of exercises
 1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
-    </br>
+    
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1739,9 +1786,10 @@ ________________________________________________________________________________
     Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
     ________________________________________________________________________________________________________________
     ```
+
 #### Add an exercise
 1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
-    </br>
+    
     Expected outcome: Error message prompts you to use the accepted types of exercises.
     ```
     ________________________________________________________________________________________________________________
@@ -1749,9 +1797,10 @@ ________________________________________________________________________________
     Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
     ________________________________________________________________________________________________________________
     ```
+
 #### Create a new Goal
 1. Testcase: Calling `fitness goal new` when the jar is first executed
-    </br>
+    
     Expected outcome: 5 randomly generated exercise goals with a status icon in front of the respective exercises
     ```
     ________________________________________________________________________________________________________________
@@ -1765,9 +1814,10 @@ ________________________________________________________________________________
 
     ________________________________________________________________________________________________________________
     ```
+
 #### Mark a goal as done
 1. Testcase: Calling `fitness goal first` when the goals have been created.
-    </br>
+    
     Expected outcome:
     ```
     ________________________________________________________________________________________________________________
