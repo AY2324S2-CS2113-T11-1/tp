@@ -1119,6 +1119,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ________________________________________________________________________________________________________________
     ```
 
+<div style="page-break-after: always"></div>
 
 #### View list of saved favourite questions
 1. Testcase: Calling `reflect list` on an empty favourites list
