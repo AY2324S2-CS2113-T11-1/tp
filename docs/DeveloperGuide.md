@@ -1129,7 +1129,6 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     No reflection questions saved to favourites
     ________________________________________________________________________________________________________________
     ```
-   <br/><br/>
    
 2. Testcase: Calling `reflect list` on a non-empty favourites list
 
@@ -1524,8 +1523,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ________________________________________________________________________________________________________________
     Sleep cycle for 05/04/2012 has been removed from list
     ________________________________________________________________________________________________________________
-    ~~~
-   <br/><br/>   
+    ~~~ 
 
 4. Testcase: `sleep delete /before 27/01/2001`
 
