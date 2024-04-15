@@ -1125,7 +1125,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Additional parameters for 'reflect list' command are not allowed.
     ________________________________________________________________________________________________________________
     ```
-   
+
 #### Save favourite question
 1. Testcase: Calling `reflect save 1` without generating questions first (`reflect get`)
 
