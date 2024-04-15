@@ -1560,6 +1560,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Unable to change as timer is running.
     ________________________________________________________________________________________________________________
     ~~~
+
 #### Start a timer
 1. Testcase: `focus start` when timer is not running <br>
     Expected outcome: Message indicating that timer has started successfully.
@@ -1614,6 +1615,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Error! Clock is not running.
     ________________________________________________________________________________________________________________
     ~~~
+
 #### Check time for focus timer
 1. Testcase: `focus check` when timer has started
 
@@ -1642,6 +1644,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Timer have not started. Please use focus start.
     ________________________________________________________________________________________________________________
     ~~~
+
 #### Pause time for focus timer
 1. Testcase: `focus pause` when timer has started
 
@@ -1669,6 +1672,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Timer is already paused or Timer hasn't started.
     ________________________________________________________________________________________________________________
     ~~~
+
 #### Resume time for focus timer
 1. Testcase: `focus resume` when timer has started and has been paused.
 
@@ -1695,6 +1699,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     ERROR MSG: Timer is already resumed or Timer hasn't started.
     ________________________________________________________________________________________________________________
     ~~~
+
 #### Set time for focus timer
 1. Testcase: `focus set 10` 
 
