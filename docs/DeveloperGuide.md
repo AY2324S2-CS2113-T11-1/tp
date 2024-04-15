@@ -1231,6 +1231,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Now you have 0 habits left in the list.
     ________________________________________________________________________________________________________________
     ```
+
 #### List habits
 1. Testcase: `habit list` with empty list.
 
@@ -1251,6 +1252,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
        2. [LOW] complete leetcode daily question [count: 0]
     ________________________________________________________________________________________________________________
     ```   
+
 #### Update habit count
 1. Testcase: `habit update` or `habit update /id` or `habit update /id /by`
 
@@ -1331,6 +1333,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
        1.  [HIGH] vacuum the floor [count: 0]
     ________________________________________________________________________________________________________________
     ```   
+
 #### Sort habit list according to priority
 1. Testcase: `habit sort` without any habits in the list.
 
@@ -1410,6 +1413,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Hours slept on 07/04/2024: 7.0
     ________________________________________________________________________________________________________________
     ~~~
+
 #### List Sleep Cycles
 
 1. Testcase: `sleep list <<RANDOM_STRING>>`
@@ -1743,6 +1747,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
     ________________________________________________________________________________________________________________
     ```
+
 #### Get a list of specific type of exercises
 1. Testcase: Calling `fitness get <Exercise_Type>` with an invalid exercise type.
     <br>
@@ -1753,6 +1758,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
     ________________________________________________________________________________________________________________
     ```
+
 #### Add an exercise
 1. Testcase: Calling `fitness add` with incorrect exercise type in the parameter.
     <br>
@@ -1763,6 +1769,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
     Only the following exercise types are allowed: Arms, Chest, Abs, Back and Legs!
     ________________________________________________________________________________________________________________
     ```
+
 #### Create a new Goal
 1. Testcase: Calling `fitness goal new` when the jar is first executed
     <br>
@@ -1779,6 +1786,7 @@ When `Main` starts, `scanner` and `FitnessMotivator` objects are created. Upon r
 
     ________________________________________________________________________________________________________________
     ```
+
 #### Mark a goal as done
 1. Testcase: Calling `fitness goal first` when the goals have been created.
     <br>
